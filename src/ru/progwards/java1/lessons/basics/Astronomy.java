@@ -1,4 +1,4 @@
-package ru.progwards.java1.lessons.basics.basics;
+package ru.progwards.java1.lessons.basics;
 
 public class Astronomy {
     public static void main(String[] args) {
