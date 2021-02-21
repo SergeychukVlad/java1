@@ -3,7 +3,7 @@ package lesson4;
 import java.util.Arrays;
 import java.util.List;
 
-public class Answers_partTwo {
+public class Answers_part2 {
     public static void main(String[] args) {
         checkConditions();
         List<Integer> grades = Arrays.asList(0, 60, 90, 101, -20);
