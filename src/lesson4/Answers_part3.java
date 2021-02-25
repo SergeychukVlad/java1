@@ -17,5 +17,7 @@ public class Answers_part3 {
         factorial(0);
         factorial(1);
         factorial(5);
+        System.out.println(true || false);
+        System.out.println(false || true);
     }
 }
