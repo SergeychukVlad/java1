@@ -1,7 +1,4 @@
-package lesson5;
-
-import javax.management.MBeanAttributeInfo;
-import javax.management.ObjectName;
+package lesson5.part1;
 
 public class UseOfTriangle {
     public static void main(String[] args) {
