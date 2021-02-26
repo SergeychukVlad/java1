@@ -20,11 +20,6 @@ public class TriangleOnStatic {
         else return null;
     }
 
-    // конструктор для равнобедренного треугольника
-    TriangleOnStatic(double base, double side) {
-        this(base, side, side);
-    }
-
     // методы
     public double perimeter() {
         return a + b + c;
