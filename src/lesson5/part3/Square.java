@@ -14,4 +14,9 @@ public class Square extends Segment {
     double perimeter() {
         return 4 * a;
     }
+
+    @Override
+    public String toString() {
+        return "Квадрат со стороной " + a;
+    }
 }

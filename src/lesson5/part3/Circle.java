@@ -16,4 +16,9 @@ public class Circle extends Figure {
     double perimeter() {
         return 2 * Math.PI * radius;
     }
+
+    @Override
+    public String toString() {
+        return "Окружность с радиусом " + radius;
+    }
 }

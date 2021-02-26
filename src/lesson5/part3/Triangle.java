@@ -19,4 +19,9 @@ public class Triangle extends Segment {
     double perimeter() {
         return a + b + c;
     }
+
+    @Override
+    public String toString() {
+        return "Треугольник со сторонами " + a + ", " + b + ", " + c;
+    }
 }
