@@ -51,7 +51,7 @@ public class ComplexNum {
             this.a = resultA;
             this.b = resultB;
         } else {
-            System.out.println("Попытка деления на НОЛЬ!");
+            System.out.println("Попытка деления на НОЛЬ! Действие не выполнено. Результат не изменён.");
         }
         return this;
     }
@@ -62,7 +62,7 @@ public class ComplexNum {
         System.out.println(result.add(new ComplexNum(17, 14)).toString());
         System.out.println(result.sub(new ComplexNum(17, 14)).toString());
         System.out.println(result.mul(new ComplexNum(100, 100)).toString());
-        System.out.println(result.div(new ComplexNum(100, 100)).toString());
+        System.out.println(result.div(new ComplexNum(0, 0)).toString());
     }
 
     public static void main(String[] args) {
@@ -72,6 +72,6 @@ public class ComplexNum {
         System.out.println(result.sub(new ComplexNum(7, 4)).toString());
         System.out.println(result.mul(new ComplexNum(10, 10)).toString());
         System.out.println(result.div(new ComplexNum(10, 10)).toString());
-//        myTesting();
+        myTesting();
     }
 }
