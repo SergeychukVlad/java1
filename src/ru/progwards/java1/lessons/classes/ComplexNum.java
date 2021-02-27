@@ -43,10 +43,16 @@ public class ComplexNum {
     //  (a + bi) / (c + di) = (a*c + b*d)/(c*c+d*d) + ((b*c - a*d)/(c*c+d*d))i
     public ComplexNum div(ComplexNum num) {
         System.out.println("---------------- " + new Throwable().getStackTrace()[0].getMethodName() + " ----------------");
-        int resultA = (this.a * num.a + this.b * num.b) / (num.a * num.a + num.b * num.b); // (a*c + b*d)/(c*c+d*d)
-        int resultB = (this.b * num.a - this.a * num.b) / (num.a * num.a + num.b * num.b); // (b*c - a*d)/(c*c+d*d)
-        this.a = resultA;
-        this.b = resultB;
+        int resultA;
+        int resultB;
+        if ((num.a * num.a + num.b * num.b) != 0) {
+            resultA = (this.a * num.a + this.b * num.b) / (num.a * num.a + num.b * num.b); // (a*c + b*d)/(c*c+d*d)
+            resultB = (this.b * num.a - this.a * num.b) / (num.a * num.a + num.b * num.b); // (b*c - a*d)/(c*c+d*d)
+            this.a = resultA;
+            this.b = resultB;
+        } else {
+            System.out.println("Попытка деления на НОЛЬ!");
+        }
         return this;
     }
 
