@@ -7,6 +7,16 @@ public class Animal {
 
     enum FoodKind {UNKNOWN, HAY, CORN}
 
+    public static Animal makeAnimal(double weight) {
+        System.out.println("Создаём " + AnimalKind.ANIMAL + " с весом " + weight);
+        if (weight > 0.0) {
+            return new Animal(weight);
+        } else {
+            System.out.println("Да быть не может такого бесплотного " + AnimalKind.ANIMAL);
+            return null;
+        }
+    }
+
     public Animal(double weight) {
         this.weight = weight;
     }
@@ -40,22 +50,34 @@ public class Animal {
     }
 
     public static void printStringInfo(Animal animal) {
-        System.out.println("---------------- " + new Throwable().getStackTrace()[0].getMethodName() + " ----------------");
-        System.out.println(animal.toString());
-        System.out.println(animal.toStringFull());
+        if (animal != null) {
+            System.out.println(animal.toString());
+            System.out.println(animal.toStringFull());
+        } else {
+            System.out.println("Поэтому информация по весу призрака не предоставляется");
+        }
+        System.out.println();
+    }
+
+    static void myTesting() {
+        Animal animal = makeAnimal(100.2);
+        printStringInfo(animal);
+        animal = makeAnimal(0);
+        printStringInfo(animal);
+
+        Cow cow = Cow.makeCow(350.2);
+        printStringInfo(cow);
+        cow = Cow.makeCow(-7.0);
+        printStringInfo(cow);
+
+        Hamster hamster = Hamster.makeHamster(2.2);
+        printStringInfo(hamster);
+
+        Duck duck = Duck.makeDuck(3.6);
+        printStringInfo(duck);
     }
 
     public static void main(String[] args) {
-        Animal animal = new Animal(100.2);
-        printStringInfo(animal);
-
-        Cow cow = new Cow(420.5);
-        printStringInfo(cow);
-
-        Hamster hamster = new Hamster(2.2);
-        printStringInfo(hamster);
-
-        Duck duck = new Duck(3.6);
-        printStringInfo(duck);
+        myTesting();
     }
 }
