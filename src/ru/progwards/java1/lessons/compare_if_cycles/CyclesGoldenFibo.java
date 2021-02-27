@@ -80,7 +80,12 @@ public class CyclesGoldenFibo {
     static void checkGoldenTriangle() {
         System.out.println("---------------- " + new Throwable().getStackTrace()[0].getMethodName() + " ----------------");
         for (int sideA = 1; sideA <= 100; sideA++) {
-            for (int sideB = sideA / 2 + 1; sideB <= 100; sideB++) {
+//            for (int sideB = sideA / 2 + 1; sideB <= 100; sideB++) {
+//            так было у меня.
+//            Сергей Алтунджи: "Тут можно так сделать цикл (int sideB = sideA + 1; sideB <= 100; sideB++)
+//            Мы же знаем, что у золотого треугольника ребро больше основания."
+//            следую...
+            for (int sideB = sideA + 1; sideB <= 100; sideB++) {
                 if (isGoldenTriangle(sideA, sideB, sideB)) {
                     System.out.println("Треугольник золотого сечения. Основание: " + sideA + ". Ребро: " + sideB);
                 }

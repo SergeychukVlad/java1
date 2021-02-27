@@ -6,24 +6,27 @@ public class TriangleSimpleInfo {
     public static int maxSide(int a, int b, int c) {
         System.out.println("---------------- " + new Throwable().getStackTrace()[0].getMethodName() + " ----------------");
         System.out.print("В треугольнике со сторонами: " + a + ", " + b + ", " + c + " ");
-        if (a >= b &  a >= c) return a;
-        if (b >= a & b >= c) return b;
+//      Сергей Алтунджи:
+//      "В логических выражениях лучше использовать логические операторы && и ||. В других задачах у Вас так и сделано."
+//      Следую...
+        if (a >= b &&  a >= c) return a;
+        if (b >= a && b >= c) return b;
         return c;
     }
     // Получает параметрами длины сторон треугольника, а вернуть должна наименьшую длину стороны
     public static int minSide(int a, int b, int c) {
         System.out.println("---------------- " + new Throwable().getStackTrace()[0].getMethodName() + " ----------------");
         System.out.print("В треугольнике со сторонами: " + a + ", " + b + ", " + c + " ");
-        if (a <= b &  a <= c) return a;
-        if (b <= a & b <= c) return b;
+        if (a <= b &&  a <= c) return a;
+        if (b <= a && b <= c) return b;
         return c;
     }
     // Получает параметрами длины сторон треугольника, а вернуть должна: true - треугольник равносторонний, false - нет
     public static boolean isEquilateralTriangle(int a, int b, int c) {
         System.out.println("---------------- " + new Throwable().getStackTrace()[0].getMethodName() + " ----------------");
         System.out.print("Со сторонами: " + a + ", " + b + ", " + c + " ");
-        if ((a + b) > c & (a + c) > b & (c + b) > a) {
-            return a == b & b == c;
+        if ((a + b) > c && (a + c) > b && (c + b) > a) {
+            return a == b && b == c;
         }
         return false;
     }
