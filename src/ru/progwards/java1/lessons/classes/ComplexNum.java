@@ -51,12 +51,12 @@ public class ComplexNum {
     }
 
     static void myTesting() {
-        ComplexNum result = new ComplexNum(1, 56);
+        ComplexNum result = new ComplexNum(9, 103);
         System.out.println(result);
-        System.out.println(result.add(new ComplexNum(7, 4)).toString());
-        System.out.println(result.sub(new ComplexNum(7, 4)).toString());
-        System.out.println(result.mul(new ComplexNum(10, 10)).toString());
-        System.out.println(result.div(new ComplexNum(10, 10)).toString());
+        System.out.println(result.add(new ComplexNum(17, 14)).toString());
+        System.out.println(result.sub(new ComplexNum(17, 14)).toString());
+        System.out.println(result.mul(new ComplexNum(100, 100)).toString());
+        System.out.println(result.div(new ComplexNum(100, 100)).toString());
     }
 
     public static void main(String[] args) {
@@ -66,5 +66,6 @@ public class ComplexNum {
         System.out.println(result.sub(new ComplexNum(7, 4)).toString());
         System.out.println(result.mul(new ComplexNum(10, 10)).toString());
         System.out.println(result.div(new ComplexNum(10, 10)).toString());
+//        myTesting();
     }
 }
