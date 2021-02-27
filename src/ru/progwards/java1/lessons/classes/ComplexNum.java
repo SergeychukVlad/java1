@@ -60,6 +60,11 @@ public class ComplexNum {
     }
 
     public static void main(String[] args) {
-        myTesting();
+        ComplexNum result = new ComplexNum(1, 56);
+        System.out.println(result);
+        System.out.println(result.add(new ComplexNum(7, 4)).toString());
+        System.out.println(result.sub(new ComplexNum(7, 4)).toString());
+        System.out.println(result.mul(new ComplexNum(10, 10)).toString());
+        System.out.println(result.div(new ComplexNum(10, 10)).toString());
     }
 }
