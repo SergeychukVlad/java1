@@ -28,21 +28,19 @@ public class Eratosthenes {
         return sieve[n];
     }
 
-    static void myTest() {
+    public static void main(String[] args) {
         int size = 30;
         Eratosthenes eratosthenes = new Eratosthenes(size);
         System.out.println(Arrays.toString(eratosthenes.sieve));
         eratosthenes.sift();
         System.out.println(Arrays.toString(eratosthenes.sieve));
+        System.out.println();
         System.out.println(eratosthenes.isSimple(4));
         System.out.println(eratosthenes.isSimple(2));
         System.out.println(eratosthenes.isSimple(3));
         System.out.println(eratosthenes.isSimple(5));
         System.out.println(eratosthenes.isSimple(11));
         System.out.println(eratosthenes.isSimple(10));
-    }
-
-    public static void main(String[] args) {
-        myTest();
+        System.out.println(eratosthenes.isSimple(4));
     }
 }
