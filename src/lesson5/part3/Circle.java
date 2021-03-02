@@ -3,7 +3,7 @@ package lesson5.part3;
 public class Circle extends Figure {
     double radius;
 
-    Circle(double radius) {
+    public Circle(double radius) {
         this.radius = radius;
     }
 
