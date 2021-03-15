@@ -15,8 +15,8 @@ public class Eratosthenes {
         sieve[1] = false;
         sift();
     }
-
-    private void sift() {
+    // вариант (Мой)
+    private void siftPrevious() {
         int p = 2;
         for (int i = p; i < N - 1; i++) {
 
@@ -31,6 +31,22 @@ public class Eratosthenes {
                     p = k;
                     break;
                 }
+            }
+        }
+    }
+    // вариант (куратор Сергей Алтунджи)
+    private void sift() {
+        sieve[0] = false;
+        sieve[1] = false;
+        int arrayLength = sieve.length;
+        for (int p = 2; p < arrayLength; p++) {
+            // пропустить зачёркнутые числа
+            if (!sieve[p]) {
+                continue;
+            }
+            // цикл начинается с первого незачёркнутого числа
+            for (int j = p; p * j < arrayLength; j++) {
+                sieve[p * j] = false;
             }
         }
     }
