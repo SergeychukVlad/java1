@@ -16,8 +16,27 @@ public class Binary {
 
      */
 
-    static void myTest() {
+    private byte num;
 
+    public Binary(byte num) {
+        this.num = num;
+    }
+
+    public String toString() {
+        String[] zeroStr = {"", "0", "00", "000", "0000", "00000", "000000", "0000000"};
+        String numStr = Integer.toBinaryString(num);
+        if (num < 0) {
+            return numStr.substring(numStr.length() - 8);
+        } else {
+            return zeroStr[8 - numStr.length()].concat(numStr);
+        }
+    }
+
+    static void myTest() {
+        byte[] testArray = {0, 1, 127, -128, -1};
+        for (int i = 0; i < testArray.length; i++) {
+            System.out.println(new Binary(testArray[i]).toString());
+        }
     }
 
     public static void main(String[] args) {

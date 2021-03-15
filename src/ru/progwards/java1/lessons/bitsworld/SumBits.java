@@ -13,8 +13,28 @@ public class SumBits {
 
      */
 
-    static void myTest() {
+    public static int sumBits(byte value) {
+        String binaryString = Integer.toBinaryString(value);
+        int result = 0;
+        if (value < 0) { // для отрицательного value. Обрезать до 8-ми знаков.
+            binaryString = binaryString.substring(binaryString.length() - 8);
+            for (int i = 0; i < binaryString.length(); i++) {
+                result += Integer.parseInt(binaryString.substring(i, i + 1));
+            }
+        } else {
+            for (int i = 0; i < binaryString.length(); i++) {
+                result += Integer.parseInt(binaryString.substring(i, i + 1));
+            }
+        }
+        System.out.println(binaryString);
+        return result;
+    }
 
+    static void myTest() {
+        byte[] testArray = {0, 1, 127, -128, -1};
+        for (int i = 0; i < testArray.length; i++) {
+            System.out.println(sumBits(testArray[i]));
+        }
     }
 
     public static void main(String[] args) {
