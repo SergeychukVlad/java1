@@ -35,7 +35,7 @@ public class CheckBit {
         byte mask = (byte) 1;
         mask <<= bitNumber;
         System.out.println(Integer.toBinaryString(mask));
-        if ((value & mask) > 0) {
+        if ((value & mask) != 0) {
             return 1;
         } else {
             return 0;
@@ -50,7 +50,7 @@ public class CheckBit {
     }
 
     public static void main(String[] args) {
-        byte[] testArray = {9, 8, -128, -1, 0};
+        byte[] testArray = {9, -87, -128, -1, 0};
         for (int i = 0; i < testArray.length; i++) {
             for (int j = 0; j < 8; j++) {
                 myTest(testArray[i], j);
