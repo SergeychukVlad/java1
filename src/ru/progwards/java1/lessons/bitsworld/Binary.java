@@ -22,7 +22,7 @@ public class Binary {
         this.num = num;
     }
 
-    public String toString() {
+    public String toStringOnSubstring() {
         String[] zeroStr = {"", "0", "00", "000", "0000", "00000", "000000", "0000000"};
         String numStr = Integer.toBinaryString(num);
         if (num < 0) {
@@ -32,11 +32,23 @@ public class Binary {
         }
     }
 
-    static void myTest() {
-        byte[] testArray = {0, 1, 127, -128, -1};
-        for (int i = 0; i < testArray.length; i++) {
-            System.out.println(new Binary(testArray[i]).toString());
+    public String toString() {
+        String[] zeroStr = {"", "0", "00", "000", "0000", "00000", "000000", "0000000"};
+        if (num < 0) {
+            return Integer.toString(0b0000_0000_0000_0000_1111_1111 & num, 2);
+        } else {
+            String binaryString = Integer.toString((byte) 0b0000_0000 | num, 2);
+            return zeroStr[8 - binaryString.length()] + binaryString;
         }
+    }
+
+    static void myTest() {
+        System.out.println("число 0: " + new Binary((byte) 0).toString());
+        System.out.println("число 1: " + new Binary((byte) 1).toString());
+        System.out.println("число 8: " + new Binary((byte) 8).toString());
+        System.out.println("число 127: " + new Binary((byte) 127).toString());
+        System.out.println("число -128: " + new Binary((byte) -128).toString());
+        System.out.println("число -1: " + new Binary((byte) -1).toString());
     }
 
     public static void main(String[] args) {
