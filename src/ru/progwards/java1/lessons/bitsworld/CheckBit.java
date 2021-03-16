@@ -14,21 +14,21 @@ public class CheckBit {
 
      */
 
-    public static int checkBitOnSubstring(byte value, int bitNumber) {
-        if (bitNumber > 8) {
-            // что-то надо вернуть... Вот это значение и возвращаю.
-            System.out.println("Бит № " + bitNumber + " не определён для числа типа byte!");
-            return bitNumber;
-        }
-
-        String binaryString = Integer.toBinaryString(value);
-        if (value < 0) { // для отрицательного value. Обрезать до 8-ми знаков.
-            binaryString = binaryString.substring(binaryString.length() - 8);
-        } else {         // для положительного value. Дополнить нулями до 8-ми знаков
-            binaryString = "0".repeat(8 - binaryString.length()).concat(binaryString);
-        }
-        return Integer.parseInt(binaryString.substring(8 - bitNumber - 1, 8 - bitNumber));
-    }
+//    public static int checkBitOnSubstring(byte value, int bitNumber) {
+//        if (bitNumber > 8) {
+//            // что-то надо вернуть... Вот это значение и возвращаю.
+//            System.out.println("Бит № " + bitNumber + " не определён для числа типа byte!");
+//            return bitNumber;
+//        }
+//
+//        String binaryString = Integer.toBinaryString(value);
+//        if (value < 0) { // для отрицательного value. Обрезать до 8-ми знаков.
+//            binaryString = binaryString.substring(binaryString.length() - 8);
+//        } else {         // для положительного value. Дополнить нулями до 8-ми знаков
+//            binaryString = "0".repeat(8 - binaryString.length()).concat(binaryString);
+//        }
+//        return Integer.parseInt(binaryString.substring(8 - bitNumber - 1, 8 - bitNumber));
+//    }
 
     public static int checkBit(byte value, int bitNumber) {
         System.out.println(Integer.toBinaryString(value));

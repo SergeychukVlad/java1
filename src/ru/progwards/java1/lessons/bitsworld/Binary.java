@@ -22,15 +22,15 @@ public class Binary {
         this.num = num;
     }
 
-    public String toStringOnSubstring() {
-        String[] zeroStr = {"", "0", "00", "000", "0000", "00000", "000000", "0000000"};
-        String numStr = Integer.toBinaryString(num);
-        if (num < 0) {
-            return numStr.substring(numStr.length() - 8);
-        } else {
-            return zeroStr[8 - numStr.length()].concat(numStr);
-        }
-    }
+//    public String toStringOnSubstring() {
+//        String[] zeroStr = {"", "0", "00", "000", "0000", "00000", "000000", "0000000"};
+//        String numStr = Integer.toBinaryString(num);
+//        if (num < 0) {
+//            return numStr.substring(numStr.length() - 8);
+//        } else {
+//            return zeroStr[8 - numStr.length()].concat(numStr);
+//        }
+//    }
 
     public String toString() {
         String[] zeroStr = {"", "0", "00", "000", "0000", "00000", "000000", "0000000"};
