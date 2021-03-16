@@ -14,9 +14,9 @@ public class CheckBit {
 
      */
 
-    public static int checkBit(byte value, int bitNumber) {
+    public static int checkBitOnSubstring(byte value, int bitNumber) {
         if (bitNumber > 8) {
-                         // что-то надо вернуть... Вот это значение и возвращаю.
+            // что-то надо вернуть... Вот это значение и возвращаю.
             System.out.println("Бит № " + bitNumber + " не определён для числа типа byte!");
             return bitNumber;
         }
@@ -28,6 +28,18 @@ public class CheckBit {
             binaryString = "0".repeat(8 - binaryString.length()).concat(binaryString);
         }
         return Integer.parseInt(binaryString.substring(8 - bitNumber - 1, 8 - bitNumber));
+    }
+
+    public static int checkBit(byte value, int bitNumber) {
+        System.out.println(Integer.toBinaryString(value));
+        byte mask = (byte) 1;
+        mask <<= bitNumber;
+        System.out.println(Integer.toBinaryString(mask));
+        if ((value & mask) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     static void myTest(byte value, int bitNumber) {
