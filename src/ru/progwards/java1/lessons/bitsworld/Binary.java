@@ -50,19 +50,16 @@ public class Binary {
     public String toString() {
         String resultString = "";
         for (int i = 0; i < 8; i++) {
-            int value = num;
-            resultString = checkBit((byte) value, i) + resultString;
+            resultString = checkBit(num, i) + resultString;
         }
         return resultString;
     }
 
     static void myTest() {
-        System.out.println("число 0: " + new Binary((byte) 0).toString());
-        System.out.println("число 1: " + new Binary((byte) 1).toString());
-        System.out.println("число 8: " + new Binary((byte) 8).toString());
-        System.out.println("число 127: " + new Binary((byte) 127).toString());
-        System.out.println("число -128: " + new Binary((byte) -128).toString());
-        System.out.println("число -1: " + new Binary((byte) -1).toString());
+        byte[] testArray = {-128, 1, 127, 0, -1};
+        for (byte b : testArray) {
+            System.out.println("число " + b + ": " + new Binary(b).toString());
+        }
     }
 
     public static void main(String[] args) {

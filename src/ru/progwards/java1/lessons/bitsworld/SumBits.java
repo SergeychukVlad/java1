@@ -61,16 +61,15 @@ public class SumBits {
     public static int sumBits(byte value) {
         int result = 0;
         for (int i = 0; i < 8; i++) {
-            byte byteValue = value;
-            result += checkBit(byteValue, i);
+            result += checkBit(value, i);
         }
         return result;
     }
 
     static void myTest() {
         byte[] testArray = {-128, 1, 127, 0, -1};
-        for (int i = 0; i < testArray.length; i++) {
-            System.out.println(sumBits(testArray[i]));
+        for (byte b : testArray) {
+            System.out.println(sumBits(b));
         }
     }
 

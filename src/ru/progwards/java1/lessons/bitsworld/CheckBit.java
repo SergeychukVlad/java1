@@ -48,19 +48,19 @@ public class CheckBit {
         return value & 0b1;
     }
 
-    static void myTest(byte value, int bitNumber) {
-        System.out.println("Исходное число: " + value);
-        System.out.println("Запрашиваемый номер бита: " + bitNumber);
-        System.out.println("Хранящееся значение: " + checkBit(value, bitNumber));
-        System.out.println();
+    static void myTest() {
+        byte[] testArray = {9, -87, 8, -128, -1, 0};
+        for (byte b : testArray) {
+            System.out.println("Исходное число: " + b + " (" + Integer.toBinaryString(b) + ")");
+            for (int bit = 0; bit < 8; bit++) {
+                System.out.print("Запрашиваемый номер бита: " + bit + ". ");
+                System.out.println("Хранящееся значение: " + checkBit(b, bit));
+            }
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
-        byte[] testArray = {9, -87, -128, -1, 0};
-        for (int i = 0; i < testArray.length; i++) {
-            for (int j = 0; j < 8; j++) {
-                myTest(testArray[i], j);
-            }
-        }
+        myTest();
     }
 }
