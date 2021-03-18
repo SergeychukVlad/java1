@@ -1,10 +1,11 @@
 package lesson5.part3;
 
-public abstract class Figure implements AreaComparable {
+public abstract class Figure implements Comparable<Figure> {
     @Override
-    public int compareArea(Figure figure) {
-        return Double.compare(this.area(), figure.area());
+    public int compareTo(Figure object) {
+        return Double.compare(this.area(), object.area());
     }
+
     // периметр фигуры
     abstract double perimeter();
 

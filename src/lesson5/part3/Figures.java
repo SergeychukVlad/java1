@@ -1,6 +1,16 @@
 package lesson5.part3;
 
+import java.util.Arrays;
+
 public class Figures {
+    static Segment segment = new Segment(5);
+    static Square square = new Square(5);
+    static Rectangle rectangle = new Rectangle(5, 11);
+    static Circle circle = new Circle(5);
+    static Triangle triangle = new Triangle(3, 4, 5);
+
+    static Figure[] figures = {segment, square, rectangle, circle, triangle};
+
     public static void printInfo(Figure figure) {
         System.out.println(figure);
         System.out.println("периметр: " + figure.perimeter());
@@ -9,39 +19,36 @@ public class Figures {
     }
 
     static void myTest() {
-        Segment segment = new Segment(5);
         printInfo(segment);
-        Square square = new Square(5);
         printInfo(square);
-        Rectangle rectangle = new Rectangle(5, 11);
         printInfo(rectangle);
-        Circle circle = new Circle(5);
         printInfo(circle);
-        Triangle triangle = new Triangle(3, 4, 5);
         printInfo(triangle);
     }
 
     static void interfaceUsage() {
-        Segment segment = new Segment(5);
-        Square square = new Square(5);
-        Rectangle rectangle = new Rectangle(5, 11);
-        Circle circle = new Circle(5);
-        Triangle triangle = new Triangle(3, 4, 5);
-
-        Figure[] figures = {segment, square, rectangle, circle, triangle};
         for (var figure : figures) {
             printInfo(figure);
         }
 
-        System.out.println("segment.compareArea(square)   = " + segment.compareArea(square));
-        System.out.println("square.compareArea(square)   = " + square.compareArea(square));
-        System.out.println("square.compareArea(rectangle)   = " + square.compareArea(rectangle));
-        System.out.println("circle.compareArea(triangle)   = " + circle.compareArea(triangle));
-        System.out.println("rectangle.compareArea(triangle)   = " + rectangle.compareArea(triangle));
+        System.out.println("segment.compareTo(square)   = " + segment.compareTo(square));
+        System.out.println("square.compareTo(square)   = " + square.compareTo(square));
+        System.out.println("square.compareTo(rectangle)   = " + square.compareTo(rectangle));
+        System.out.println("circle.compareTo(triangle)   = " + circle.compareTo(triangle));
+        System.out.println("rectangle.compareTo(triangle)   = " + rectangle.compareTo(triangle));
+    }
+
+    static void genericUsage() {
+        Arrays.sort(figures);
+        for (var figure : figures) {
+            printInfo(figure);
+        }
     }
 
     public static void main(String[] args) {
-//        myTest();
+        myTest();
         interfaceUsage();
+        System.out.println();
+        genericUsage();
     }
 }
