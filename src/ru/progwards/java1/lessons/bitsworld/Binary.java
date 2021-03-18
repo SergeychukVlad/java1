@@ -49,8 +49,8 @@ public class Binary {
     // по варианту С.А.
     public String toString() {
         String resultString = "";
-        for (int i = 0; i < 8; i++) {
-            resultString = checkBit(num, i) + resultString;
+        for (int i = 7; i >= 0; i--) {
+            resultString += checkBit(num, i);
         }
         return resultString;
     }
