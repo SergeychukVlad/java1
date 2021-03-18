@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.bitsworld;
 
+import static ru.progwards.java1.lessons.bitsworld.CheckBit.checkBit;
+
 public class SumBits {
     /*
 
@@ -11,32 +13,34 @@ public class SumBits {
 используйте & с числом 1 для того, чтобы оставить только один правый значащий бит;
 используйте сдвиг вправо для того, чтобы проверить следующий бит.
 
--128:   "10000000"
-1:      "00000001"
-127:    "01111111"
-0:      "00000000"
--1:     "11111111"
+-128:   "10000000" - 1
+1:      "00000001" - 1
+127:    "01111111" - 7
+0:      "00000000" - 0
+-1:     "11111111" - 8
 
      */
 
-//    public static int sumBitsOnSubstring(byte value) {
-//        String binaryString = Integer.toBinaryString(value);
-//        int result = 0;
-//        if (value < 0) { // для отрицательного value. Обрезать до 8-ми знаков.
-//            binaryString = binaryString.substring(binaryString.length() - 8);
-//            for (int i = 0; i < binaryString.length(); i++) {
-//                result += Integer.parseInt(binaryString.substring(i, i + 1));
-//            }
-//        } else {
-//            for (int i = 0; i < binaryString.length(); i++) {
-//                result += Integer.parseInt(binaryString.substring(i, i + 1));
-//            }
-//        }
-//        System.out.println(binaryString);
-//        return result;
-//    }
+    // мой вариант 1
+    public static int sumBitsOnSubstring(byte value) {
+        String binaryString = Integer.toBinaryString(value);
+        int result = 0;
+        if (value < 0) { // для отрицательного value. Обрезать до 8-ми знаков.
+            binaryString = binaryString.substring(binaryString.length() - 8);
+            for (int i = 0; i < binaryString.length(); i++) {
+                result += Integer.parseInt(binaryString.substring(i, i + 1));
+            }
+        } else {
+            for (int i = 0; i < binaryString.length(); i++) {
+                result += Integer.parseInt(binaryString.substring(i, i + 1));
+            }
+        }
+        System.out.println(binaryString);
+        return result;
+    }
 
-    public static int sumBits(byte value) {
+    // мой вариант 2
+    public static int mySumBits(byte value) {
         int result = 0;
         byte mask = (byte) 1;
 
@@ -49,6 +53,16 @@ public class SumBits {
                 }
                 mask <<= 1;
             }
+        }
+        return result;
+    }
+
+    // по варианту С.А.
+    public static int sumBits(byte value) {
+        int result = 0;
+        for (int i = 0; i < 8; i++) {
+            byte byteValue = value;
+            result += checkBit(byteValue, i);
         }
         return result;
     }
