@@ -1,6 +1,6 @@
 package lesson5.part3;
 
-public class Rectangle extends Square {
+public final class Rectangle extends Square {
     double b;
 
     Rectangle(double a, double b) {

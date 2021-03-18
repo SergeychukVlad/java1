@@ -1,18 +1,11 @@
 package lesson5.part3;
 
-public class Figure {
+public abstract class Figure {
     // периметр фигуры
-    double perimeter() {
-        return 0d;
-    }
+    abstract double perimeter();
 
     // площадь фигуры
     double area() {
         return 0d;
-    }
-
-    @Override
-    public String toString() {
-        return "Абстрактная фигура";
     }
 }
