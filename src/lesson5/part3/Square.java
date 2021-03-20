@@ -6,12 +6,12 @@ public class Square extends Segment {
     }
 
     @Override
-    double area() {
+    public double area() {
         return a * a;
     }
 
     @Override
-    double perimeter() {
+    public double perimeter() {
         return 4 * a;
     }
 

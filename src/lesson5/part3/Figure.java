@@ -7,10 +7,10 @@ public abstract class Figure implements Comparable<Figure> {
     }
 
     // периметр фигуры
-    abstract double perimeter();
+    public abstract double perimeter();
 
     // площадь фигуры
-    double area() {
+    public double area() {
         return 0d;
     }
 }

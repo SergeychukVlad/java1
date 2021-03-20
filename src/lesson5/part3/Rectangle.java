@@ -9,12 +9,12 @@ public final class Rectangle extends Square {
     }
 
     @Override
-    double area() {
+    public double area() {
         return a * b;
     }
 
     @Override
-    double perimeter() {
+    public double perimeter() {
         return 2 * (a + b);
     }
 

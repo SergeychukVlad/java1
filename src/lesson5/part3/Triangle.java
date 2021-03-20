@@ -10,13 +10,13 @@ public class Triangle extends Segment {
     }
 
     @Override
-    double area() {
+    public double area() {
         double hP = perimeter() / 2;
         return Math.sqrt(hP * (hP - a) * (hP - b) * (hP - c));
     }
 
     @Override
-    double perimeter() {
+    public double perimeter() {
         return a + b + c;
     }
 

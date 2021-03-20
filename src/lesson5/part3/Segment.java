@@ -1,14 +1,14 @@
 package lesson5.part3;
 
 public class Segment extends Figure {
-    double a;
+    public double a;
 
-    Segment(double a) {
+    public Segment(double a) {
         this.a = a;
     }
 
     @Override
-    double perimeter() {
+    public double perimeter() {
         return a;
     }
 
