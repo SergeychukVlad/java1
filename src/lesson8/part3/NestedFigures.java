@@ -1,10 +1,12 @@
 package lesson8.part3;
 
+import lesson5.part3.Figure;
+
 public class NestedFigures {
     // вложенные классы-фигуры
-    public static abstract class Figure implements Comparable<lesson5.part3.Figure> {
+    public static abstract class Figure implements Comparable<Figure> {
         @Override
-        public int compareTo(lesson5.part3.Figure object) {
+        public int compareTo(Figure object) {
             return Double.compare(this.area(), object.area());
         }
 
@@ -17,7 +19,7 @@ public class NestedFigures {
         }
     }
 
-    public static class Segment extends lesson5.part3.Figure {
+    public static class Segment extends Figure {
         double a;
 
         Segment(double a) {
@@ -80,7 +82,7 @@ public class NestedFigures {
         }
     }
 
-    public static class Circle extends lesson5.part3.Figure {
+    public static class Circle extends Figure {
         double radius;
 
         public Circle(double radius) {
@@ -127,5 +129,12 @@ public class NestedFigures {
         public String toString() {
             return "Треугольник со сторонами " + a + ", " + b + ", " + c;
         }
+    }
+
+    public static void printInfo(Figure figure) {
+        System.out.println(figure);
+        System.out.println("периметр: " + figure.perimeter());
+        System.out.println("площадь : " + figure.area());
+        System.out.println();
     }
 }
