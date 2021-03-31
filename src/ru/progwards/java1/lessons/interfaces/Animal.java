@@ -1,11 +1,23 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public class Animal implements FoodCompare {
+public class Animal implements FoodCompare, CompareWeight {
 
     @Override
     public int compareFoodPrice(Animal animal) {
         return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
     }
+
+    @Override
+    public CompareResult compareWeight(CompareWeight smthValue) {
+        if (this.weight < ((ArraySort) smthValue).getValue()) {
+            return CompareResult.LESS;
+        }
+        if (this.weight > ((ArraySort) smthValue).getValue()) {
+            return CompareResult.GREATER;
+        } else
+            return CompareResult.EQUAL;
+    }
+
 
     double weight;
 
