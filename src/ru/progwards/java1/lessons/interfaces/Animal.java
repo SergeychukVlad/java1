@@ -1,21 +1,17 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public class Animal {
-    public double weight;
+public class Animal implements FoodCompare {
+
+    @Override
+    public int compareFoodPrice(Animal animal) {
+        return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
+    }
+
+    double weight;
 
     enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
 
     enum FoodKind {UNKNOWN, HAY, CORN}
-
-    public static Animal makeAnimal(double weight) {
-        System.out.println("Создаём " + AnimalKind.ANIMAL + " с весом " + weight);
-        if (weight > 0.0) {
-            return new Animal(weight);
-        } else {
-            System.out.println("Да быть не может такого бесплотного " + AnimalKind.ANIMAL);
-            return null;
-        }
-    }
 
     public Animal(double weight) {
 //      если предполагается отрицательная масса, создаём объект с массой 0.0, чтобы дальше проверить и сообщить
@@ -51,42 +47,33 @@ public class Animal {
         return getWeight() * getFoodCoeff();
     }
 
-    public String toStringFull() {
-        return "I am " + getKind() + ", eat " + getFoodKind() + " " + calculateFoodWeight();
+    public double getFood1kgPrice() {
+        return switch (getFoodKind()) {
+            case HAY -> 20.0;
+            case CORN -> 50.0;
+            case UNKNOWN -> 0.0;
+        };
     }
 
-    public static void printStringInfo(Animal animal) {
-        if (animal.weight > 0.0) {
-            System.out.println(animal.toString());
-            System.out.println(animal.toStringFull());
-        } else {
-            System.out.println("Поэтому информация по весу призрака не предоставляется");
-        }
-        System.out.println();
+    public double getFoodPrice() {
+        return getFood1kgPrice() * calculateFoodWeight();
+    }
+
+    public boolean equals(Object anObject) {
+//       убедиться, что сравниваем объекты класса Animal
+//       вернуть true, если у объектов равный вес
+        return anObject instanceof Animal && this.weight == (((Animal) anObject).weight);
     }
 
     static void myTesting() {
         Animal animal = new Animal(100.2);
-        System.out.println("Создаём " + AnimalKind.ANIMAL + " с весом " + animal.weight);
-        printStringInfo(animal);
-        animal = new Animal(0);
-        System.out.println("Создаём " + AnimalKind.ANIMAL + " с весом " + animal.weight);
-        printStringInfo(animal);
-
         Cow cow = new Cow(350.2);
-        System.out.println("Создаём " + AnimalKind.COW + " с весом " + cow.weight);
-        printStringInfo(cow);
-        cow = new Cow(-7.0);
-        System.out.println("Создаём " + AnimalKind.COW + " с весом " + cow.weight);
-        printStringInfo(cow);
-
         Hamster hamster = new Hamster(2.2);
-        System.out.println("Создаём " + AnimalKind.HAMSTER + " с весом " + hamster.weight);
-        printStringInfo(hamster);
-
         Duck duck = new Duck(3.6);
-        System.out.println("Создаём " + AnimalKind.DUCK + " с весом " + duck.weight);
-        printStringInfo(duck);
+        System.out.println(cow.compareFoodPrice(hamster));
+        System.out.println(animal.compareFoodPrice(duck));
+        System.out.println(cow.equals(duck));
+        System.out.println(cow.equals(cow));
     }
 
     public static void main(String[] args) {
