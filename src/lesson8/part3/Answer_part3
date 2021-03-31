@@ -1,21 +1,34 @@
 1.
-Правильный ответ: public class Number implements Comparable {
+Правильный ответ:
+public class Number implements Comparable {
 ...
-} → этот класс обязан реализовать все методы из Comparable, public abstract final class Number {
+} → этот класс обязан реализовать все методы из Comparable,
+
+public abstract final class Number {
 ...
-} → так нельзя, компилятор выдаст ошибку, public abstract class Number {
+} → так нельзя, компилятор выдаст ошибку,
+
+public abstract class Number {
 ...
-} → нельзя создать экземпляр этого класса, public final class Number {
+} → нельзя создать экземпляр этого класса,
+
+public final class Number {
 ...
-} → у этого класса не может быть потомков, public class Number implements ICompare {
+} → у этого класса не может быть потомков,
+
+public class Number implements ICompare {
 ...
+} → можно написать ICompare i = new Number()
 
 2.
+
 3. Правильные ответы:
 Хеш-код предназначен для повышение быстродействия при поиске, добавлении и удалении элементов в коллекциях,
 public boolean equals(Object o) обладает свойствами - транзитивность, рефлексивность и симметричность,
 a.equals(null) всегда false
+
 4.
+
 5. Правильный ответ:
    public static class Animal {
    public class SaveRec {
@@ -25,8 +38,9 @@ a.equals(null) всегда false
    public class Animal {
    public static class SaveRec {
               ....
-     → Снаружи класса Animal можно написать new Animal.SaveRec();, public class Person {
+     → Снаружи класса Animal можно написать new Animal.SaveRec();,
 
+   public class Person {
    static class SaveRec {
               ....
      → Внутри класса Person можно написать new SaveRec();,
@@ -40,10 +54,12 @@ a.equals(null) всегда false
       class SaveRec {
               ....
      → Внутри класса Person можно написать newPerson().new SaveRec();
+
 6. Правильные ответы:
 невозможно создать экземпляр абстрактного класса,
 класс-наследник абстрактного класса либо сам должен быть абстрактным, либо реализовать все абстрактные методы,
 interface позволяет использовать унифицированный доступ к классам, не связанным иерархией наследования
+
 7. Верный ответ:
    Задайте верный порядок действий при реализации переопределении public boolean equals(Object o)
    при сравнении экземпляров класса
@@ -60,7 +76,9 @@ interface позволяет использовать унифицированн
    [double radius = ((Circle)o).radius;]
    return [Double.compareTo(this,radius, radius) == 0;]
    }
+
 8.
+
 9. Правильный ответ:
 Разновидность локального класса, но существует сам по себе, без переменной → анонимный класс,
 Располагается внутри какого-либо класса и содержит модификатор static → вложенный класс,
