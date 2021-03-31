@@ -60,9 +60,9 @@ public class Animal implements FoodCompare {
     }
 
     public boolean equals(Object anObject) {
-//       убедиться, что сравниваем объекты класса Animal
+//       убедиться, что сравниваем объекты одного класса
 //       вернуть true, если у объектов равный вес
-        return anObject instanceof Animal && this.weight == (((Animal) anObject).weight);
+        return anObject.getClass().equals(this.getClass()) && this.weight == ((Animal) anObject).weight;
     }
 
     static void myTesting() {
