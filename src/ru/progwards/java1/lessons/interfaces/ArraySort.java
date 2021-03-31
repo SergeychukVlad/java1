@@ -35,9 +35,13 @@ public class ArraySort implements CompareWeight {
         }
     }
 
-    public static void main(String[] args) {
+    public static void myTesting() {
         ArraySort[] values = {new ArraySort(500), new ArraySort(169), new ArraySort(1024),
                 new ArraySort(100), new ArraySort(7)};
         sort(values);
+    }
+
+    public static void main(String[] args) {
+        myTesting();
     }
 }

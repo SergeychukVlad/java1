@@ -2,28 +2,27 @@ package ru.progwards.java1.lessons.interfaces;
 
 public class Animal implements FoodCompare, CompareWeight {
 
+    enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
+
+    enum FoodKind {UNKNOWN, HAY, CORN}
+
+    double weight;
+
     @Override
     public int compareFoodPrice(Animal animal) {
         return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
     }
 
     @Override
-    public CompareResult compareWeight(CompareWeight smthValue) {
-        if (this.weight < ((ArraySort) smthValue).getValue()) {
+    public CompareResult compareWeight(CompareWeight smthHasWeight) {
+        if (this.weight < ((Animal) smthHasWeight).getWeight()) {
             return CompareResult.LESS;
         }
-        if (this.weight > ((ArraySort) smthValue).getValue()) {
+        if (this.weight > ((Animal) smthHasWeight).getWeight()) {
             return CompareResult.GREATER;
         } else
             return CompareResult.EQUAL;
     }
-
-
-    double weight;
-
-    enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
-
-    enum FoodKind {UNKNOWN, HAY, CORN}
 
     public Animal(double weight) {
 //      если предполагается отрицательная масса, создаём объект с массой 0.0, чтобы дальше проверить и сообщить
