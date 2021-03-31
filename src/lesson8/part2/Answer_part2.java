@@ -30,6 +30,4 @@ public abstract final class Number {
 
  */
 
-
-
 }
