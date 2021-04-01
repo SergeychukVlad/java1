@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.interfaces;
 
+import java.util.Arrays;
+
 public class ArraySort implements CompareWeight {
     public int value;
 
@@ -39,6 +41,9 @@ public class ArraySort implements CompareWeight {
         ArraySort[] values = {new ArraySort(500), new ArraySort(169), new ArraySort(1024),
                 new ArraySort(100), new ArraySort(7)};
         sort(values);
+        for (int i = 0; i < values.length; i++) {
+            System.out.println(Arrays.asList(values).get(i).getValue());
+        }
     }
 
     public static void main(String[] args) {
