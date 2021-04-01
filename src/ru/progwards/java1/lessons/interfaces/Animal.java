@@ -1,5 +1,8 @@
 package ru.progwards.java1.lessons.interfaces;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Animal implements FoodCompare, CompareWeight {
 
     enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
@@ -22,6 +25,19 @@ public class Animal implements FoodCompare, CompareWeight {
             return CompareResult.GREATER;
         } else
             return CompareResult.EQUAL;
+    }
+
+    public static void sort(CompareWeight[] a) {
+        CompareWeight buffer;
+        for (int i = 1; i < a.length; i++) {
+            for (int j = 0; j < a.length; j++) {
+                if (a[j].compareWeight(a[i]) == CompareResult.GREATER) {
+                    buffer = a[j];
+                    a[j] = a[i];
+                    a[i] = buffer;
+                }
+            }
+        }
     }
 
     public Animal(double weight) {
@@ -83,8 +99,11 @@ public class Animal implements FoodCompare, CompareWeight {
         Duck duck = new Duck(3.6);
         System.out.println(cow.compareFoodPrice(hamster));
         System.out.println(animal.compareFoodPrice(duck));
-        System.out.println(cow.equals(duck));
-        System.out.println(cow.equals(cow));
+        System.out.println(Objects.equals(cow, duck));
+        System.out.println(Objects.equals(cow, cow));
+        Animal[] animals = {animal, cow, hamster, duck};
+        sort(animals);
+        System.out.println(Arrays.asList(animals));
     }
 
     public static void main(String[] args) {
