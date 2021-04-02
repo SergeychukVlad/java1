@@ -26,19 +26,19 @@ public class Animal implements FoodCompare, CompareWeight {
         } else
             return CompareResult.EQUAL;
     }
-
-    public static void sort(CompareWeight[] a) {
-        CompareWeight buffer;
-        for (int i = 1; i < a.length; i++) {
-            for (int j = 0; j < a.length; j++) {
-                if (a[j].compareWeight(a[i]) == CompareResult.GREATER) {
-                    buffer = a[j];
-                    a[j] = a[i];
-                    a[i] = buffer;
-                }
-            }
-        }
-    }
+//
+//    public static void sort(CompareWeight[] a) {
+//        CompareWeight buffer;
+//        for (int i = 1; i < a.length; i++) {
+//            for (int j = 0; j < a.length; j++) {
+//                if (a[j].compareWeight(a[i]) == CompareResult.GREATER) {
+//                    buffer = a[j];
+//                    a[j] = a[i];
+//                    a[i] = buffer;
+//                }
+//            }
+//        }
+//    }
 
     public Animal(double weight) {
 //      если предполагается отрицательная масса, создаём объект с массой 0.0, чтобы дальше проверить и сообщить
@@ -102,7 +102,7 @@ public class Animal implements FoodCompare, CompareWeight {
         System.out.println(Objects.equals(cow, duck));
         System.out.println(Objects.equals(cow, cow));
         Animal[] animals = {animal, cow, hamster, duck};
-        sort(animals);
+        ArraySort.sort(animals);
         System.out.println(Arrays.asList(animals));
     }
 
