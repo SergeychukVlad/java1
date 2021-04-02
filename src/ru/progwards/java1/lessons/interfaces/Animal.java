@@ -102,6 +102,7 @@ public class Animal implements FoodCompare, CompareWeight {
         System.out.println(Objects.equals(cow, duck));
         System.out.println(Objects.equals(cow, cow));
         Animal[] animals = {animal, cow, hamster, duck};
+        System.out.println(Arrays.asList(animals));
         ArraySort.sort(animals);
         System.out.println(Arrays.asList(animals));
     }
