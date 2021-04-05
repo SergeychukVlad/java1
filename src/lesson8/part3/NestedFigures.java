@@ -1,7 +1,5 @@
 package lesson8.part3;
 
-import lesson5.part3.Figure;
-
 public class NestedFigures {
     // вложенные классы-фигуры
     public static abstract class Figure implements Comparable<Figure> {
@@ -11,7 +9,7 @@ public class NestedFigures {
         }
 
         // периметр фигуры
-        abstract double perimeter();
+        public abstract double perimeter();
 
         // площадь фигуры
         double area() {
