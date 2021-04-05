@@ -12,7 +12,7 @@ public class NestedFigures {
         public abstract double perimeter();
 
         // площадь фигуры
-        double area() {
+        public double area() {
             return 0d;
         }
     }
@@ -20,7 +20,7 @@ public class NestedFigures {
     public static class Segment extends Figure {
         double a;
 
-        Segment(double a) {
+        public Segment(double a) {
             this.a = a;
         }
 
@@ -36,7 +36,7 @@ public class NestedFigures {
     }
 
     public static class Square extends Segment {
-        Square(double a) {
+        public Square(double a) {
             super(a);
         }
 
@@ -59,7 +59,7 @@ public class NestedFigures {
     public static final class Rectangle extends Square {
         double b;
 
-        Rectangle(double a, double b) {
+        public Rectangle(double a, double b) {
             super(a);
             this.b = b;
         }
@@ -106,7 +106,7 @@ public class NestedFigures {
     public static class Triangle extends Segment {
         double b, c;
 
-        Triangle(double a, double b, double c) {
+        public Triangle(double a, double b, double c) {
             super(a);
             this.b = b;
             this.c = c;
@@ -129,10 +129,16 @@ public class NestedFigures {
         }
     }
 
+    // статические методы
     public static void printInfo(Figure figure) {
+
         System.out.println(figure);
         System.out.println("периметр: " + figure.perimeter());
         System.out.println("площадь : " + figure.area());
         System.out.println();
+    }
+
+    public static void main(String[] args) {
+
     }
 }
