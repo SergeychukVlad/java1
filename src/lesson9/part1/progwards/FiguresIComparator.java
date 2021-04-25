@@ -1,4 +1,4 @@
-package lesson9.part1;
+package lesson9.part1.progwards;
 
 import lesson8.part3.NestedFigures;
 
@@ -43,7 +43,8 @@ public class FiguresIComparator extends NestedFigures {
         Triangle triangle = new Triangle(3, 4, 5);
         Figure[] figures = {segment, square, rectangle, circle, triangle};
 
-        FiguresIComparator fcArea = new FiguresIComparator(figures,
+        FiguresIComparator fcArea = new FiguresIComparator(
+                figures,
                 new Comparator<Figure>() {
                     @Override
                     public int compare(Figure o1, Figure o2) {
