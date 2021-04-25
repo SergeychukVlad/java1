@@ -10,5 +10,16 @@ public class Test {
 
         cat.makeSound();
         cat.eat();
+
+        System.out.println("------");
+
+        Woman woman = new Woman();
+        woman.eat();
+        woman.makeSound();
+        woman.makeUp();
+
+        Man man = new Man();
+        man.eat();
+        man.makeChildren();
     }
 }
