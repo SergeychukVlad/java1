@@ -1,0 +1,43 @@
+1. Правильные ответы:
+BigDecimal – класс для точных вычислений в дробных числах,
+BigInteger – класс для точных вычислений в целых числах,
+Для BigDecimal хранится unscaledValue и scale (масштаб)
+
+2. Правильный ответ:
+MathContext mathContext = new MathContext(3);
+   BigDecimal result = new BigDecimal("3.3333", mathContext); → 3.33,
+
+   BigDecimal bigDec1 = BigDecimal.valueOf(10);
+   BigDecimal bigDec2 = BigDecimal.valueOf(3);
+   BigDecimal result = bigDec1.divide(bigDec2); → Так нельзя, будет ошибка во время выполнения, BigDecimal bigDec1 = BigDecimal.valueOf(10);
+
+   BigDecimal bigDec2 = BigDecimal.valueOf(3);
+   BigDecimal result = bigDec1.divide(bigDec2, 5, RoundingMode.HALF_UP); → 3.33333
+
+3. Описан класс
+
+    static class Rectangle {
+
+   		Rectangle(BigDecimal a, BigDecimal b) {
+   			this.a = a;
+   			this.b = b;
+   		}
+   		public BigDecimal a;
+   		public BigDecimal b;
+   	}
+
+Напишите функцию со спецификацией boolean rectCompare(Rectangle r1, Rectangle r2),
+которая возвращает true если площади прямоугольников равны
+
+boolean rectCompare(Rectangle r1, Rectangle r2) {
+        if (r1.a.multiply(r1.b).compareTo(r2.a.multiply(r2.b)) == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    или элегантней ))
+
+    boolean rectCompare(Rectangle r1, Rectangle r2) {
+            return r1.a.multiply(r1.b).compareTo(r2.a.multiply(r2.b)) == 0;
+        }
