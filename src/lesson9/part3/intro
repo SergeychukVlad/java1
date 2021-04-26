@@ -1,0 +1,12 @@
+BigDecimal. BigInteger.
+
+Класс BigDecimal - это высокоточная арифметика с большими ДРОБНЫМИ числами.
+Класс BigInteger - это высокоточная арифметика с большими ЦЕЛЫМИ числами.
+
+public class BigDecimal
+    extends Number
+        implements Comparable<BigDecimal>
+
+public class BigInteger
+    extends Number
+        implements Comparable<BigInteger>
