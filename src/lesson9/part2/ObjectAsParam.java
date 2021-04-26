@@ -25,10 +25,17 @@ public class ObjectAsParam {
     }
 
     static void objectAsParam2(Simple simple) {
-        simple = new Simple();
         simple.a = 55555;
         simple.b = true;
         simple.msg = "Сообщение изменено в objectAsParam2";
+    }
+
+    static void objectAsParam3(Simple simple) {
+        simple.msg = "Сообщение изменено в objectAsParam3 перед созданием нового объекта simple";
+        simple = new Simple();
+        simple.a = 99999;
+        simple.b = true;
+        simple.msg = "Сообщение изменено в objectAsParam3";
     }
 
     static void stringAsParam(String str) {
@@ -50,6 +57,8 @@ public class ObjectAsParam {
         objectAsParam1(simple);
         System.out.println(simple);
         objectAsParam2(simple);
+        System.out.println(simple);
+        objectAsParam3(simple);
         System.out.println(simple);
         System.out.println("---------------");
 
