@@ -20,8 +20,8 @@ public class BigAlgebra {
         startTime = new Date().getTime();
         System.out.println("Start Time :" + startTime);
         bigDecimal = new BigDecimal(testValue);
-        System.out.println("Result: " + fastPow0(bigDecimal, expValue));
-        System.out.println("fastPow0() speed: " + (new Date().getTime() - startTime) + " mSec \n");
+        System.out.println("Result: " + fastPow(bigDecimal, expValue));
+        System.out.println("fastPow() speed: " + (new Date().getTime() - startTime) + " mSec \n");
 
         startTime = new Date().getTime();
         System.out.println("Start Time :" + startTime);
@@ -86,7 +86,7 @@ http://xn----htbdsuo3h.xn--p1ai/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC
     }
 
     // мой вариант метода
-    public static BigDecimal fastPow0(BigDecimal num, int pow) {
+    public static BigDecimal fastPow(BigDecimal num, int pow) {
         BigDecimal oneStepNum = num;
     //  пробовал разные. Оставил 5. Чтобы не удлинять время первого цикла
         int divider = 5;
