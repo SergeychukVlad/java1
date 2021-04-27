@@ -87,7 +87,7 @@ public class ArrayInteger {
             System.out.println("После add(): " + Arrays.toString(this.digits));
             return false;
         } else {
-            System.out.println("После add(): " + Arrays.toString(this.digits));
+            System.out.println("После add()  : " + Arrays.toString(this.digits));
             return true;
         }
     }
