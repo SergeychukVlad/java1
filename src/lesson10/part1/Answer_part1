@@ -1,0 +1,57 @@
+1. Правильные ответы:
+Исключение - проблемы возникающие при выполнении кода,
+Исключения освобождают код от передачи информации о возникшей проблеме,
+Все исключения в Java описываются классами
+
+2. Правильный ответ:
+   str = null;
+   try {
+       System.out.println(str.toString());
+   }
+   catch (NullPointerException npe) {
+       System.out.println("catch-npe");
+   }
+   catch (Exception e) {
+       System.out.println("catch");
+   }
+   → catch-npe,
+
+   str = null;
+   try {
+       System.out.println(str.toString());
+   }
+   catch (Exception e) {
+       System.out.println("catch");
+   }
+   → catch,
+
+   str = null;
+   try {
+       System.out.println(str.toString());
+   }
+   catch (Exception e) {
+       System.out.println("catch");
+   }
+   finally {
+       System.out.println("finally");
+   }
+   → catch finally,
+
+   str = "null";
+   try {
+       System.out.println(str.toString());
+   }
+   catch (Exception e) {
+       System.out.println("null pointer");
+   }
+   → null
+
+3. Напишите функцию, со спецификацией public Integer sqr(Integer n) которая вычисляет квадрат переданного числа
+Сделайте обработку NullPointerException, и в этом случае функция должна вернуть -1
+public Integer sqr(Integer n) {
+        try {
+            return n * n;
+        } catch (NullPointerException e) {
+            return -1;
+        }
+    }
