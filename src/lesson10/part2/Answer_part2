@@ -1,0 +1,34 @@
+1. Правильные ответы:
+Проверяемые исключения - компилятор требует наличия try-catch или throws,
+Непроверяемые исключения - потомки RuntimeException,
+Пробросить проверяемое исключение можно через throws
+
+2. Правильный ответ:
+
+   public static void test() throws IOException {
+       FileWriter writer = new FileWriter("aaaa", true);
+   }
+   → метод может выбросить IOException,
+
+   public static void test() throws IOException {
+       throw new IOException();
+   }
+   → метод всегда выбрасывает IOException,
+
+   try {
+       FileWriter writer = new FileWriter("aaaa", true);
+   }
+   catch (NullPointerException e) {
+   }
+   → компилятор выдаст Unhandled exception: IOException
+
+3. Напишите метод с сигнатурой public String test(String filename), который проверяет filename и если он равен null
+выбрасывает IOException со строкой "File not found", в противном случает возвращает строку "File processing"
+
+    public String test(String filename) throws IOException {
+        if (filename != null) {
+            return "File processing";
+        } else {
+            throw new IOException("File not found");
+        }
+    }
