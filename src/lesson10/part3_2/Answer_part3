@@ -1,0 +1,38 @@
+1. Правильные ответы:
+Потоки предназначены для работы с вводом - выводом,
+Поток доставляет данные от источника к получателю,
+При работе с потоками нужно корректно обрабатывать исключения
+
+2. Правильный ответ:
+Бинарная запись в файл  → FileOutputStream,
+Символьное чтение из файла → FileReader,
+Символьная запись в файл → FileWriter,
+Бинарное чтение из файла  → FileInputStream
+
+3. Реализовать метод с сигнатурой private int lineCount(String filename),
+который возвращает количество строк в файле filename.
+В случае ошибки пробросить исключение IOException со строкой сообщения "файл не найден"
+
+private int lineCount(String filename) throws IOException {
+        int count = 0;
+        try {
+            FileReader fileReader = new FileReader(filename);
+            try {
+                for (int ch; (ch = fileReader.read()) >= 0; ) {
+                    if (ch == 10) {
+                        count++;
+                    }
+                    ;
+                }
+            } finally {
+                try {
+                    fileReader.close();
+                } catch (Exception e) {
+                    throw new IOException("файл не найден");
+                }
+            }
+        } catch (Exception e) {
+            throw new IOException("файл не найден");
+        }
+        return count;
+    }
