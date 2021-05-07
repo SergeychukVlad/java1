@@ -122,7 +122,6 @@ public class ReadWithScanner {
                     if (ch == 10) {
                         count++;
                     }
-                    ;
                 }
             } finally {
                 try {
