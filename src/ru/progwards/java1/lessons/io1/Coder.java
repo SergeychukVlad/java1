@@ -13,32 +13,32 @@ public class Coder {
     public static String logMessage = "Нет файла с таким именем на устройстве!";
 
     public static void main(String[] args) throws IOException {
-        String sourceFileName, codedFileName, logFileName;
-        sourceFileName = "source.txt";
-        codedFileName = "coded.txt";
-        logFileName = "coder.log";
+        char[] code = new char[65536];
+        String inFileName, outFileName, logName;
+        inFileName = "source1.txt";
+        outFileName = "coded.txt";
+        logName = "coder.log";
 
-        System.setOut(new PrintStream(new FileOutputStream(logFileName)));
-        System.out.println("Redirect output stream.");
-
-        char[] code = prepareCodeTable(sourceFileName);
-        codeFile(sourceFileName, codedFileName, code, logFileName);
+        codeFile(inFileName, outFileName, code, logName);
     }
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-        String toCodedFile = "";
+        if (logName != null) {
+            try {
+                System.setOut(new PrintStream(new FileOutputStream(logName)));
+                System.out.println("Здесь логи для класса Coder\n");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (inFileName != null) {
             try {
                 FileReader fileReader = new FileReader(inFileName);
                 try {
-                    BufferedReader bufferedReader = new BufferedReader(fileReader);
-                    int i = 0;
-                    int symbol = bufferedReader.read();
-                    while (symbol != -1) {
-                        toCodedFile = toCodedFile + symbol;
-                        i++;
-                        symbol = bufferedReader.read();
+                    BufferedReader reader = new BufferedReader(fileReader);
+                    for (int symbol; (symbol = reader.read()) >= 0; ) {
+                        code[symbol] = (char) symbol;
                     }
                 } finally {
                     fileReader.close();
@@ -53,7 +53,7 @@ public class Coder {
             try {
                 FileWriter fileWriter = new FileWriter(outFileName);
                 try {
-                    fileWriter.write(toCodedFile);
+                    fileWriter.write(code);
                 } finally {
                     fileWriter.close();
                 }
@@ -61,47 +61,7 @@ public class Coder {
                 System.out.println(logMessage);
                 System.out.println(e.getMessage());
             }
-            if (logName != null) {
-                try {
-                    FileWriter logWriter = new FileWriter(logName);
-                    try {
-                        logWriter.write(logName);
-                    } finally {
-                        logWriter.close();
-                    }
-                } catch (IOException l) {
-                    System.out.println(logMessage);
-                    System.out.println(l.getMessage());
-                }
-            }
         }
-    }
-
-    public static char[] prepareCodeTable(String sourceFile) {
-        char[] code = new char[100];
-        try {
-            FileReader fileReader = new FileReader(sourceFile);
-            try {
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
-                int symbol = bufferedReader.read();
-                int i = 0;
-                code[i] = (char) symbol;
-                while (symbol != -1) {
-                    code[i] = (char) symbol;
-                    i++;
-                    System.out.println((char) symbol + " соответствует " + symbol);
-                    symbol = bufferedReader.read();
-                }
-                System.out.println(code);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                fileReader.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return code;
     }
 }
 
