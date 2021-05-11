@@ -1,4 +1,4 @@
-package lesson10.part3_2;
+package lesson10.examples;
 
 import java.io.*;
 

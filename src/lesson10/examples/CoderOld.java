@@ -5,7 +5,7 @@
 соответствует символ code[(int)symbol] выходного файла.
 В случае ошибок, в файл с именем logName вывести название ошибки через метод класса Exception - getMessage()
 */
-package lesson10.part3_2;
+package lesson10.examples;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
