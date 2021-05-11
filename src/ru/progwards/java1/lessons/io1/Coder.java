@@ -8,18 +8,28 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Coder {
-    public static String logMessage = "Нет файла с таким именем на устройстве!";
+    private static String logMessage = "Нет файла с таким именем на устройстве!";
+    private static List<Character> chars = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         char[] code = new char[65536];
-        String inFileName, outFileName, logName;
-        inFileName = "source1.txt";
+        String inFileName, outFileName, logName, decodedFileName;
+        inFileName = "source.txt";
         outFileName = "coded.txt";
+        decodedFileName = "decoded.txt";
         logName = "coder.log";
 
         codeFile(inFileName, outFileName, code, logName);
+        decodeFile(outFileName, decodedFileName, code);
+        System.setOut(System.out);
     }
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
@@ -31,31 +41,53 @@ public class Coder {
                 e.printStackTrace();
             }
         }
-
-        if (inFileName != null) {
+        if (outFileName != null) {
             try {
-                FileReader fileReader = new FileReader(inFileName);
-                try {
-                    BufferedReader reader = new BufferedReader(fileReader);
-                    for (int symbol; (symbol = reader.read()) >= 0; ) {
-                        code[symbol] = (char) symbol;
+                FileOutputStream writer = new FileOutputStream(outFileName);
+                if (inFileName != null) {
+                    try {
+                        FileInputStream reader = new FileInputStream(inFileName);
+                        try {
+                            while (reader.available() > 0) {
+                                int symbol = reader.read();
+                                code[symbol] = (char) symbol;
+                                System.out.println(symbol);
+                                writer.write(symbol);
+//                                writer.write(Character.getNumericValue(symbol));
+                            }
+                        } catch (IOException e) {
+                            System.out.println(e.getMessage());
+                        } finally {
+                            reader.close();
+                            writer.close();
+                        }
+                    } catch (IOException e) {
+                        System.out.println(logMessage);
+                        System.out.println(e.getMessage());
                     }
-                } finally {
-                    fileReader.close();
                 }
             } catch (IOException e) {
                 System.out.println(logMessage);
                 System.out.println(e.getMessage());
             }
         }
+    }
 
-        if (outFileName != null) {
+    public static void decodeFile(String outFileName, String decodedFileName, char[] code) {
+        if (decodedFileName != null) {
             try {
-                FileWriter fileWriter = new FileWriter(outFileName);
+                BufferedReader reader = new BufferedReader(new FileReader(outFileName));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(decodedFileName));
                 try {
-                    fileWriter.write(code);
+                    for (int symbol; (symbol = reader.read()) >= 0; ) {
+                        char ch = code[(char) symbol];
+                        writer.write(ch);
+                    }
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 } finally {
-                    fileWriter.close();
+                    reader.close();
+                    writer.close();
                 }
             } catch (IOException e) {
                 System.out.println(logMessage);
