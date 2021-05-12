@@ -1,3 +1,14 @@
+/*
+Реализовать класс BigAlgebra, содержащий следующие статические методы:
+
+1.1 Метод BigDecimal fastPow(BigDecimal num, int pow)
+Реализовать алгоритм быстрого возведения в степень pow числа num в BigDecimal, описание алгоритма можно
+прочитать например в Википедии
+1.2 Метод BigInteger fibonacci(int n)
+Реализовать алгоритм вычисления n-го числа фибоначчи в BigInteger. Последовательность чисел Фибоначчи,
+это когда каждое последующее число равно сумме двух предыдущих чисел. Первые 2 числа последовательности 1, 1.
+Итого получаем 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 и т.д.
+ */
 package ru.progwards.java1.lessons.bigints;
 
 import java.math.BigDecimal;
@@ -8,32 +19,25 @@ import java.util.Date;
 public class BigAlgebra {
 
     public static void main(String[] args) {
-        String testValue = "4819";
+        String testValue = "48195";
         int expValue = 199;
 
-        long startTime = new Date().getTime();
-        System.out.println("Start Time :" + startTime);
         BigDecimal bigDecimal = new BigDecimal(testValue);
+        long startTime = new Date().getTime();
         System.out.println("Result: " + ordinaryPow(bigDecimal, expValue));
         System.out.println("ordinaryPow() speed: " + (new Date().getTime() - startTime) + " mSec \n");
 
         startTime = new Date().getTime();
-        System.out.println("Start Time :" + startTime);
-        bigDecimal = new BigDecimal(testValue);
         System.out.println("Result: " + fastPow(bigDecimal, expValue));
         System.out.println("fastPow() speed: " + (new Date().getTime() - startTime) + " mSec \n");
 
         startTime = new Date().getTime();
-        System.out.println("Start Time :" + startTime);
-        bigDecimal = new BigDecimal(testValue);
-        System.out.println("Result: " + fastPow2(bigDecimal, expValue));
-        System.out.println("fastPow2() speed: " + (new Date().getTime() - startTime) + " mSec \n");
-
-        startTime = new Date().getTime();
-        System.out.println("Start Time :" + startTime);
-        bigDecimal = new BigDecimal(testValue);
         System.out.println("Result: " + fastPow1(bigDecimal, expValue));
         System.out.println("fastPow1() speed: " + (new Date().getTime() - startTime) + " mSec \n");
+
+        startTime = new Date().getTime();
+        System.out.println("Result: " + fastPow2(bigDecimal, expValue));
+        System.out.println("fastPow2() speed: " + (new Date().getTime() - startTime) + " mSec \n");
 
         fibonacci(10);
     }
@@ -108,21 +112,18 @@ http://xn----htbdsuo3h.xn--p1ai/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC
     }
 
     public static BigInteger fibonacci(int n) {
-        BigInteger presiousFiboNumber = new BigInteger("0");
+        BigInteger previousFiboNumber = new BigInteger("0");
         BigInteger currentFiboNumber = new BigInteger("1");
         BigInteger resultFiboNumber = new BigInteger("0");
         for (int i = 1; i <= n; i++) {
             if (i != 1) {
-                resultFiboNumber = currentFiboNumber.add(presiousFiboNumber);
-                presiousFiboNumber = currentFiboNumber;
+                resultFiboNumber = currentFiboNumber.add(previousFiboNumber);
+                previousFiboNumber = currentFiboNumber;
                 currentFiboNumber = resultFiboNumber;
             } else {
                 resultFiboNumber = (new BigInteger("1"));
             }
-            System.out.print("номер числа - " + i + " , ");
-            System.out.println("значение числа Фибоначчи - " + resultFiboNumber);
         }
-        System.out.println();
         return resultFiboNumber;
     }
 }

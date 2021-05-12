@@ -1,11 +1,25 @@
+/*
+Реализовать класс ArrayInteger - целого числа произвольной длины на массиве byte[] digits;
+Каждый элемент массива digits[i] может хранить только цифру, то есть число от 0 до 9.
+Например, число 159 должно занять 3 ячейки массива digits[0] = 9; digits[1] = 5; digits[2] = 1;
+
+Реализовать методы:
+3.1 ArrayInteger(int n) - инициализирует класс, с максимальной точностью n цифр (размер массива)
+3.2 void fromInt(BigInteger value) - установить свое значение,
+взяв его из value (уложить BigInteger во внутренний массив)
+3.3 BigInteger toInt() - привести свое значение к BigInteger (преобразовать из массива в BigInteger)
+3.4 boolean add(ArrayInteger num) - сложить 2 числа, не используя BigInteger,
+а  используя массив digits, результат поместить в экземпляр ArrayInteger, у которого был вызван метод.
+При переполнении вернуть false, при этом само число сбросить в 0
+ */
 package ru.progwards.java1.lessons.bigints;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 
 public class ArrayInteger {
-    public int rangeOfArray;
-    public byte[] digits;
+    private int rangeOfArray;
+    private byte[] digits;
 
     public ArrayInteger(int n) {
         this.rangeOfArray = n;
@@ -16,12 +30,10 @@ public class ArrayInteger {
     public static void main(String[] args) {
         ArrayInteger arrayInteger1 = new ArrayInteger(7);
         arrayInteger1.fromInt(new BigInteger("8028124"));
-        System.out.println("arrayInteger1: " + Arrays.toString(arrayInteger1.digits));
         arrayInteger1.toInt();
 
         ArrayInteger arrayInteger2 = new ArrayInteger(5);
         arrayInteger2.fromInt(new BigInteger("79896"));
-        System.out.println("arrayInteger2: " + Arrays.toString(arrayInteger2.digits));
         arrayInteger1.add(arrayInteger2);
     }
 
@@ -61,21 +73,6 @@ public class ArrayInteger {
                     digits[i] = 9;
                     break;
             }
-/*  вариант enhanced switch от Idea
-            switch (bytes[i]) {
-                case 48 -> digits[i] = 0;
-                case 49 -> digits[i] = 1;
-                case 50 -> digits[i] = 2;
-                case 51 -> digits[i] = 3;
-                case 52 -> digits[i] = 4;
-                case 53 -> digits[i] = 5;
-                case 54 -> digits[i] = 6;
-                case 55 -> digits[i] = 7;
-                case 56 -> digits[i] = 8;
-                case 57 -> digits[i] = 9;
-            }
- */
-
         }
     }
 
@@ -95,15 +92,8 @@ public class ArrayInteger {
         if (this.rangeOfArray > num.rangeOfArray) {
             Arrays.fill(cloneNumArray, (byte) 0);
             int shift = this.rangeOfArray - num.rangeOfArray;
-/*
-            for (int j = this.rangeOfArray - 1; j >= shift; j--) {
-                cloneNumArray[j] = num.digits[j - shift];
-            }
-
- */
             if (this.rangeOfArray - shift >= 0)
                 System.arraycopy(num.digits, 0, cloneNumArray, shift, this.rangeOfArray - shift);
-            System.out.println("cloneNumArray: " + Arrays.toString(cloneNumArray));
         }
 
         for (int i = this.rangeOfArray - 1; i >= 0; i--) {
@@ -119,10 +109,8 @@ public class ArrayInteger {
 
         if (overflow == 1 || this.rangeOfArray < num.rangeOfArray) {
             Arrays.fill(this.digits, (byte) 0);
-            System.out.println("После add(): " + Arrays.toString(this.digits));
             return false;
         } else {
-            System.out.println("После add()  : " + Arrays.toString(this.digits));
             return true;
         }
     }
