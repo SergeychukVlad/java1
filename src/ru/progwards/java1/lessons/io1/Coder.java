@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Coder {
     private static String logMessage = "Нет файла с таким именем на устройстве!";
@@ -43,7 +45,7 @@ public class Coder {
         }
         if (outFileName != null) {
             try {
-                FileOutputStream writer = new FileOutputStream(outFileName);
+                FileWriter writer = new FileWriter(outFileName);
                 if (inFileName != null) {
                     try {
                         FileInputStream reader = new FileInputStream(inFileName);
@@ -51,9 +53,7 @@ public class Coder {
                             while (reader.available() > 0) {
                                 int symbol = reader.read();
                                 code[symbol] = (char) symbol;
-                                System.out.println(symbol);
-                                writer.write(symbol);
-//                                writer.write(Character.getNumericValue(symbol));
+                                writer.write(symbol + System.getProperty("line.separator"));
                             }
                         } catch (IOException e) {
                             System.out.println(e.getMessage());
@@ -76,17 +76,16 @@ public class Coder {
     public static void decodeFile(String outFileName, String decodedFileName, char[] code) {
         if (decodedFileName != null) {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(outFileName));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(decodedFileName));
+                Scanner scanner = new Scanner(new File(outFileName));
+                FileWriter writer = new FileWriter(decodedFileName);
                 try {
-                    for (int symbol; (symbol = reader.read()) >= 0; ) {
-                        char ch = code[(char) symbol];
-                        writer.write(ch);
+                    while (scanner.hasNextLine()) {
+                        writer.write(code[Integer.parseInt(scanner.nextLine())]);
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                 } finally {
-                    reader.close();
+                    scanner.close();
                     writer.close();
                 }
             } catch (IOException e) {
