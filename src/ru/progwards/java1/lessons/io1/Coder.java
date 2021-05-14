@@ -23,7 +23,7 @@ public class Coder {
         logName = "coder.log";
 
         codeFile(inFileName, outFileName, code, logName);
-        decodeFile(inFileName, outFileName, decodedFileName, code);
+//        decodeFile(inFileName, outFileName, decodedFileName, code);
         System.setOut(System.out);
     }
 
@@ -43,18 +43,9 @@ public class Coder {
                     try {
                         FileReader reader = new FileReader(inFileName);
                         try {
-                            int symbol;
-                            while (true) {
-                                symbol = reader.read();
-                                if (symbol >= 0) {
-                                    code[symbol] = (char) symbol;
-                                    if (reader.ready()) {
-                                        writer.write(symbol + System.getProperty("line.separator"));
-                                    } else {
-                                        writer.write(symbol + "");
-                                        break;
-                                    }
-                                }
+                            for (int symbol; (symbol = reader.read()) >= 0; ) {
+                                code[symbol] = (char) symbol;
+                                writer.write(symbol + "");
                             }
                         } catch (IOException e) {
                             System.out.println(e.getMessage());
@@ -80,8 +71,8 @@ public class Coder {
                 Scanner scanner = new Scanner(new File(outFileName));
                 FileWriter writer = new FileWriter(decodedFileName);
                 try {
-                    while (scanner.hasNextLine()) {
-                        writer.write(code[Integer.parseInt(scanner.nextLine())]);
+                    while (scanner.hasNext()) {
+                        writer.write(code[scanner.nextInt()]);
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
