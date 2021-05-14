@@ -28,14 +28,14 @@ public class Coder {
     }
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-        if (logName != null) {
-            try {
-                System.setOut(new PrintStream(new FileOutputStream(logName)));
-                System.out.println("Здесь логи для класса Coder\n");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (logName != null) {
+//            try {
+//                System.setOut(new PrintStream(new FileOutputStream(logName)));
+//                System.out.println("Здесь логи для класса Coder\n");
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
         if (outFileName != null) {
             try {
                 FileWriter writer = new FileWriter(outFileName);
@@ -45,7 +45,9 @@ public class Coder {
                         try {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
                                 code[symbol] = (char) symbol;
+                                System.out.print(code [symbol]);
                                 writer.write(symbol + "");
+                                System.out.println(" : " + symbol);
                             }
                         } catch (IOException e) {
                             System.out.println(e.getMessage());
