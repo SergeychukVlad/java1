@@ -8,17 +8,12 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Coder {
-    private static String logMessage = "Нет файла с таким именем на устройстве!";
+    private static final String logMessage = "Нет файла с таким именем на устройстве!";
     private static List<Character> chars = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +25,7 @@ public class Coder {
         logName = "coder.log";
 
         codeFile(inFileName, outFileName, code, logName);
-        decodeFile(outFileName, decodedFileName, code);
+//        decodeFile(outFileName, decodedFileName, code);
         System.setOut(System.out);
     }
 
@@ -53,7 +48,8 @@ public class Coder {
                             while (reader.available() > 0) {
                                 int symbol = reader.read();
                                 code[symbol] = (char) symbol;
-                                writer.write(symbol + System.getProperty("line.separator"));
+                                writer.write(String.valueOf(symbol));
+//                                writer.write(symbol + System.getProperty("line.separator"));
                             }
                         } catch (IOException e) {
                             System.out.println(e.getMessage());
