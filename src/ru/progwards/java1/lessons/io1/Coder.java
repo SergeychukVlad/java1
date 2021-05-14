@@ -8,13 +8,11 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Coder {
     private static final String logMessage = "Нет файла с таким именем на устройстве!";
-    private static List<Character> chars = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         char[] code = new char[65536];
@@ -25,7 +23,7 @@ public class Coder {
         logName = "coder.log";
 
         codeFile(inFileName, outFileName, code, logName);
-//        decodeFile(outFileName, decodedFileName, code);
+        decodeFile(inFileName, outFileName, decodedFileName, code);
         System.setOut(System.out);
     }
 
@@ -43,13 +41,20 @@ public class Coder {
                 FileWriter writer = new FileWriter(outFileName);
                 if (inFileName != null) {
                     try {
-                        FileInputStream reader = new FileInputStream(inFileName);
+                        FileReader reader = new FileReader(inFileName);
                         try {
-                            while (reader.available() > 0) {
-                                int symbol = reader.read();
-                                code[symbol] = (char) symbol;
-                                writer.write(String.valueOf(symbol));
-//                                writer.write(symbol + System.getProperty("line.separator"));
+                            int symbol;
+                            while (true) {
+                                symbol = reader.read();
+                                if (symbol >= 0) {
+                                    code[symbol] = (char) symbol;
+                                    if (reader.ready()) {
+                                        writer.write(symbol + System.getProperty("line.separator"));
+                                    } else {
+                                        writer.write(symbol + "");
+                                        break;
+                                    }
+                                }
                             }
                         } catch (IOException e) {
                             System.out.println(e.getMessage());
@@ -69,7 +74,7 @@ public class Coder {
         }
     }
 
-    public static void decodeFile(String outFileName, String decodedFileName, char[] code) {
+    public static void decodeFile(String inFileName, String outFileName, String decodedFileName, char[] code) {
         if (decodedFileName != null) {
             try {
                 Scanner scanner = new Scanner(new File(outFileName));
@@ -89,6 +94,8 @@ public class Coder {
                 System.out.println(e.getMessage());
             }
         }
+        System.out.println(inFileName.getBytes(StandardCharsets.UTF_8).length);
+        System.out.println(decodedFileName.getBytes(StandardCharsets.UTF_8).length);
     }
 }
 
