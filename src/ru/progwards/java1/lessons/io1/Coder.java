@@ -8,34 +8,42 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Coder {
-    private static final String logMessage = "Нет файла с таким именем на устройстве!";
+    private static final String logMessage = "Нет файла с таким именем на устройстве!"; // многократное сообщение
+    private static final String inFileName = "source.txt";                              // исходный файл - читаем
+    private static final String outFileName = "coded.txt";                              // здесь будут символы - пишем
+    private static final String logName = "coder.log";                                  // файл для хранения логов
+    private static char[] code = new char[256];                                         //
 
     public static void main(String[] args) throws IOException {
-        char[] code = new char[65536];
-        String inFileName, outFileName, logName, decodedFileName;
-        inFileName = "source.txt";
-        outFileName = "coded.txt";
-        decodedFileName = "decoded.txt";
-        logName = "coder.log";
-
-        codeFile(inFileName, outFileName, code, logName);
-//        decodeFile(inFileName, outFileName, decodedFileName, code);
+        codeFile(inFileName, outFileName, getCode(), logName);
         System.setOut(System.out);
     }
 
+    public static char[] getCode() {
+        Arrays.fill(code, '*');
+        for (int i = 48; i < 58; i++) {
+            code[i] = (char) (i + 25);
+            System.out.println(i + " " + code[i]);
+        }
+        return code;
+    }
+
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-//        if (logName != null) {
-//            try {
-//                System.setOut(new PrintStream(new FileOutputStream(logName)));
-//                System.out.println("Здесь логи для класса Coder\n");
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        if (logName != null) {
+            try {
+                System.setOut(new PrintStream(new FileOutputStream(logName)));
+                System.out.println("Здесь будут логи для класса Coder\n");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
         if (outFileName != null) {
             try {
                 FileWriter writer = new FileWriter(outFileName);
@@ -45,9 +53,7 @@ public class Coder {
                         try {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
                                 code[symbol] = (char) symbol;
-                                System.out.print(code [symbol]);
-                                writer.write(symbol + "");
-                                System.out.println(" : " + symbol);
+                                writer.write(code[symbol]);
                             }
                         } catch (IOException e) {
                             System.out.println(e.getMessage());
@@ -73,8 +79,8 @@ public class Coder {
                 Scanner scanner = new Scanner(new File(outFileName));
                 FileWriter writer = new FileWriter(decodedFileName);
                 try {
-                    while (scanner.hasNext()) {
-                        writer.write(code[scanner.nextInt()]);
+                    while (scanner.hasNextLine()) {
+                        writer.write(code[(scanner.nextInt())]);
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
@@ -86,9 +92,9 @@ public class Coder {
                 System.out.println(logMessage);
                 System.out.println(e.getMessage());
             }
+            System.out.println(inFileName.getBytes(StandardCharsets.UTF_8).length);
+            System.out.println(decodedFileName.getBytes(StandardCharsets.UTF_8).length);
         }
-        System.out.println(inFileName.getBytes(StandardCharsets.UTF_8).length);
-        System.out.println(decodedFileName.getBytes(StandardCharsets.UTF_8).length);
     }
 }
 
