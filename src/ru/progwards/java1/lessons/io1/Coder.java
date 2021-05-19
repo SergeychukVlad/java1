@@ -43,7 +43,15 @@ public class Coder {
                 e.printStackTrace();
             }
         }
+/*
+Массив char:
+везде звёздочки, кроме цифр. На месте цифр - буквы
+  char[] code = new char[256];
+    Arrays.fill(code, '*');
 
+    for (int i = 48; i < 58; i++)
+      code[i] = (char) (i + 16);
+ */
         if (outFileName != null) {
             try {
                 FileWriter writer = new FileWriter(outFileName);
