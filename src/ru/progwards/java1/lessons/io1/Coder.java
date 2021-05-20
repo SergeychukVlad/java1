@@ -8,28 +8,26 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class Coder {
     private static final String logMessage = "Нет файла с таким именем на устройстве!"; // многократное сообщение
-    private static final String inFileName = "source.txt";                              // исходный файл - читаем
-    private static final String outFileName = "coded.txt";                              // здесь будут символы - пишем
+    private static final String inFileName = "source.txt";                              // исходный файл (цифры)- читаем
+    private static final String outFileName = "coded.txt";                              // здесь будут символы- пишем
+    private static final String decodedFileName = "decoded.txt";                        // ждём исходный файл- читаем
     private static final String logName = "coder.log";                                  // файл для хранения логов
-    private static char[] code = new char[256];                                         //
+    private static char[] code = new char[256];                                         // исходный массив символов
+    private static int codeShift = 25;                                                  // ключ-смещение
 
     public static void main(String[] args) throws IOException {
         codeFile(inFileName, outFileName, getCode(), logName);
+        decodeFile(outFileName, decodedFileName);
         System.setOut(System.out);
     }
 
     public static char[] getCode() {
-        Arrays.fill(code, '*');
         for (int i = 48; i < 58; i++) {
-            code[i] = (char) (i + 25);
-            System.out.println(i + " " + code[i]);
+            code[i] = (char) (i + codeShift);
         }
         return code;
     }
@@ -38,20 +36,12 @@ public class Coder {
         if (logName != null) {
             try {
                 System.setOut(new PrintStream(new FileOutputStream(logName)));
-                System.out.println("Здесь будут логи для класса Coder\n");
+                System.out.println("Здесь будут логи для класса Coder");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-/*
-Массив char:
-везде звёздочки, кроме цифр. На месте цифр - буквы
-  char[] code = new char[256];
-    Arrays.fill(code, '*');
 
-    for (int i = 48; i < 58; i++)
-      code[i] = (char) (i + 16);
- */
         if (outFileName != null) {
             try {
                 FileWriter writer = new FileWriter(outFileName);
@@ -60,7 +50,7 @@ public class Coder {
                         FileReader reader = new FileReader(inFileName);
                         try {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
-                                code[symbol] = (char) symbol;
+//                                writer.write(code[symbol]);
                                 writer.write(code[symbol]);
                             }
                         } catch (IOException e) {
@@ -81,28 +71,28 @@ public class Coder {
         }
     }
 
-    public static void decodeFile(String inFileName, String outFileName, String decodedFileName, char[] code) {
+    public static void decodeFile(String outFileName, String decodedFileName) {
         if (decodedFileName != null) {
             try {
-                Scanner scanner = new Scanner(new File(outFileName));
+                InputStreamReader reader = new InputStreamReader(new FileInputStream(outFileName));
                 FileWriter writer = new FileWriter(decodedFileName);
                 try {
-                    while (scanner.hasNextLine()) {
-                        writer.write(code[(scanner.nextInt())]);
+                    for (int symbol; (symbol = reader.read()) >= 0; ) {
+                        symbol = symbol - codeShift;
+                        writer.write(symbol);
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                 } finally {
-                    scanner.close();
+                    reader.close();
                     writer.close();
                 }
             } catch (IOException e) {
                 System.out.println(logMessage);
                 System.out.println(e.getMessage());
             }
-            System.out.println(inFileName.getBytes(StandardCharsets.UTF_8).length);
-            System.out.println(decodedFileName.getBytes(StandardCharsets.UTF_8).length);
+            System.out.print("символов: " + inFileName.getBytes(StandardCharsets.UTF_8).length + " vs ");
+            System.out.print(decodedFileName.getBytes(StandardCharsets.UTF_8).length);
         }
     }
 }
-
