@@ -38,7 +38,7 @@ public class Coder {
                 System.setOut(new PrintStream(new FileOutputStream(logName)));
                 System.out.println("Здесь будут логи для класса Coder");
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
 
@@ -50,7 +50,6 @@ public class Coder {
                         FileReader reader = new FileReader(inFileName);
                         try {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
-//                                writer.write(code[symbol]);
                                 writer.write(code[symbol]);
                             }
                         } catch (IOException e) {
@@ -60,12 +59,10 @@ public class Coder {
                             writer.close();
                         }
                     } catch (IOException e) {
-                        System.out.println(logMessage);
                         System.out.println(e.getMessage());
                     }
                 }
             } catch (IOException e) {
-                System.out.println(logMessage);
                 System.out.println(e.getMessage());
             }
         }
@@ -88,7 +85,6 @@ public class Coder {
                     writer.close();
                 }
             } catch (IOException e) {
-                System.out.println(logMessage);
                 System.out.println(e.getMessage());
             }
             System.out.print("символов: " + inFileName.getBytes(StandardCharsets.UTF_8).length + " vs ");
