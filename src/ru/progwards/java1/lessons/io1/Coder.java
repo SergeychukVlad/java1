@@ -55,7 +55,7 @@ public class Coder {
                             reader.close();
                             writer.close();
                         }
-                    } catch (IOException e) {
+                    } catch (FileNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
                 }
