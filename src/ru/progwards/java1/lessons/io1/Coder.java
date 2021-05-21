@@ -12,7 +12,7 @@ import java.io.*;
 public class Coder {
     private static final String inFileName = "source.txt";          // исходный файл (цифры)- читаем ДЛЯ кодирования
     private static final String outFileName = "coded.txt";          // файл для хранения (буквы) - пишем ЗАКОДИРОВАННОЕ
-    private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
+    private static final String decodedFileName = "decoded/.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
     private static final String logName = "coder.log";              // файл для хранения логов
     private static char[] code = new char[256];                     // массив символов (ключ - символ)
     private static int codeShift = 25;                              // ключ - смещение
@@ -30,12 +30,13 @@ public class Coder {
         return code;
     }
 
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
         if (logName != null) {
             try {
                 System.setOut(new PrintStream(new FileOutputStream(logName)));
             } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 
@@ -59,13 +60,13 @@ public class Coder {
                         System.out.println(e.getMessage());
                     }
                 }
-            } catch (IOException e) {
+            } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static void decodeFile(String outFileName, String decodedFileName) {
+    public static void decodeFile(String outFileName, String decodedFileName) throws IOException {
         if (decodedFileName != null) {
             try {
                 InputStreamReader reader = new InputStreamReader(new FileInputStream(outFileName));
@@ -81,7 +82,7 @@ public class Coder {
                     reader.close();
                     writer.close();
                 }
-            } catch (IOException e) {
+            } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
             }
         }
