@@ -52,13 +52,13 @@ public class Coder {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
                                 writer.write(code[symbol]);
                             }
-                        } catch (IOException e) {
+                        } catch (FileNotFoundException e) {
                             System.out.println(e.getMessage());
                         } finally {
                             reader.close();
                             writer.close();
                         }
-                    } catch (IOException e) {
+                    } catch (FileNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
                 }
