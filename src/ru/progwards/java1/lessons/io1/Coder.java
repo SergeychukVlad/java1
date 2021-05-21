@@ -8,19 +8,18 @@
 package ru.progwards.java1.lessons.io1;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 public class Coder {
     private static final String inFileName = "source.txt";          // исходный файл (цифры)- читаем ДЛЯ кодирования
     private static final String outFileName = "coded.txt";          // файл для хранения (буквы) - пишем ЗАКОДИРОВАННОЕ
-    private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
+//    private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
     private static final String logName = "coder.log";              // файл для хранения логов
     private static char[] code = new char[256];                     // массив символов (ключ - символ)
     private static int codeShift = 25;                              // ключ - смещение
 
     public static void main(String[] args) throws IOException {
         codeFile(inFileName, outFileName, getCode(), logName);
-        decodeFile(outFileName, decodedFileName);
+//        decodeFile(outFileName, decodedFileName);
         System.setOut(System.out);
     }
 
