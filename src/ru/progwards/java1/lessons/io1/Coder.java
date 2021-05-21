@@ -12,14 +12,14 @@ import java.io.*;
 public class Coder {
     private static final String inFileName = "source.txt";          // исходный файл (цифры)- читаем ДЛЯ кодирования
     private static final String outFileName = "coded.txt";          // файл для хранения (буквы) - пишем ЗАКОДИРОВАННОЕ
-//    private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
+    private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
     private static final String logName = "coder.log";              // файл для хранения логов
     private static char[] code = new char[256];                     // массив символов (ключ - символ)
     private static int codeShift = 25;                              // ключ - смещение
 
     public static void main(String[] args) throws IOException {
         codeFile(inFileName, outFileName, getCode(), logName);
-//        decodeFile(outFileName, decodedFileName);
+        decodeFile(outFileName, decodedFileName);
         System.setOut(System.out);
     }
 
@@ -34,7 +34,6 @@ public class Coder {
         if (logName != null) {
             try {
                 System.setOut(new PrintStream(new FileOutputStream(logName)));
-                System.out.println("Здесь будут логи для класса Coder");
             } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
             }
