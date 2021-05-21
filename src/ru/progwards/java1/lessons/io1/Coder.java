@@ -11,10 +11,9 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class Coder {
-    private static final String logMessage = "Нет файла с таким именем на устройстве!"; // многократное сообщение
     private static final String inFileName = "source.txt";                              // исходный файл (цифры)- читаем
     private static final String outFileName = "coded.txt";                              // здесь будут символы- пишем
-    private static final String decodedFileName = "decoded.txt";                        // ждём исходный файл- читаем
+    private static final String decodedFileName = "decoded.txt";                        // ждём кодированный файл- читаем
     private static final String logName = "coder.log";                                  // файл для хранения логов
     private static char[] code = new char[256];                                         // исходный массив символов
     private static int codeShift = 25;                                                  // ключ-смещение
@@ -52,13 +51,13 @@ public class Coder {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
                                 writer.write(code[symbol]);
                             }
-                        } catch (FileNotFoundException e) {
+                        } catch (IOException e) {
                             System.out.println(e.getMessage());
                         } finally {
                             reader.close();
                             writer.close();
                         }
-                    } catch (FileNotFoundException e) {
+                    } catch (IOException e) {
                         System.out.println(e.getMessage());
                     }
                 }
