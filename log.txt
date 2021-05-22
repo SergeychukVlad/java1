@@ -1,1 +1,2 @@
-source1.txt (Не удается найти указанный файл)
+codeFile(). File outFileName: coded\.txt (Системе не удается найти указанный путь)
+decodedFile(). File decodedFileName: coded\.txt (Системе не удается найти указанный путь)

@@ -30,38 +30,38 @@ public class Coder {
         return code;
     }
 
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
         if (logName != null) {
             try {
                 System.setOut(new PrintStream(new FileOutputStream(logName)));
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println("codeFile(). File logName " + e.getMessage());
                 e.printStackTrace();
             }
         }
 
-        if (outFileName != null) {
+        if (inFileName != null) {
             try {
-                FileWriter writer = new FileWriter(outFileName);
-                if (inFileName != null) {
+                FileReader reader = new FileReader(inFileName);
+                if (outFileName != null) {
                     try {
-                        FileReader reader = new FileReader(inFileName);
+                        FileWriter writer = new FileWriter(outFileName);
                         try {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
                                 writer.write(code[symbol]);
                             }
                         } catch (IOException e) {
-                            System.out.println(e.getMessage());
+                            System.out.println("codeFile(). Array code[] " + e.getMessage());
                         } finally {
                             reader.close();
                             writer.close();
                         }
-                    } catch (FileNotFoundException e) {
-                        System.out.println(e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("codeFile(). File outFileName: " + e.getMessage());
                     }
                 }
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println("codeFile(). File inFileName: " + e.getMessage());
             }
         }
     }
@@ -77,13 +77,13 @@ public class Coder {
                         writer.write(symbol);
                     }
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("decodedFile(). File outFileName: " + e.getMessage());
                 } finally {
                     reader.close();
                     writer.close();
                 }
             } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
+                System.out.println("decodedFile(). File decodedFileName: " + e.getMessage());
             }
         }
     }
