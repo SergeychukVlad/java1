@@ -14,7 +14,7 @@ public class Coder {
     private static final String outFileName = "coded.txt";          // файл для хранения (буквы) - пишем ЗАКОДИРОВАННОЕ
     private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
     private static final String logName = "log.txt";                // файл для хранения логов
-    private static char[] code = new char[256];                     // массив символов (ключ - символ)
+    private static char[] mySecretCode = new char[256];             // массив символов (ключ - символ)
     private static int codeShift = 25;                              // ключ - смещение
 
     public static void main(String[] args) throws IOException {
@@ -25,18 +25,17 @@ public class Coder {
 
     public static char[] getCode() {
         for (int i = 48; i < 58; i++) {
-            code[i] = (char) (i + codeShift);
+            mySecretCode[i] = (char) (i + codeShift);
         }
-        return code;
+        return mySecretCode;
     }
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
         if (logName != null) {
             try {
                 System.setOut(new PrintStream(new FileOutputStream(logName)));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println("codeFile(). File logName " + e.getMessage());
-                e.printStackTrace();
             }
         }
 
@@ -50,23 +49,23 @@ public class Coder {
                             for (int symbol; (symbol = reader.read()) >= 0; ) {
                                 writer.write(code[symbol]);
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             System.out.println("codeFile(). Array code[] " + e.getMessage());
                         } finally {
                             reader.close();
                             writer.close();
                         }
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         System.out.println("codeFile(). File outFileName: " + e.getMessage());
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println("codeFile(). File inFileName: " + e.getMessage());
             }
         }
     }
 
-    public static void decodeFile(String outFileName, String decodedFileName) throws IOException {
+    public static void decodeFile(String outFileName, String decodedFileName) {
         if (decodedFileName != null) {
             try {
                 InputStreamReader reader = new InputStreamReader(new FileInputStream(outFileName));
@@ -76,13 +75,13 @@ public class Coder {
                         symbol = symbol - codeShift;
                         writer.write(symbol);
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     System.out.println("decodedFile(). File outFileName: " + e.getMessage());
                 } finally {
                     reader.close();
                     writer.close();
                 }
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 System.out.println("decodedFile(). File decodedFileName: " + e.getMessage());
             }
         }
