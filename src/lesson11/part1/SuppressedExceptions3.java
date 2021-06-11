@@ -11,7 +11,7 @@ public class SuppressedExceptions3 {
         } catch (Throwable t) {
             suppressed = t;
             throw t;
-        } finally
+        } finally {
             try {
                 ae.close();
             } catch (Throwable t) {
