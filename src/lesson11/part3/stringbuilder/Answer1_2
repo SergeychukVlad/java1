@@ -1,0 +1,13 @@
+1. Правильные ответы:
+- Тип String неизменяемый (immutable) объект,
+- Тип StringBuilder работает быстрее чем String при массовой конкатенации строк
+
+2. Правильный ответ:
+- Перевод строки в верхний регистр → String toUpperCase(),
+- Найти подстроку в строке → int indexOf(),
+- Получить подстроку от from до to → String substring(int from, int to),
+- Замена всех подстрок → String replace(...),
+- Получить подстроку, начиная с from до конца строки → String substring(int from),
+- Убрать пробелы в начале и в конце строки → String trim(),
+- Разбить строку на массив строк → String[] split(String delimeter),
+- Перевод строки в нижний регистр → String toLowerCase()
