@@ -1,7 +1,5 @@
 package lesson11.part3.stringbuilder;
 
-import java.util.Arrays;
-
 public class Answer3 {
     static String invertWords1(String sentence) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -10,7 +8,7 @@ public class Answer3 {
             if (i == 0) {
                 stringBuilder.append(sentenceArr[i]);
             } else
-                stringBuilder.append(sentenceArr[i] + ".");
+                stringBuilder.append(sentenceArr[i]).append(".");
         }
         return stringBuilder.toString();
     }
