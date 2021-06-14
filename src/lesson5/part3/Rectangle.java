@@ -1,7 +1,7 @@
 package lesson5.part3;
 
-public final class Rectangle extends Square {
-    double b;
+public class Rectangle extends Square {
+    final double b;
 
     Rectangle(double a, double b) {
         super(a);

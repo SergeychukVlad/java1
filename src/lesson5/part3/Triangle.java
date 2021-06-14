@@ -1,7 +1,7 @@
 package lesson5.part3;
 
 public class Triangle extends Segment {
-    double b, c;
+    final double b, c;
 
     Triangle(double a, double b, double c) {
         super(a);

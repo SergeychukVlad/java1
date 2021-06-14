@@ -1,7 +1,7 @@
 package lesson5.part3;
 
 public class Segment extends Figure {
-    public double a;
+    public final double a;
 
     public Segment(double a) {
         this.a = a;
