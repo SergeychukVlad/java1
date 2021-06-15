@@ -1,0 +1,13 @@
+Random Access File
+- Конструктор на основе строки - имени файла (RandomAccessFile(File file, String mode))
+- Конструктор на основе класса File (RandomAccessFile(String name, String mode))
+* mode (режим открытия файла: r / rw)
+
+Методы:
+- void seek(long pos)   - переместить курсор к позиции pos
+- long getFilePointer() - возвращает текущую позицию курсора
+- String readLine()     - прочитать строку (побайтно)
+- int read()            - возвращает байт (беззнаковое значение)
+- <тип> read...()       - возвращает указанный тип (формируется из нужного кол-ва байт)
+- int read(byte[] bytes)- прочитать массив байт в буфер bytes
+- void write...(...)    - записать что-то побайтно
