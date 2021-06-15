@@ -41,6 +41,30 @@ public class RAFWithCities extends RandomAccessFile {
     }
 
     public boolean findCity(String city) throws IOException {
+        city = city.trim().toUpperCase();
+
+        start = 0;
+        end = length();
+
+        while (start != end) {
+            // ишем середину и движемся к началу строки
+            long current = startStringPosition((end + start) / 2);
+            seek(current);
+            String currentLine = readLine();
+            if (currentLine == null) return false;
+            currentLine = new String(currentLine.getBytes("ISO-8859-1"), "UTF-8");
+
+            // сравниваем заданный город и найденный в файле
+            cityGeoLocation = new CityGeoLocation(currentLine);
+            int compareResult = city.compareTo(cityGeoLocation.city);
+            if (compareResult == 0) {
+                return true;
+            } else if (compareResult > 0) {
+                start = this.getFilePointer();
+            } else {
+                end = current;
+            }
+        }
         return false;
     }
 
