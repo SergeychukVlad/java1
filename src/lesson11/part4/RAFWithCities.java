@@ -80,7 +80,21 @@ public class RAFWithCities extends RandomAccessFile {
 
     // точка входа
     public static void main(String[] args) {
-
+        try (RAFWithCities rafCities = new RAFWithCities("D:\\Progwards\\src\\lesson11\\part4\\cities.csv")) {
+            if (rafCities.findCity("АпатитЫ")) {
+                System.out.println(rafCities.cityGeoLocation);
+            }
+            if (rafCities.findCity("ТОмск")) {
+                System.out.println(rafCities.cityGeoLocation);
+            }
+            if (rafCities.findCity("ЯСНЫЙ")) {
+                System.out.println(rafCities.cityGeoLocation);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
