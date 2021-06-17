@@ -1,6 +1,10 @@
 package lesson11.part3.immutable;
-
 /*
+Правильный Singleton в Java
+Вариант - LAZY. Synchronized Accessor.
++ Ленивая инициализация
+- Низкая производительность (критическая секция) в наиболее типичном доступе
+
 Особенность реализации Singleton в Java за три шага
 Поведение Одиночки на Java невозможно реализовать с помощью обычного конструктора, потому что конструктор всегда
 возвращает новый объект. Поэтому все реализации Singleton’a сводятся к тому, чтобы скрыть конструктор
@@ -10,26 +14,22 @@ package lesson11.part3.immutable;
 либо вернуть уже созданный.
  */
 
-public class LazyInitializedSingleton {
+public class LazyInitializedSingleton1 {
     /*
     #1. Нужно добавить в класс приватное статическое поле, содержащее одиночный объект.
     #2. Сделать конструктор класса (конструктор по-умолчанию) приватным, (чтобы доступ к нему был закрыт
         за пределами класса, тогда он не сможет возвращать новые объекты).
     #3. Объявить статический создающий метод, который будет использоваться для получения одиночки:
      */
-    private static LazyInitializedSingleton instance;                               // #1
+    private static LazyInitializedSingleton1 instance;                               // #1
 
-    private LazyInitializedSingleton() {}                                           // #2
+    private LazyInitializedSingleton1() {}                                           // #2
 
-    public static LazyInitializedSingleton getInstance() {                          // #3
+    public static LazyInitializedSingleton1 getInstance() {                          // #3
         if (instance == null) {                                                     //если объект еще не создан
-            instance = new LazyInitializedSingleton();                              //создать новый объект
+            instance = new LazyInitializedSingleton1();                              //создать новый объект
         }
         return instance;                                                            // вернуть ранее созданный объект
-    }
-
-    enum INSTANCE {
-        getInstance(),
     }
 }
 
