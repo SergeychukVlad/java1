@@ -24,30 +24,35 @@ public class Translator {
     }
 
     String translate(String sentence) {
-        String endOfResultString = "";  // строка для сохранения знака препинания, которым заканчивается предложение
-        if (sentence.endsWith("!") || sentence.endsWith("?") || sentence.endsWith(".")) {
-            endOfResultString = sentence.substring(sentence.length() - 1);
-        }
-
         StringBuilder result = new StringBuilder();
-        String regex = "\\s*(\\s|\\?|!|\\.)\\s*";   // запятая не будет разделителем, чтобы "отловить" её место во фразе
+        // запятая и восклицательный знак не будут разделителями, чтобы "отловить" их место во фразе
+        String regex = "\\s*(\\s|\\?|\\.)\\s*";
         String[] splittedSentence = sentence.split(regex);
+
         for (int i = 0; i < splittedSentence.length; i++) {
             String wordForResultString = "";
             for (int j = 0; j < inLang.length; j++) {
-                // сразу проверяем и на совпадение слова с запятой
+
+                // сразу проверяем и на совпадение слова с запятой, с восклицательным знаком
                 if (splittedSentence[i].trim().equalsIgnoreCase(inLang[j])
-                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + ",")) {
+                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + ",")
+                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + "!")) {
                     if (splittedSentence[i].startsWith(splittedSentence[i].substring(0, 1).toUpperCase()))
                         wordForResultString = outLang[j].substring(0, 1).toUpperCase() + outLang[j].substring(1);
                     else
                         wordForResultString = outLang[j];
-                    // сохраняем запятую в переводе
+
+                    // сохраняем запятую на месте в переводе
                     if (splittedSentence[i].endsWith(","))
                         wordForResultString = wordForResultString + ",";
 
+                    // сохраняем восклицательный знак на месте в переводе
+                    if (splittedSentence[i].endsWith("!"))
+                        wordForResultString = wordForResultString + "!";
+
+                    // формируем строку перевода с сохранением пунктуации
                     if (i == (splittedSentence.length - 1))
-                        result.append(wordForResultString).append(endOfResultString);
+                        result.append(wordForResultString);
                     else
                         result.append(wordForResultString).append(" ");
                     break;
@@ -66,7 +71,7 @@ public class Translator {
         String[] russian = {"привет", "мир", "люди", "любят", "футбол", "чемпион", "cпартак", "смотреть"};
 
         Translator engToRus = new Translator(english, russian);
-        System.out.println(engToRus.translate("people like world, football, Spartak!"));
+        System.out.println(engToRus.translate("people like world! Football, Spartak!"));
         System.out.println(engToRus.translate("Spartak champion!"));
 
         Translator rusToEng = new Translator(russian, english);
