@@ -24,22 +24,27 @@ public class Translator {
     }
 
     String translate(String sentence) {
-        String endOfResultString = "";
+        String endOfResultString = "";  // строка для сохранения знака препинания, которым заканчивается предложение
         if (sentence.endsWith("!") || sentence.endsWith("?") || sentence.endsWith(".")) {
             endOfResultString = sentence.substring(sentence.length() - 1);
         }
 
         StringBuilder result = new StringBuilder();
-        String regex = "\\s*(\\s|\\?|,|!|\\.)\\s*";
+        String regex = "\\s*(\\s|\\?|!|\\.)\\s*";   // запятая не будет разделителем, чтобы "отловить" её место во фразе
         String[] splittedSentence = sentence.split(regex);
         for (int i = 0; i < splittedSentence.length; i++) {
             String wordForResultString = "";
             for (int j = 0; j < inLang.length; j++) {
-                if (splittedSentence[i].trim().equalsIgnoreCase(inLang[j])) {
+                // сразу проверяем и на совпадение слова с запятой
+                if (splittedSentence[i].trim().equalsIgnoreCase(inLang[j])
+                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + ",")) {
                     if (splittedSentence[i].startsWith(splittedSentence[i].substring(0, 1).toUpperCase()))
                         wordForResultString = outLang[j].substring(0, 1).toUpperCase() + outLang[j].substring(1);
                     else
                         wordForResultString = outLang[j];
+                    // сохраняем запятую в переводе
+                    if (splittedSentence[i].endsWith(","))
+                        wordForResultString = wordForResultString + ",";
 
                     if (i == (splittedSentence.length - 1))
                         result.append(wordForResultString).append(endOfResultString);
@@ -48,6 +53,7 @@ public class Translator {
                     break;
                 }
             }
+            // на случай, если нет соответствия в словаре
             if (wordForResultString.equals("")) {
                 return "В словаре нет совпадений для слова " + splittedSentence[i];
             }
@@ -60,7 +66,7 @@ public class Translator {
         String[] russian = {"привет", "мир", "люди", "любят", "футбол", "чемпион", "cпартак", "смотреть"};
 
         Translator engToRus = new Translator(english, russian);
-        System.out.println(engToRus.translate("people like watch Football?"));
+        System.out.println(engToRus.translate("people like world, football, Spartak!"));
         System.out.println(engToRus.translate("Spartak champion!"));
 
         Translator rusToEng = new Translator(russian, english);
