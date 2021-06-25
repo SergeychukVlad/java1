@@ -45,25 +45,29 @@ public class Translator {
     }
 
     String translate(String sentence) {
+        // если исходная строка не заканчивается знаком препинания (или \r),
+        // то "ловим" крайнее слово, добавляя (\r) к исходной строке (массиву)
+        if (!sentence.endsWith("\r") || !sentence.endsWith("\n")) {
+            sentence = sentence + "\r";
+        }
+        char[] charsOfSentence = sentence.toCharArray();
         StringBuilder inWord = new StringBuilder();
         StringBuilder outSentence = new StringBuilder();
-        char[] charsOfSentence = sentence.toCharArray();
         boolean wordInUpperCase = false;
 
-        for (int i = 0; i < charsOfSentence.length; i++) {
-            char ch = charsOfSentence[i];
+        for (char ch : charsOfSentence) {
             if (Character.isLetter(ch)) {
-                inWord.append(ch);
                 if (Character.isUpperCase(ch)) wordInUpperCase = true;
+                inWord.append(ch);
             } else {
-                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
-                outSentence.append(getSymbol(ch));
+                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase)).append(getSymbol(ch));
                 inWord = new StringBuilder();
                 wordInUpperCase = false;
             }
-            // если строка не заканчивается знаком препинания или \r, то "ловим" слово на конце строки таким образом:
-            if (i == charsOfSentence.length - 1)
-                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
+// если строка не заканчивается знаком препинания (или \r), то "ловим" слово на конце строки вот таким образом:
+// но остаёмся тогда без ForEach
+//            if (i == charsOfSentence.length - 1)
+//                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
         }
         return outSentence.toString();
     }
