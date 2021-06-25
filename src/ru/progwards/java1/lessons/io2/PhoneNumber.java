@@ -16,4 +16,13 @@
 package ru.progwards.java1.lessons.io2;
 
 public class PhoneNumber {
+    public static String format(String phone) {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        format("79991112233");
+        format("8(999)111-22-33");
+        format("8 999 111 22 33");
+    }
 }
