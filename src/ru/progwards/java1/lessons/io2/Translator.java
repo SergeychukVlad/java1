@@ -31,38 +31,49 @@ public class Translator {
         return symbol;
     }
 
-    public static String getTranslatedWord(String inWord, boolean wordInUpperCase) {
+    public static String getTranslatedWord(String inWord, boolean isCapital) {
         StringBuilder outWord = new StringBuilder();
+        boolean wordExist = false;
+
         for (int j = 0; j < inLang.length; j++) {
             if (inWord.equalsIgnoreCase(inLang[j])) {
-                if (wordInUpperCase)
-                    outWord.append(outLang[j].substring(0, 1).toUpperCase()).append(outLang[j].substring(1));
+                if (isCapital) outWord.append(outLang[j].substring(0, 1).toUpperCase()).append(outLang[j].substring(1));
                 else outWord.append(outLang[j]);
+                wordExist = true;
                 break;
             }
         }
-        return outWord.toString();
+        if (wordExist) return outWord.toString();
+        else return "*** " + inWord + " ***";
     }
 
     String translate(String sentence) {
         char[] charsOfSentence = sentence.toCharArray();
         StringBuilder inWord = new StringBuilder();
         StringBuilder outSentence = new StringBuilder();
-        boolean wordInUpperCase = false;
+        boolean isCapital = false;
+        String translatedWord, symbol;
 
-        for (int i = 0, charsOfSentenceLength = charsOfSentence.length; i < charsOfSentenceLength; i++) {
+        for (int i = 0; i < charsOfSentence.length; i++) {
             if (Character.isLetter(charsOfSentence[i])) {
-                if (Character.isUpperCase(charsOfSentence[i])) wordInUpperCase = true;
                 inWord.append(charsOfSentence[i]);
+                if (Character.isUpperCase(charsOfSentence[i])) {
+                    isCapital = true;
+                }
+                // если строка не заканчивается знаком препинания (или \r), то "ловим" слово на индексе окончания строки
+                if (i == charsOfSentence.length - 1) {
+                    outSentence.append(getTranslatedWord(inWord.toString(), isCapital));
+                }
             } else {
-                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase))
-                        .append(getSymbol(charsOfSentence[i]));
+                symbol = String.valueOf(getSymbol(charsOfSentence[i]));
+                if (!inWord.toString().isBlank())
+                    translatedWord = getTranslatedWord(inWord.toString(), isCapital);
+                else translatedWord = "";
                 inWord = new StringBuilder();
-                wordInUpperCase = false;
+                isCapital = false;
+                outSentence.append(translatedWord)
+                        .append((symbol));
             }
-// если строка не заканчивается знаком препинания (или \r), то "ловим" слово на конце строки вот таким образом:
-            if (i == charsOfSentence.length - 1)
-                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
         }
         return outSentence.toString();
     }
