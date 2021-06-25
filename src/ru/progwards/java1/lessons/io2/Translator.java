@@ -31,38 +31,41 @@ public class Translator {
         return symbol;
     }
 
+    public static String getTranslatedWord(String inWord, boolean wordInUpperCase) {
+        StringBuilder outWord = new StringBuilder();
+        for (int j = 0; j < inLang.length; j++) {
+            if (inWord.equalsIgnoreCase(inLang[j])) {
+                if (wordInUpperCase)
+                    outWord.append(outLang[j].substring(0, 1).toUpperCase()).append(outLang[j].substring(1));
+                else outWord.append(outLang[j]);
+                break;
+            }
+        }
+        return outWord.toString();
+    }
+
     String translate(String sentence) {
         StringBuilder inWord = new StringBuilder();
         StringBuilder outSentence = new StringBuilder();
         char[] charsOfSentence = sentence.toCharArray();
         boolean wordInUpperCase = false;
-        boolean wordAppended = false;
 
-        for (char ch : charsOfSentence) {
+        for (int i = 0; i < charsOfSentence.length; i++) {
+            char ch = charsOfSentence[i];
             if (Character.isLetter(ch)) {
-                if (Character.isUpperCase(ch)) wordInUpperCase = true;
                 inWord.append(ch);
+                if (Character.isUpperCase(ch)) wordInUpperCase = true;
             } else {
-                for (int j = 0; j < inLang.length; j++) {
-                    if (inWord.toString().equalsIgnoreCase(inLang[j])) {
-                        if (wordInUpperCase)
-                            outSentence.append(outLang[j].substring(0, 1).toUpperCase()).append(outLang[j].substring(1));
-                        else outSentence.append(outLang[j]);
-
-                        wordAppended = true;
-                        inWord = new StringBuilder();
-                        wordInUpperCase = false;
-                        break;
-                    }
-                }
-                // если нет совпадений в словаре
-                if (!wordAppended) return "В словаре нет перевода для этого слова - " + inWord.toString().toUpperCase();
-                else outSentence.append(getSymbol(ch));
+                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
+                outSentence.append(getSymbol(ch));
+                inWord = new StringBuilder();
+                wordInUpperCase = false;
             }
+            // если строка не заканчивается знаком препинания или \r, то "ловим" слово на конце строки таким образом:
+            if (i == charsOfSentence.length - 1)
+                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
         }
-        // если строка не имеет знака препинания в конце и нет знака \r, то "ловим" слово таким образом:
-        if (inWord.toString().isBlank()) return outSentence.toString();
-        else return outSentence.append(inWord).toString();
+        return outSentence.toString();
     }
 
     public static void main(String[] args) {
@@ -76,5 +79,6 @@ public class Translator {
         Translator rusToEng = new Translator(russian, english);
         System.out.println(rusToEng.translate("люди любят Мир") + "\n");
         System.out.println(rusToEng.translate("приветe, Футбол!") + "\n");
+        System.out.println(rusToEng.translate("привет, Футбол!") + "\n");
     }
 }
