@@ -23,53 +23,48 @@ public class Translator {
         this.outLang = outLang;
     }
 
-    String translate(String sentence) {
-        StringBuilder result = new StringBuilder();
-        // точка, запятая и восклицательный знак не будут разделителями, чтобы "отловить" их место во фразе-переводе
-        String regex = "\\s*(\\s|\\?)\\s*";
-        String[] splittedSentence = sentence.split(regex);
-
-        for (int i = 0; i < splittedSentence.length; i++) {
-            String wordForResultString = "";
-            for (int j = 0; j < inLang.length; j++) {
-
-                // сразу проверяем и на совпадение слова с точкой, запятой, и с восклицательным знаком
-                if (splittedSentence[i].trim().equalsIgnoreCase(inLang[j])
-                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + ".")
-                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + ",")
-                        || splittedSentence[i].trim().equalsIgnoreCase(inLang[j] + "!")) {
-                    // сохранение регистра в переводе
-                    if (splittedSentence[i].startsWith(splittedSentence[i].substring(0, 1).toUpperCase()))
-                        wordForResultString = outLang[j].substring(0, 1).toUpperCase() + outLang[j].substring(1);
-                    else
-                        wordForResultString = outLang[j];
-
-                    // сохраняем точку на месте в переводе
-                    if (splittedSentence[i].endsWith("."))
-                        wordForResultString = wordForResultString + ".";
-
-                    // сохраняем запятую на месте в переводе
-                    if (splittedSentence[i].endsWith(","))
-                        wordForResultString = wordForResultString + ",";
-
-                    // сохраняем восклицательный знак на месте в переводе
-                    if (splittedSentence[i].endsWith("!"))
-                        wordForResultString = wordForResultString + "!";
-
-                    // формируем строку перевода с сохранением пунктуации и регистра
-                    if (i == (splittedSentence.length - 1))
-                        result.append(wordForResultString);
-                    else
-                        result.append(wordForResultString).append(" ");
-                    break;
-                }
-            }
-            // на случай, если нет соответствия в словаре
-            if (wordForResultString.equals("")) {
-                return "В словаре нет совпадений для слова " + splittedSentence[i];
+    public static char getSymbol(char symbol) {
+        char[] punctuationSymbols = {' ', ',', '-', ':', '.', '!', '?', '\r', '\n'};
+        for (char punctuationSymbol : punctuationSymbols) {
+            if (symbol == punctuationSymbol) {
+                break;
             }
         }
-        return result.toString();
+        return symbol;
+    }
+
+    String translate(String sentence) {
+        StringBuilder inWord = new StringBuilder();
+        StringBuilder outSentence = new StringBuilder();
+        char[] charsOfSentence = sentence.toCharArray();
+        boolean wordInUpperCase = false;
+        boolean wordAppended = false;
+
+        for (char ch : charsOfSentence) {
+            if (Character.isLetter(ch)) {
+                if (Character.isUpperCase(ch)) wordInUpperCase = true;
+                inWord.append(ch);
+            } else {
+                for (int j = 0; j < inLang.length; j++) {
+                    if (inWord.toString().equalsIgnoreCase(inLang[j])) {
+                        if (wordInUpperCase)
+                            outSentence.append(outLang[j].substring(0, 1).toUpperCase()).append(outLang[j].substring(1));
+                        else outSentence.append(outLang[j]);
+
+                        wordAppended = true;
+                        inWord = new StringBuilder();
+                        wordInUpperCase = false;
+                        break;
+                    }
+                }
+                // если нет совпадений в словаре
+                if (!wordAppended) return "В словаре нет перевода для этого слова - " + inWord.toString().toUpperCase();
+                else outSentence.append(getSymbol(ch));
+            }
+        }
+        // если строка не имеет знака препинания в конце и нет знака \r, то "ловим" слово таким образом:
+        if (inWord.isEmpty()) return outSentence.toString();
+        else return outSentence.append(inWord).toString();
     }
 
     public static void main(String[] args) {
@@ -77,11 +72,11 @@ public class Translator {
         String[] russian = {"привет", "мир", "люди", "любят", "футбол", "чемпион", "cпартак", "смотреть"};
 
         Translator engToRus = new Translator(english, russian);
-        System.out.println(engToRus.translate("people like world. Football, Spartak!"));
-        System.out.println(engToRus.translate("Spartak champion!"));
+        System.out.println(engToRus.translate("people like world - Football, Spartak!") + "\n");
+        System.out.println(engToRus.translate("Spartak champion!") + "\n");
 
         Translator rusToEng = new Translator(russian, english);
-        System.out.println(rusToEng.translate("люди любят Мир"));
-        System.out.println(rusToEng.translate("привет Футбол!"));
+        System.out.println(rusToEng.translate("люди любят Мир") + "\n");
+        System.out.println(rusToEng.translate("приветe, Футбол!") + "\n");
     }
 }
