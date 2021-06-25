@@ -61,7 +61,7 @@ public class Translator {
             }
         }
         // если строка не имеет знака препинания в конце и нет знака \r, то "ловим" слово таким образом:
-        if (inWord.isEmpty()) return outSentence.toString();
+        if (inWord.toString().isBlank()) return outSentence.toString();
         else return outSentence.append(inWord).toString();
     }
 
