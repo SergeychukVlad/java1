@@ -19,16 +19,14 @@ public class Translator {
     private static String[] outLang;
 
     public Translator(String[] inLang, String[] outLang) {
-        this.inLang = inLang;
-        this.outLang = outLang;
+        Translator.inLang = inLang;
+        Translator.outLang = outLang;
     }
 
     public static char getSymbol(char symbol) {
         char[] punctuationSymbols = {' ', ',', '-', ':', '.', '!', '?', '\r', '\n'};
         for (char punctuationSymbol : punctuationSymbols) {
-            if (symbol == punctuationSymbol) {
-                break;
-            }
+            if (symbol == punctuationSymbol) break;
         }
         return symbol;
     }
