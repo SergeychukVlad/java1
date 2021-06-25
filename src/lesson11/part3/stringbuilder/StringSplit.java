@@ -1,6 +1,5 @@
 package lesson11.part3.stringbuilder;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /*
