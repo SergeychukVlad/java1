@@ -17,4 +17,11 @@ obscene = {"Java", "Oracle", "Sun", "Microsystems"}
 package ru.progwards.java1.lessons.io2;
 
 public class Censor {
+    public static void censorFile(String inoutFileName, String[] obscene) {
+    }
+
+    public static void main(String[] args) {
+        String[] obscene = {"Java", "Class", "Library", "Synchronized", "Accessor"};
+        censorFile("hw_lesson11_task3", obscene);
+    }
 }
