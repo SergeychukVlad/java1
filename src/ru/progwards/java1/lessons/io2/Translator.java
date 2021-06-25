@@ -45,29 +45,24 @@ public class Translator {
     }
 
     String translate(String sentence) {
-        // если исходная строка не заканчивается знаком препинания (или \r),
-        // то "ловим" крайнее слово, добавляя (\r) к исходной строке (массиву)
-        if (!sentence.endsWith("\r") || !sentence.endsWith("\n")) {
-            sentence = sentence + "\r";
-        }
         char[] charsOfSentence = sentence.toCharArray();
         StringBuilder inWord = new StringBuilder();
         StringBuilder outSentence = new StringBuilder();
         boolean wordInUpperCase = false;
 
-        for (char ch : charsOfSentence) {
-            if (Character.isLetter(ch)) {
-                if (Character.isUpperCase(ch)) wordInUpperCase = true;
-                inWord.append(ch);
+        for (int i = 0, charsOfSentenceLength = charsOfSentence.length; i < charsOfSentenceLength; i++) {
+            if (Character.isLetter(charsOfSentence[i])) {
+                if (Character.isUpperCase(charsOfSentence[i])) wordInUpperCase = true;
+                inWord.append(charsOfSentence[i]);
             } else {
-                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase)).append(getSymbol(ch));
+                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase))
+                        .append(getSymbol(charsOfSentence[i]));
                 inWord = new StringBuilder();
                 wordInUpperCase = false;
             }
 // если строка не заканчивается знаком препинания (или \r), то "ловим" слово на конце строки вот таким образом:
-// но остаёмся тогда без ForEach
-//            if (i == charsOfSentence.length - 1)
-//                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
+            if (i == charsOfSentence.length - 1)
+                outSentence.append(getTranslatedWord(inWord.toString(), wordInUpperCase));
         }
         return outSentence.toString();
     }
