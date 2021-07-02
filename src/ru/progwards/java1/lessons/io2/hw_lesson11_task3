@@ -1,1 +1,1 @@
-Примечательно, что разработчики Java Class Library выбрали наиболее простой способ реализации шаблона — Synchronized Accessor
+Недостатком использования synchronized в Java является появление "bottle neck"

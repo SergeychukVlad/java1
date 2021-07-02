@@ -16,11 +16,36 @@ obscene = {"Java", "Oracle", "Sun", "Microsystems"}
  */
 package ru.progwards.java1.lessons.io2;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Censor {
+    class CensorException extends Throwable {
+        private String errorCode;
+
+        public CensorException(String fileName, String errorCode) {
+            super(fileName);
+            this.errorCode = errorCode;
+        }
+
+        @Override
+        public String toString() {
+            return super.getClass() + ":" + errorCode;
+        }
+    }
+
+    private static RandomAccessFile raf;
+
+    public static synchronized RandomAccessFile getInstance(String fileName, String mode) {
+        if (raf == null) {
+            try {
+                raf = new RandomAccessFile(new File(fileName), mode);
+            } catch (FileNotFoundException notFoundException) {
+                notFoundException.printStackTrace();
+            }
+        }
+        return raf;
+    }
 
     private static char getSymbol(char symbol) {
         char[] punctuationSymbols = {' ', ',', '-', ':', '.', '!', '?', '\r', '\n'};
@@ -40,6 +65,32 @@ public class Censor {
         return separateWord;
     }
 
+    private static String getSentence(String inoutFileName) {
+        String sentence = "";
+        raf = getInstance(inoutFileName, "rw");
+        try {
+            sentence = raf.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new String(sentence.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+    }
+
+    private static void writeUpdatedSentence(String inoutFileName, String updatedSentence) {
+        raf = getInstance(inoutFileName, "rw");
+        try {
+            raf.seek(0);
+            raf.write(updatedSentence.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                raf.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static void censorFile(String inoutFileName, String[] obscene) {
         // сделали массив-клон со звездочками вместо символов оригинального obscene[]
@@ -48,25 +99,13 @@ public class Censor {
             stars[i] = "*".repeat(stars[i].length());
         }
 
-        String sentence = "";
+        String sentence = getSentence(inoutFileName);
         StringBuilder separateWord = new StringBuilder();
-
-        File file = new File(inoutFileName);
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                sentence = scanner.nextLine();
-                System.out.println(sentence);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден!");
-        }
-
         StringBuilder result = new StringBuilder();
         char[] charsOfSentence = sentence.toCharArray();
         for (int i = 0; i < charsOfSentence.length; i++) {
             if (Character.isLetter(charsOfSentence[i])) {
                 separateWord.append(charsOfSentence[i]);
-
                 // если строка не заканчивается знаком препинания (или \r), то "ловим" слово на индексе окончания строки
                 if (i == charsOfSentence.length - 1) {
                     result.append(getStarsWord(obscene, stars, separateWord.toString()));
@@ -76,11 +115,11 @@ public class Censor {
                 separateWord = new StringBuilder();
             }
         }
-        System.out.println(result);
+        writeUpdatedSentence(inoutFileName, result.toString());
     }
 
-    public static void main(String[] args) {
-        String[] obscene = {"Java", "Class", "Library", "Synchronized", "Accessor"};
+    public static void main(String[] args) throws IOException {
+        String[] obscene = {"synchronized", "Java", "bottle", "neck"};
         censorFile("D:\\Progwards\\src\\ru\\progwards\\java1\\lessons\\io2\\hw_lesson11_task3", obscene);
     }
 }
