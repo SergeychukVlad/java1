@@ -103,7 +103,7 @@ public class Censor {
         }
     }
 
-    public static void censorFile(String inoutFileName, String[] obscene) {
+    public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
         // сделали массив-клон со звездочками вместо символов оригинального obscene[]
         String[] stars = obscene.clone();
         for (int i = 0; i < stars.length; i++) {
@@ -134,6 +134,10 @@ public class Censor {
 
     public static void main(String[] args) {
         String[] obscene = {"synchronized", "Java", "bottle", "neck"};
-        censorFile(myFileName, obscene);
+        try {
+            censorFile(myFileName, obscene);
+        } catch (CensorException ce) {
+            ce.printStackTrace();
+        }
     }
 }
