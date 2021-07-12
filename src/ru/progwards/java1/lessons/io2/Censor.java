@@ -35,7 +35,7 @@ public class Censor {
         return raf;
     }
 
-    public class CensorException extends Exception {
+    public static class CensorException extends Exception {
         private final String fileName;
         private final String errorCode;
 
@@ -131,10 +131,11 @@ public class Censor {
         }
     }
 
-    public static void censorFile(String inoutFileName, String[] obscene) {
-        if (inoutFileName != null && obscene != null) {
-            writeUpdatedSentence(inoutFileName, updateSentence(getSentence(inoutFileName), obscene));
-        }
+    public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
+        if (inoutFileName == null || obscene == null) {
+            throw new CensorException();
+        } else writeUpdatedSentence(inoutFileName, updateSentence(getSentence(inoutFileName), obscene));
+
     }
 
     public static void main(String[] args) throws CensorException {
