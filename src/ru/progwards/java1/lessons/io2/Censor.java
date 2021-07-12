@@ -41,7 +41,7 @@ public class Censor {
 
         public CensorException() {
             this.fileName = myFileName;
-            this.errorCode = "что-то идёт не так...";
+            this.errorCode = "что-то идёт не так... В параметрах - null";
         }
 
         @Override
