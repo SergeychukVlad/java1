@@ -131,16 +131,14 @@ public class Censor {
         }
     }
 
-    public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
-        writeUpdatedSentence(inoutFileName, updateSentence(getSentence(inoutFileName), obscene));
+    public static void censorFile(String inoutFileName, String[] obscene) {
+        if (inoutFileName != null && obscene != null) {
+            writeUpdatedSentence(inoutFileName, updateSentence(getSentence(inoutFileName), obscene));
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CensorException {
         String[] obscene = {"synchronized", "Java", "bottle", "neck"};
-        try {
-            censorFile(myFileName, obscene);
-        } catch (CensorException ce) {
-            ce.printStackTrace();
-        }
+        censorFile(myFileName, obscene);
     }
 }
