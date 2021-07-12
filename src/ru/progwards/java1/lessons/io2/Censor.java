@@ -140,7 +140,7 @@ public class Censor {
     }
 
     public static void main(String[] args) throws CensorException {
-        String[] obscene = {"synchronized", "Java", "bottle", "neck"};
+        String[] obscene = {"storey", "write", "count", "two", "day"};
         censorFile(myFileName, obscene);
     }
 }
