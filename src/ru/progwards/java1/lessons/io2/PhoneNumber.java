@@ -21,7 +21,7 @@ public class PhoneNumber {
     public static String getResultPhoneNumber(String phoneNumber) {
         if (phoneNumber.charAt(0) == '7' || phoneNumber.charAt(0) == '8') {
             phoneNumber = "+7(" + phoneNumber.substring(1, 4) + ")"
-                    + phoneNumber.substring(5, 7) + "-" + phoneNumber.substring(7);
+                    + phoneNumber.substring(4, 7) + "-" + phoneNumber.substring(7);
         }
         return phoneNumber;
     }
@@ -52,6 +52,7 @@ public class PhoneNumber {
 
     public static void main(String[] args) {
         format("7999111223345");
+        format("8 479 713 58 16");
         format("79991112233");
         format("8(999)111-22-33");
         format("8 999 111 22 33");
