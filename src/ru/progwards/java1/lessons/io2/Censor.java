@@ -35,7 +35,7 @@ public class Censor {
         return raf;
     }
 
-    class CensorException extends Exception {
+    public class CensorException extends Exception {
         private final String fileName;
         private final String errorCode;
 
@@ -83,6 +83,34 @@ public class Censor {
         return new String(sentence.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 
+    private static String updateSentence(String sentence, String[] obscene) {
+        // сделали массив-клон со звездочками вместо символов оригинального obscene[]
+        String[] stars = obscene.clone();
+        for (int i = 0; i < stars.length; i++) {
+            stars[i] = "*".repeat(stars[i].length());
+        }
+
+        StringBuilder separateWord = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+        char[] charsOfSentence = sentence.toCharArray();
+
+        for (int i = 0; i < charsOfSentence.length; i++) {
+            if (Character.isLetter(charsOfSentence[i])) {
+                separateWord.append(charsOfSentence[i]);
+                // если строка не заканчивается знаком препинания (или \r), то "ловим" слово на индексе окончания строки
+                if (i == charsOfSentence.length - 1) {
+                    result.append(getStarsWord(obscene, stars, separateWord.toString()));
+                }
+            } else {
+                result.append(getStarsWord(obscene, stars, separateWord.toString()))
+                        .append(getSymbol(charsOfSentence[i]));
+                separateWord = new StringBuilder();
+            }
+        }
+
+        return result.toString();
+    }
+
     private static void writeUpdatedSentence(String inoutFileName, String updatedSentence) {
         try {
             raf = getInstance(inoutFileName, "rw");
@@ -104,32 +132,7 @@ public class Censor {
     }
 
     public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
-        // сделали массив-клон со звездочками вместо символов оригинального obscene[]
-        String[] stars = obscene.clone();
-        for (int i = 0; i < stars.length; i++) {
-            stars[i] = "*".repeat(stars[i].length());
-        }
-
-        String sentence = getSentence(inoutFileName);
-
-        StringBuilder separateWord = new StringBuilder();
-        StringBuilder result = new StringBuilder();
-        char[] charsOfSentence = sentence.toCharArray();
-
-        for (int i = 0; i < charsOfSentence.length; i++) {
-            if (Character.isLetter(charsOfSentence[i])) {
-                separateWord.append(charsOfSentence[i]);
-                // если строка не заканчивается знаком препинания (или \r), то "ловим" слово на индексе окончания строки
-                if (i == charsOfSentence.length - 1) {
-                    result.append(getStarsWord(obscene, stars, separateWord.toString()));
-                }
-            } else {
-                result.append(getStarsWord(obscene, stars, separateWord.toString()))
-                        .append(getSymbol(charsOfSentence[i]));
-                separateWord = new StringBuilder();
-            }
-        }
-        writeUpdatedSentence(inoutFileName, result.toString());
+        writeUpdatedSentence(inoutFileName, updateSentence(getSentence(inoutFileName), obscene));
     }
 
     public static void main(String[] args) {
