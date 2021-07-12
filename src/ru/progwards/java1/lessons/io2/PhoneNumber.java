@@ -26,7 +26,7 @@ public class PhoneNumber {
         return phoneNumber;
     }
 
-    public static String format(String phone) {
+    public static String format(String phone) throws Exception {
         StringBuilder sourcePhoneNumber = new StringBuilder();
         try (Scanner scanner = new Scanner(phone).useDelimiter("\\s*,\\s*")) {
             while (scanner.hasNextLine()) {
@@ -43,15 +43,13 @@ public class PhoneNumber {
                     phone = getResultPhoneNumber(sourcePhoneNumber.toString());
                 }
             }
-        } catch (Exception e) {
-            System.out.println("В исходном телефонном номере неверное количество цифр: требуется 10 или 11, а имеем "
-                    + sourcePhoneNumber.length());
         }
         return phone;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         format("7999111223345");
+        format("7 324 168 21 0511");
         format("8 479 713 58 16");
         format("79991112233");
         format("8(999)111-22-33");
