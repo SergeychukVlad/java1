@@ -58,10 +58,12 @@ public class Censor {
         return symbol;
     }
 
-    private static String getStarsWord(String[] obscene, String[] stars, String separateWord) {
-        for (int j = 0; j < obscene.length; j++) {
-            if (separateWord.equals(obscene[j])) {
-                separateWord = stars[j];
+    private static String getStarsWord(String[] obscene, String separateWord) {
+        StringBuilder wordInStars = new StringBuilder();
+        for (String s : obscene) {
+            if (separateWord.equals(s)) {
+                wordInStars.append("*".repeat(separateWord.length()));
+                separateWord = wordInStars.toString();
                 break;
             }
         }
@@ -84,12 +86,6 @@ public class Censor {
     }
 
     private static String updateSentence(String sentence, String[] obscene) {
-        // сделали массив-клон со звездочками вместо символов оригинального obscene[]
-        String[] stars = obscene.clone();
-        for (int i = 0; i < stars.length; i++) {
-            stars[i] = "*".repeat(stars[i].length());
-        }
-
         StringBuilder separateWord = new StringBuilder();
         StringBuilder result = new StringBuilder();
         char[] charsOfSentence = sentence.toCharArray();
@@ -99,10 +95,10 @@ public class Censor {
                 separateWord.append(charsOfSentence[i]);
                 // если строка не заканчивается знаком препинания (или \r), то "ловим" слово на индексе окончания строки
                 if (i == charsOfSentence.length - 1) {
-                    result.append(getStarsWord(obscene, stars, separateWord.toString()));
+                    result.append(getStarsWord(obscene, separateWord.toString()));
                 }
             } else {
-                result.append(getStarsWord(obscene, stars, separateWord.toString()))
+                result.append(getStarsWord(obscene, separateWord.toString()))
                         .append(getSymbol(charsOfSentence[i]));
                 separateWord = new StringBuilder();
             }
@@ -135,11 +131,12 @@ public class Censor {
         if (inoutFileName == null || obscene == null) {
             throw new CensorException();
         } else writeUpdatedSentence(inoutFileName, updateSentence(getSentence(inoutFileName), obscene));
-
     }
 
     public static void main(String[] args) throws CensorException {
-        String[] obscene = {"storey", "write", "count", "two", "day"};
+        String[] obscene = {"Java", "Sun", "Microsystems", "Oracle"};
+//        String[] obscene = {"synchronized", "Java", "bottle", "neck"};
+//        String[] obscene = {"storey", "write", "count", "two", "day"};
         censorFile(myFileName, obscene);
     }
 }
