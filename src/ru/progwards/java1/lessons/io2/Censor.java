@@ -25,13 +25,13 @@ public class Censor {
     private static final String myFileName = "D:\\Progwards\\src\\ru\\progwards\\java1\\lessons\\io2\\hw_lesson11_task3";
 
     public static synchronized RandomAccessFile getInstance(String fileName, String mode) throws CensorException {
-        if (raf == null) {
+//        if (raf == null) {
             try {
                 raf = new RandomAccessFile(new File(fileName), mode);
             } catch (FileNotFoundException notFoundException) {
                 notFoundException.printStackTrace();
             }
-        }
+//        }
         return raf;
     }
 
