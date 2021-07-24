@@ -1,6 +1,8 @@
 package lesson5.part3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Figures {
     static Segment segment = new Segment(5);
@@ -46,9 +48,23 @@ public class Figures {
     }
 
     public static void main(String[] args) {
-        myTest();
-        interfaceUsage();
-        System.out.println();
-        genericUsage();
+//        myTest();
+//        interfaceUsage();
+//        System.out.println();
+//        genericUsage();
+
+        workWithArrayList();
+    }
+
+    public static void workWithArrayList() {
+        List<Figure> figures = new ArrayList<>();
+        figures.add(new Segment(5));
+        figures.add(new Square(5));
+        figures.add(new Rectangle(5, 11));
+        figures.add(new Circle(5));
+        figures.add(new Triangle(3, 4, 5));
+        for (Figure figure : figures) {
+            printInfo(figure);
+        }
     }
 }

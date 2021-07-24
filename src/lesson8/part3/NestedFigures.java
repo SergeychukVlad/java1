@@ -1,6 +1,13 @@
 package lesson8.part3;
 
+import lesson5.part3.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class NestedFigures {
+    public List<Figure> list = new ArrayList<>();
+
     // вложенные классы-фигуры
     public static abstract class Figure implements Comparable<Figure> {
         @Override
@@ -139,6 +146,14 @@ public class NestedFigures {
     }
 
     public static void main(String[] args) {
-
+        NestedFigures figures = new NestedFigures();
+        figures.list.add(new Segment(5));
+        figures.list.add(new Square(5));
+        figures.list.add(new Rectangle(5, 11));
+        figures.list.add(new Circle(5));
+        figures.list.add(new Triangle(3, 4, 5));
+        for (Figure figure : figures.list) {
+            printInfo(figure);
+        }
     }
 }
