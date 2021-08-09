@@ -63,12 +63,25 @@ public class Figures {
         figures.list.add(new NestedFigures.Circle(5));
         figures.list.add(new NestedFigures.Triangle(3, 4, 5));
 
-        figures.list.remove(figures.maxFigure());
-        figures.list.remove(figures.minFigure());
+//        figures.list.remove(figures.maxFigure());
+//        figures.list.remove(figures.minFigure());
+
+// 'элегантное расходование ресурсов
+//        figures.list.sort(figures.list);
+        figures.list.sort(null);
+        if(!figures.list.isEmpty()) {
+            figures.list.remove(0);
+        }
+        if(!figures.list.isEmpty()) {
+            figures.list.remove(figures.list.size() - 1);
+        }
 
         for (NestedFigures.Figure figure : figures.list) {
-            figure.area();
-            figure.perimeter();
+//            figure.printInfo();
+        }
+
+        for (int i = 0; i < figures.list.size(); i++) {
+//            figures.list.get(i).printInfo();
         }
     }
 
