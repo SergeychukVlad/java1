@@ -21,4 +21,5 @@ public abstract class Figure implements Comparable<Figure> {
         System.out.println("площадь : " + area());
         System.out.println();
     }
+
 }

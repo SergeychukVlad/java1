@@ -4,6 +4,7 @@ import lesson8.part3.NestedFigures;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Figures {
@@ -55,7 +56,7 @@ public class Figures {
         }
     }
 
-    public static void workWithList() {
+    public static void workWithList1() {
         NestedFigures figures = new NestedFigures();
         figures.list.add(new NestedFigures.Segment(5));
         figures.list.add(new NestedFigures.Square(5));
@@ -63,25 +64,36 @@ public class Figures {
         figures.list.add(new NestedFigures.Circle(5));
         figures.list.add(new NestedFigures.Triangle(3, 4, 5));
 
-//        figures.list.remove(figures.maxFigure());
-//        figures.list.remove(figures.minFigure());
+        figures.list.remove(figures.maxFigure());
+        figures.list.remove(figures.minFigure());
 
-// 'элегантное расходование ресурсов
-//        figures.list.sort(figures.list);
         figures.list.sort(null);
-        if(!figures.list.isEmpty()) {
-            figures.list.remove(0);
-        }
-        if(!figures.list.isEmpty()) {
-            figures.list.remove(figures.list.size() - 1);
-        }
 
         for (NestedFigures.Figure figure : figures.list) {
-//            figure.printInfo();
+            figure.printInfo();
         }
+    }
 
+    public static void workWithList2() {
+        NestedFigures figures = new NestedFigures();
+        figures.list.add(new NestedFigures.Segment(5));
+        figures.list.add(new NestedFigures.Square(5));
+        figures.list.add(new NestedFigures.Rectangle(5, 11));
+        figures.list.add(new NestedFigures.Circle(5));
+        figures.list.add(new NestedFigures.Triangle(3, 4, 5));
+
+        figures.list.sort(null);
+
+// элегантное расходование ресурсов
+        if (!figures.list.isEmpty()) {
+            figures.list.remove(0);
+        }
+        if (!figures.list.isEmpty()) {
+            figures.list.remove(figures.list.size() - 1);
+        }
+// вариант использования классического цикла
         for (int i = 0; i < figures.list.size(); i++) {
-//            figures.list.get(i).printInfo();
+            figures.list.get(i).printInfo();
         }
     }
 
@@ -91,7 +103,11 @@ public class Figures {
 //        System.out.println();
 //        genericUsage();
 
+        System.out.println(" --- workWithArrayList --- ");
         workWithArrayList();
-        workWithList();
+        System.out.println(" --- workWithList1 --- ");
+        workWithList1();
+        System.out.println(" --- workWithList2 --- ");
+        workWithList2();
     }
 }

@@ -28,6 +28,15 @@ public class NestedFigures {
         public double area() {
             return 0d;
         }
+        // информация о фигуре
+
+        public void printInfo() {
+            System.out.println(this);
+            System.out.println("периметр: " + perimeter());
+            System.out.println("площадь : " + area());
+            System.out.println();
+        }
+
     }
 
     public static class Segment extends Figure {
