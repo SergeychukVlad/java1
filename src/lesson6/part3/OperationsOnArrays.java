@@ -35,7 +35,7 @@ public class OperationsOnArrays {
 
         System.out.println(Arrays.toString(arrayInt2D_1));
         System.out.println(Arrays.toString(arrayInt2D_2));
-        System.out.println(Arrays.equals(arrayInt2D_1, arrayInt2D_2));
+        System.out.println(Arrays.deepEquals(arrayInt2D_1, arrayInt2D_2));
 
         System.out.println(Arrays.deepToString(arrayInt2D_1));
         System.out.println(Arrays.deepToString(arrayInt2D_2));

@@ -1,12 +1,18 @@
 package lesson8.part3;
-
-import lesson5.part3.*;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NestedFigures {
     public List<Figure> list = new ArrayList<>();
+
+    public Figure maxFigure() {
+        return Collections.max(list);
+    }
+
+    public Figure minFigure() {
+        return Collections.min(list);
+    }
 
     // вложенные классы-фигуры
     public static abstract class Figure implements Comparable<Figure> {

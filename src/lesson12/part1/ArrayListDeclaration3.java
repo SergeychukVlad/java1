@@ -9,7 +9,7 @@ import java.util.List;
 public class ArrayListDeclaration3 {
     public static void main(String[] args) {
         ArrayList list1 = new ArrayList();
-        ArrayList<Integer> list2 = new ArrayList<Integer>();
+        ArrayList<Integer> list2 = new ArrayList<>();
         ArrayList<Integer> list3 = new ArrayList();
 
         // и через интерфейс...

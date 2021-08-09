@@ -14,14 +14,7 @@ public class Rectangle {
     }
 
     public int compareTo(Rectangle anRectangle) {
-        if (this.area() > anRectangle.area()) {
-            return 1;
-        }
-        if (this.area() < anRectangle.area()) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Double.compare(this.area(), anRectangle.area());
     }
 
     static void myTest() {

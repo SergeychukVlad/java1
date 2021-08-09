@@ -1,7 +1,5 @@
 package lesson6.part1;
 
-import java.lang.reflect.Array;
-
 public class ArrayExamples {
     static void myTest1() {
         int[] ints = new int[]{1, 4, 5, 6, 8};

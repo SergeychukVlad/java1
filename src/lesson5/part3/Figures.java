@@ -1,5 +1,7 @@
 package lesson5.part3;
 
+import lesson8.part3.NestedFigures;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,24 +15,17 @@ public class Figures {
 
     static Figure[] figures = {segment, square, rectangle, circle, triangle};
 
-    public static void printInfo(Figure figure) {
-        System.out.println(figure);
-        System.out.println("периметр: " + figure.perimeter());
-        System.out.println("площадь : " + figure.area());
-        System.out.println();
-    }
-
     static void myTest() {
-        printInfo(segment);
-        printInfo(square);
-        printInfo(rectangle);
-        printInfo(circle);
-        printInfo(triangle);
+        segment.printInfo();
+        square.printInfo();
+        rectangle.printInfo();
+        circle.printInfo();
+        triangle.printInfo();
     }
 
     static void interfaceUsage() {
         for (var figure : figures) {
-            printInfo(figure);
+            figure.printInfo();
         }
 
         System.out.println("segment.compareTo(square)   = " + segment.compareTo(square));
@@ -43,7 +38,37 @@ public class Figures {
     static void genericUsage() {
         Arrays.sort(figures);
         for (var figure : figures) {
-            printInfo(figure);
+            figure.printInfo();
+        }
+    }
+
+    public static void workWithArrayList() {
+        List<Figure> figures = new ArrayList<>();
+        figures.add(new Segment(5));
+        figures.add(new Square(5));
+        figures.add(new Rectangle(5, 11));
+        figures.add(new Circle(5));
+        figures.add(new Triangle(3, 4, 5));
+
+        for (Figure figure : figures) {
+            figure.printInfo();
+        }
+    }
+
+    public static void workWithList() {
+        NestedFigures figures = new NestedFigures();
+        figures.list.add(new NestedFigures.Segment(5));
+        figures.list.add(new NestedFigures.Square(5));
+        figures.list.add(new NestedFigures.Rectangle(5, 11));
+        figures.list.add(new NestedFigures.Circle(5));
+        figures.list.add(new NestedFigures.Triangle(3, 4, 5));
+
+        figures.list.remove(figures.maxFigure());
+        figures.list.remove(figures.minFigure());
+
+        for (NestedFigures.Figure figure : figures.list) {
+            figure.area();
+            figure.perimeter();
         }
     }
 
@@ -54,17 +79,6 @@ public class Figures {
 //        genericUsage();
 
         workWithArrayList();
-    }
-
-    public static void workWithArrayList() {
-        List<Figure> figures = new ArrayList<>();
-        figures.add(new Segment(5));
-        figures.add(new Square(5));
-        figures.add(new Rectangle(5, 11));
-        figures.add(new Circle(5));
-        figures.add(new Triangle(3, 4, 5));
-        for (Figure figure : figures) {
-            printInfo(figure);
-        }
+        workWithList();
     }
 }

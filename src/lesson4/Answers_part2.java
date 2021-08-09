@@ -7,8 +7,8 @@ public class Answers_part2 {
     public static void main(String[] args) {
         checkConditions();
         List<Integer> grades = Arrays.asList(0, 60, 90, 101, -20);
-        for (int i = 0; i < grades.size(); i++) {
-            System.out.println(textGrade(grades.get(i)));
+        for (Integer grade : grades) {
+            System.out.println(textGrade(grade));
         }
     }
 

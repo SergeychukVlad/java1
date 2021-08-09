@@ -7,6 +7,6 @@ public class Answers_part1 {
     }
 
     static int addAsStrings(int n1, int n2) {
-        return Integer.parseInt(String.valueOf(n1) + String.valueOf(n2));
+        return Integer.parseInt(n1 + String.valueOf(n2));
     }
 }
