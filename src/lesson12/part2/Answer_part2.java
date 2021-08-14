@@ -21,13 +21,13 @@ LinkedList организован на основе  → двунаправле�
 - удаляет из списка элементы, значение которых больше суммы, деленной на 100 (целочисленное деление)
 - возвращает результирующий список
  */
-package lesson12.part3;
+package lesson12.part2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Answer_part3 {
+public class Answer_part2 {
 
     public static List<Integer> filter(List<Integer> list) {
         Integer sum = 0;

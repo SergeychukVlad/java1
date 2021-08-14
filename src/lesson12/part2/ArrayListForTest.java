@@ -2,7 +2,7 @@
 Тестирование for / forEach для ArrayList
  */
 
-package lesson12.part3;
+package lesson12.part2;
 
 import java.util.ArrayList;
 import java.util.Date;
