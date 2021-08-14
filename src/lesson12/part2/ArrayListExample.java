@@ -15,7 +15,7 @@ public class ArrayListExample {
 
     public static ArrayList action(ArrayList arrayList) {
         System.out.println(new Throwable().getStackTrace()[0].getMethodName() + "()\n" + arrayList + "работает... ");
-        arrayList.add(1, 109);
+        arrayList.add(1, 109); // добавил элемент по индексу
         arrayList.remove(arrayList.size() - 1); // удалили последний элемент
         return arrayList;
     }
