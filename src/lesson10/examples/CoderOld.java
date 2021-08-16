@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class CoderOld {
 
     public static void main(String[] args) throws IOException {
-        String sourceFileName = "source.txt";
+        String sourceFileName = "files/source.txt";
         String codedFileName = "coded.txt";
         String logFileName = "log.txt";
         char[] code = {109, 121, 32, 115, 111, 117, 114, 99, 101, 32, 49, 32, 108, 105, 110, 101, 46};

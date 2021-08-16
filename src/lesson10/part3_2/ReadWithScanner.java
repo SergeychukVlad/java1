@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ReadWithScanner {
     public static void readWithScannerAndSlashN() {
         try {
-            Scanner scanner = new Scanner(new File("windows.txt"));
+            Scanner scanner = new Scanner(new File("files/windows.txt"));
             FileWriter fileWriter = new FileWriter("out.txt");
             try {
                 while (scanner.hasNextLine()) {
@@ -34,7 +34,7 @@ public class ReadWithScanner {
 
     public static void readWithScannerAndLineSeparator() {
         try {
-            Scanner scanner = new Scanner(new File("windows.txt"));
+            Scanner scanner = new Scanner(new File("files/windows.txt"));
             FileWriter fileWriter = new FileWriter("out.txt");
             try {
                 while (scanner.hasNextLine()) {
@@ -64,7 +64,7 @@ public class ReadWithScanner {
         Реализует интерфейс Closeable, поэтому может использоваться в try-with-resources
          */
         try {
-            FileReader fileReader = new FileReader("windows.txt");
+            FileReader fileReader = new FileReader("files/windows.txt");
             FileWriter fileWriter = new FileWriter("out.txt");
             try {
                 for (int ch; (ch = fileReader.read()) >= 0; ) {
@@ -89,7 +89,7 @@ public class ReadWithScanner {
 
     public static void readWithFileReaderBuffered() {
         try {
-            FileReader fileReader = new FileReader("windows.txt");
+            FileReader fileReader = new FileReader("files/windows.txt");
             FileWriter fileWriter = new FileWriter("out.txt");
             try {
                 char[] buf = new char[5];

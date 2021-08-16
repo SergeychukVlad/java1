@@ -5,7 +5,7 @@ import java.io.*;
 public class InputStreamReaderInAction {
 
     public static void one() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("source.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("files/source.txt"));
         int x = 0;
         while (x != -1) {
             x = reader.read();

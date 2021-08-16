@@ -10,7 +10,7 @@ package ru.progwards.java1.lessons.io1;
 import java.io.*;
 
 public class Coder {
-    private static final String inFileName = "source.txt";          // исходный файл (цифры)- читаем ДЛЯ кодирования
+    private static final String inFileName = "files/source.txt";          // исходный файл (цифры)- читаем ДЛЯ кодирования
     private static final String outFileName = "coded.txt";          // файл для хранения (буквы) - пишем ЗАКОДИРОВАННОЕ
     private static final String decodedFileName = "decoded.txt";    // файл ДЛЯ сохранения РАСКОДИРОВАННОГО (ждём цифры)
     private static final String logName = "log.txt";                // файл для хранения логов
