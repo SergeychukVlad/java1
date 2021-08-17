@@ -18,37 +18,42 @@ public static Collection<Integer> fill3(int n) - создать коллекци
 package ru.progwards.java1.lessons.collections;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class Creator {
-    static final int ELEMENT_COUNT = 20;
+    static final int ELEMENT_COUNT = 5;
 
     public static Collection<Integer> fillEven(int n) {
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             arrayList.add(i, (i + 1) * 2);
-        System.out.println(arrayList);
+        }
         return arrayList;
     }
 
     public static Collection<Integer> fillOdd(int n) {
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             arrayList.add(i, (2 * i + 1));
-
-        System.out.println(arrayList);
+        }
         return arrayList;
     }
 
     public static Collection<Integer> fill3(int n) {
-        return Arrays.asList();
+        ArrayList arrayList = new ArrayList();
+        int i = 0;
+        while (i < (n * 3)) {
+            arrayList.add(i, i);
+            arrayList.add(i + 1, (i * i));
+            arrayList.add(i + 2, (i * i * i));
+            i = i + 3;
+        }
+        return arrayList;
     }
 
     public static void main(String[] args) {
-
         fillEven(ELEMENT_COUNT);
         fillOdd(ELEMENT_COUNT);
-//        fill3(10);
+        fill3(ELEMENT_COUNT);
     }
 }
