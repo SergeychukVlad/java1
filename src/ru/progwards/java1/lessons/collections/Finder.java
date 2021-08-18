@@ -51,7 +51,7 @@ public class Finder {
 
     public static boolean findSequence(Collection<Integer> numbers) {
         for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.contains(i) == false) {
+            if (numbers.contains(i) == false) { // ищем единственное несовпадение. Если не находим - возвращаем true.
                 return false;
             }
         }
@@ -59,16 +59,23 @@ public class Finder {
     }
 
     public static String findSimilar(Collection<String> names) {
+        ArrayList<String> words = new ArrayList<>(names);
         return null;
+
     }
 
     public static void main(String[] args) {
         ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(1, 3, -2, 10, 45, 14, -6, 55, 19));
-//        ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
+        ArrayList<Integer> myListForTrue = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
+        ArrayList<String> myStringList = new ArrayList<>(Arrays.asList("Тихон", "Таня", "Тихон", "Тихон", "Толя", "Толя", "Толя", "Таня", "Таня"));
 
         System.out.println("findMinSumPair(): " + findMinSumPair(myList));
+
         System.out.println("findLocalMax(): " + findLocalMax(myList));
+
         System.out.println("findSequence(): " + findSequence(myList));
-//        findSimilar(myList);
+        System.out.println("findSequence(): " + findSequence(myListForTrue));
+
+        System.out.println("findSimilar(): " + findSimilar(myStringList));
     }
 }
