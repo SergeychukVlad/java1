@@ -28,15 +28,25 @@ public class Finder {
         ArrayList<Integer> sums = new ArrayList<>();
 
         for (int i = 1; i < values.size() - 1; i++) {
+            // индексируем элементы массива sums[] так: индекс элемента в sums[] соответствует младшему индексу в паре
+            // например, sums[0] - это максимум из пары values[0]/values[1]
             sums.add(values.get(i - 1) + values.get(i));
-            System.out.println("Добавлена сумма пары значений "
-                    + values.get(i - 1) + " , " + values.get(i) + " : " + sums.get(i - 1));
         }
-        return Arrays.asList( sums.indexOf(Collections.min(sums)), sums.indexOf(Collections.min(sums)) + 1);
+        return Arrays.asList(sums.indexOf(Collections.min(sums)), sums.indexOf(Collections.min(sums)) + 1);
     }
 
     public static Collection<Integer> findLocalMax(Collection<Integer> numbers) {
-        return new ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>(numbers);
+        ArrayList<Integer> localMax = new ArrayList<>();
+
+        for (int i = 1; i < values.size() - 1; i++) {
+            if (values.get(i) > values.get(i - 1)) {
+                if (values.get(i) > values.get(i + 1)) {
+                    localMax.add(values.get(i));
+                }
+            }
+        }
+        return localMax;
     }
 
     public static boolean findSequence(Collection<Integer> numbers) {
@@ -48,11 +58,11 @@ public class Finder {
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(1, 3, -2, 10, 45, 14, -6));
+        ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(1, 3, -2, 10, 45, 14, -6, 55, 19));
 
-        findMinSumPair(myList);
-//        findLocalMax(myList);
-//        findSequence(myList);
+        System.out.println("findMinSumPair(): " + findMinSumPair(myList));
+        System.out.println("findLocalMax(): " + findLocalMax(myList));
+        System.out.println("findSequence(): " + findSequence(myList));
 //        findSimilar(myList);
     }
 }
