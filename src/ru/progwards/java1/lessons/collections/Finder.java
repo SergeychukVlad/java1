@@ -80,13 +80,16 @@ public class Finder {
         nTimes.add(j);  // добавление последнего элемента в список числа совпадений
         // находим через indexOf() индекс максимального значения в списке числа повторений (nTimes)
         // По этому индексу - читаем имя в списке words
-        return words.get(nTimes.indexOf(Collections.max(nTimes))) + ":" + nTimes.indexOf(Collections.max(nTimes));
+        return words.get(nTimes.indexOf(Collections.max(nTimes))) + ":" + nTimes.get(nTimes.indexOf(Collections.max(nTimes)));
     }
 
     public static void main(String[] args) {
         ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(1, 3, -2, 10, 45, 14, -6, 55, 19));
         ArrayList<Integer> myListForTrue = new ArrayList<>(Arrays.asList(1, 2, 3));
         ArrayList<String> myStringList = new ArrayList<>(Arrays.asList("Тихон", "Таня", "Тихон", "Тихон", "Толя", "Толя", "Толя", "Таня", "Таня", "Таня", "Алекс"));
+        ArrayList<String> myTestList = new ArrayList<>(Arrays.asList("Григорий", "Александр", "Борис", "Григорий",
+                "Василий", "Борис", "Василий", "Борис", "Дмитрий", "Григорий", "Александр", "Василий", "Григорий",
+                "Дмитрий", "Василий", "Александр", "Александр"));
 
         System.out.println("findMinSumPair(): " + findMinSumPair(myList));
 
@@ -96,5 +99,6 @@ public class Finder {
         System.out.println("findSequence(): " + findSequence(myListForTrue));
 
         System.out.println("findSimilar(): " + findSimilar(myStringList));
+        System.out.println("findSimilar(): " + findSimilar(myTestList));
     }
 }
