@@ -25,14 +25,16 @@ public class Creator {
     static final int ELEMENT_COUNT = 6;
 
     public static Collection<Integer> fillEven(int n) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+
         for (int i = 0; i < n; i++)
             arrayList.add(i, (i + 1) * 2);
         return arrayList;
     }
 
     public static Collection<Integer> fillOdd(int n) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+
         for (int i = 0; i < n; i++)
             arrayList.add(i, (2 * i + 1));
         Collections.reverse(arrayList);
@@ -40,7 +42,8 @@ public class Creator {
     }
 
     public static Collection<Integer> fill3(int n) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+
         int i = 0;
         while (i < (n * 3)) {
             arrayList.add(i, i);
