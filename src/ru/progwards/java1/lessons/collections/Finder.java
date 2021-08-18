@@ -50,6 +50,11 @@ public class Finder {
     }
 
     public static boolean findSequence(Collection<Integer> numbers) {
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbers.contains(i) == false) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -59,6 +64,7 @@ public class Finder {
 
     public static void main(String[] args) {
         ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(1, 3, -2, 10, 45, 14, -6, 55, 19));
+//        ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
 
         System.out.println("findMinSumPair(): " + findMinSumPair(myList));
         System.out.println("findLocalMax(): " + findLocalMax(myList));
