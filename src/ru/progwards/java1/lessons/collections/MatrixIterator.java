@@ -15,7 +15,7 @@ public class MatrixIterator<T> implements Iterator<T> {
 
     public MatrixIterator(T[][] arrayAsParam) {
         int k = 0;                                  // счётчик одномерного массива
-        int size = arrayAsParam.length              // счётчик одномерного массива: кол-во строк
+        int size = arrayAsParam.length              // размер одномерного массива: кол-во строк
                 * arrayAsParam[0].length;           // * кол-во столбцов
 
         T[] oneSizeArray = (T[]) new Object[size];  // создаю одномерный массив для "укладки" элементов двухмерного
