@@ -1,4 +1,16 @@
 package ru.progwards.java1.lessons.collections;
 
-public class MatrixIterator {
+import java.util.Iterator;
+
+public class MatrixIterator <T> implements Iterator <T> {
+
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
+    @Override
+    public T next() {
+        return null;
+    }
 }
