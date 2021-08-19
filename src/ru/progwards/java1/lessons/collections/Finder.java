@@ -48,9 +48,8 @@ public class Finder {
 
     public static boolean findSequence(Collection<Integer> numbers) {
         for (int i = 1; i < numbers.size(); i++) {
-            if (!numbers.contains(i)) { // ищем единственное несовпадение. Если не находим - возвращаем из метода true.
+            if (!numbers.contains(i))  // ищем единственное несовпадение. Если не находим - возвращаем из метода true.
                 return false;
-            }
         }
         return true;
     }
