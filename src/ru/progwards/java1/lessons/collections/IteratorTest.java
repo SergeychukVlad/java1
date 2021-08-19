@@ -8,7 +8,7 @@ public class IteratorTest {
 
         System.out.println();
 
-        Integer[][] forMatrixIterator = new Integer[][]{{1, 2, 3}, {40, 50, 60}, {700, 800, 900}};
+        Integer[][] forMatrixIterator = new Integer[][]{{1, 2, 3}, {40, 50, 60}, {700, 800, 900}, {1000, 1001, 1002}};
         MatrixIterator<Integer> matrixIterator = new MatrixIterator<>(forMatrixIterator);
         withMatrixIterator(matrixIterator);
     }

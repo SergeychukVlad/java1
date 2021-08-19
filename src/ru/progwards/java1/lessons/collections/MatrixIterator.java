@@ -11,25 +11,27 @@ import java.util.Iterator;
 
 public class MatrixIterator<T> implements Iterator<T> {
 
+
     private T[] array;
 
     public MatrixIterator(T[][] arrayAsParam) {
         int k = 0;                                  // счётчик одномерного массива
-        int size = arrayAsParam.length              // размер одномерного массива: кол-во строк
-                * arrayAsParam[0].length;           // * кол-во столбцов
+        int size = arrayAsParam.length              // размер одномерного массива:
+                * arrayAsParam[0].length;           // кол-во строк * кол-во столбцов
 
         T[] oneSizeArray = (T[]) new Object[size];  // создаю одномерный массив для "укладки" элементов двухмерного
 
         while (k < size) {
-            for (T[] ts : arrayAsParam) {
-                for (int i = 0; i < arrayAsParam.length; i++) {
-                    oneSizeArray[k] = ts[i];
+            for (int m = 0; m < arrayAsParam.length; m++) {
+                for (int n = 0; n < arrayAsParam[0].length; n++) {
+                    oneSizeArray[k] = arrayAsParam[m][n];
                     k++;
                 }
             }
         }
         this.array = oneSizeArray;
     }
+
     // дальше всё, как в ArrayIterator
     private int currentIndexI = 0;
 
