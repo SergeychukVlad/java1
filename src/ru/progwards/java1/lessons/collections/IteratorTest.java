@@ -5,6 +5,7 @@ public class IteratorTest {
         Integer[] forArrayIterator = new Integer[]{1, 3, 67, 89, 222};
         ArrayIterator<Integer> arrayIterator = new ArrayIterator<>(forArrayIterator);
         withArrayIterator(arrayIterator);
+
         System.out.println();
 
         Integer[][] forMatrixIterator = new Integer[][]{{1, 2, 3}, {40, 50, 60}, {700, 800, 900}};
