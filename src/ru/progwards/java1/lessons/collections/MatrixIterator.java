@@ -14,11 +14,11 @@ public class MatrixIterator<T> implements Iterator<T> {
     private T[] array;
 
     public MatrixIterator(T[][] arrayAsParam) {
-        // создаю одномерный массив для "укладки" элементов двухмерного
-        T[] oneSizeArray = (T[]) new Object[arrayAsParam.length * arrayAsParam.length];
-        int k = 0;                          // счётчик одномерного массива
-        int size = arrayAsParam.length      // счётчик одномерного массива: кол-во строк
-                * arrayAsParam[0].length;   // * кол-во столбцов
+        int k = 0;                                  // счётчик одномерного массива
+        int size = arrayAsParam.length              // счётчик одномерного массива: кол-во строк
+                * arrayAsParam[0].length;           // * кол-во столбцов
+
+        T[] oneSizeArray = (T[]) new Object[size];  // создаю одномерный массив для "укладки" элементов двухмерного
 
         while (k < size) {
             for (T[] ts : arrayAsParam) {
