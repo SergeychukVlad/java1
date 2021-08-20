@@ -20,12 +20,35 @@ public static String findSimilar(Collection<String> names) - найдите ма
  */
 package ru.progwards.java1.lessons.collections;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class Finder_v2 {
+
+    static class MyIterator implements Iterator {
+
+        private int currentIndex = 1;
+        private final List<Integer> list;
+
+        public MyIterator(List<Integer> list) {
+            this.list = list;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < this.list.size() - 1 && list.get(currentIndex) != null;
+        }
+
+        @Override
+        public Integer[] next() {
+            Integer[] triad = new Integer[3];
+            for (int i = 0; i < triad.length; i++) {
+                triad[i] = list.get(currentIndex - (i - 1));
+            }
+            currentIndex++;
+            return triad;
+        }
+    }
+
     public static Collection<Integer> findMinSumPair(Collection<Integer> numbers) {
         ArrayList<Integer> values = new ArrayList<>(numbers);
         ArrayList<Integer> sums = new ArrayList<>();
@@ -37,13 +60,13 @@ public class Finder_v2 {
     }
 
     public static Collection<Integer> findLocalMax(Collection<Integer> numbers) {
-        ArrayList<Integer> values = new ArrayList<>(numbers);
         ArrayList<Integer> localMax = new ArrayList<>();
-
-        for (int i = 1; i < values.size() - 1; i++) {
-            if (values.get(i) > values.get(i - 1))
-                if (values.get(i) > values.get(i + 1))
-                    localMax.add(values.get(i));
+        MyIterator myIterator = new MyIterator((List<Integer>) numbers);
+        while (myIterator.hasNext()) {
+            Integer[] triad = myIterator.next();
+            if (Collections.max(Arrays.asList(triad)).equals(triad[1])) {
+                localMax.add(triad[1]);
+            }
         }
         return localMax;
     }
