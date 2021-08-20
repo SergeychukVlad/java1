@@ -26,13 +26,12 @@ import java.util.Iterator;
 
 public class ArrayIterator<T> implements Iterator<T> {
 
-    private T[] array;
-
-    public ArrayIterator(T[] array) {
-        this.array = array;
-    }
-
     private int currentIndex = 0;
+    private final T[] array;
+
+    public ArrayIterator(T[] arrayAsParam) {
+        this.array = arrayAsParam;
+    }
 
     @Override
     public boolean hasNext() {

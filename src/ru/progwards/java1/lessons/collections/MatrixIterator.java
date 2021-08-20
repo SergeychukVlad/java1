@@ -7,29 +7,30 @@
  */
 package ru.progwards.java1.lessons.collections;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class MatrixIterator<T> implements Iterator<T> {
 
-
-    private T[] array;
+    private final T[] array;
 
     public MatrixIterator(T[][] arrayAsParam) {
         int k = 0;                                  // счётчик одномерного массива
         int size = arrayAsParam.length              // размер одномерного массива:
                 * arrayAsParam[0].length;           // кол-во строк * кол-во столбцов
 
-        T[] oneSizeArray = (T[]) new Object[size];  // создаю одномерный массив для "укладки" элементов двухмерного
+        List<T> list = new ArrayList<>();
 
         while (k < size) {
             for (int m = 0; m < arrayAsParam.length; m++) {
                 for (int n = 0; n < arrayAsParam[0].length; n++) {
-                    oneSizeArray[k] = arrayAsParam[m][n];
+                    list.add(arrayAsParam[m][n]);
                     k++;
                 }
             }
         }
-        this.array = oneSizeArray;
+        this.array = (T[]) list.toArray();
     }
 
     // дальше всё, как в ArrayIterator
