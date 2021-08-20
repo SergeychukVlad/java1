@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MatrixIterator<T> implements Iterator<T> {
 
-    private final T[] array;
+    private final List<T> arrayList;
 
     public MatrixIterator(T[][] arrayAsParam) {
         int k = 0;                                  // счётчик одномерного массива
@@ -30,7 +30,7 @@ public class MatrixIterator<T> implements Iterator<T> {
                 }
             }
         }
-        this.array = (T[]) list.toArray();
+        this.arrayList = list;
     }
 
     // дальше всё, как в ArrayIterator
@@ -38,11 +38,11 @@ public class MatrixIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return currentIndexI < this.array.length && array[currentIndexI] != null;
+        return currentIndexI < this.arrayList.size() && arrayList.get(currentIndexI) != null;
     }
 
     @Override
     public T next() {
-        return array[currentIndexI++];
+        return arrayList.get(currentIndexI++);
     }
 }
