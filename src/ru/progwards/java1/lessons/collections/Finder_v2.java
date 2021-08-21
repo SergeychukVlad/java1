@@ -109,10 +109,11 @@ public class Finder_v2 {
     public static void main(String[] args) {
         ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(1, 3, -2, 10, 45, 14, -6, 55, 19));
         ArrayList<Integer> myListForTrue = new ArrayList<>(Arrays.asList(1, 2, 3));
-        ArrayList<String> myStringList = new ArrayList<>(Arrays.asList("Тихон", "Таня", "Тихон", "Тихон", "Толя", "Толя", "Толя", "Таня", "Таня", "Таня", "Алекс"));
-        ArrayList<String> myTestList = new ArrayList<>(Arrays.asList("Григорий", "Александр", "Борис", "Григорий",
-                "Василий", "Борис", "Василий", "Борис", "Дмитрий", "Григорий", "Александр", "Василий", "Григорий",
-                "Дмитрий", "Василий", "Александр", "Александр"));
+        ArrayList<String> myStringList = new ArrayList<>(Arrays.asList(
+                "Тихон", "Таня", "Тихон", "Тихон", "Толя", "Толя", "Толя", "Таня", "Таня", "Таня", "Алекс"));
+        ArrayList<String> myTestList = new ArrayList<>(Arrays.asList(
+                "Григорий", "Александр", "Борис", "Григорий", "Василий", "Борис", "Василий", "Борис", "Дмитрий",
+                "Григорий", "Александр", "Василий", "Григорий", "Дмитрий", "Василий", "Александр", "Александр"));
 
         System.out.println("findMinSumPair(): " + findMinSumPair(myList));
 
