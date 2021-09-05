@@ -1,0 +1,22 @@
+C13 Содержание
+
+1. Множества, HashSet.
+
+                множества в Java
+                интерфейс Set
+                класс HashSet
+
+
+2. LinkedHashSet, Проверка типа.
+
+                класс LinkedHashSet
+                instanceOf
+                getClass()
+
+
+3. Интерфейсы NavigableSet, SortedSet. Класс TreeSet.
+
+                интерфейс NavigableSet
+                интерфейс SortedSet
+                класс TreeSet
+
