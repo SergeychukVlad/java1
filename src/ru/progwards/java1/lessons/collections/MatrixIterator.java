@@ -8,6 +8,7 @@
 package ru.progwards.java1.lessons.collections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,19 +17,9 @@ public class MatrixIterator<T> implements Iterator<T> {
     private final List<T> arrayList;
 
     public MatrixIterator(T[][] arrayAsParam) {
-        int k = 0;                                  // счётчик одномерного массива
-        int size = arrayAsParam.length              // размер одномерного массива:
-                * arrayAsParam[0].length;           // кол-во строк * кол-во столбцов
-
         List<T> list = new ArrayList<>();
-
-        while (k < size) {
-            for (T[] ts : arrayAsParam) {
-                for (int n = 0; n < arrayAsParam[0].length; n++) {
-                    list.add(ts[n]);
-                    k++;
-                }
-            }
+        for (T[] ts : arrayAsParam) {
+            list.addAll(Arrays.asList(ts).subList(0, arrayAsParam[0].length));
         }
         this.arrayList = list;
     }
