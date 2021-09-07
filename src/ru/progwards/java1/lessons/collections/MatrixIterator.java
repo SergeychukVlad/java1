@@ -18,9 +18,9 @@ public class MatrixIterator<T> implements Iterator<T> {
 
     public MatrixIterator(T[][] arrayAsParam) {
         List<T> list = new ArrayList<>();
-        for (int m = 0; m < arrayAsParam.length; m++) {
-            for (int n = 0; n < arrayAsParam.length; n++) {
-                list.add(arrayAsParam[m][n]);
+        for (T[] ts : arrayAsParam) {
+            for (int n = 0; n < ts.length; n++) {
+                list.add(ts[n]);
             }
         }
         this.arrayList = list;
