@@ -18,8 +18,10 @@ public class MatrixIterator<T> implements Iterator<T> {
 
     public MatrixIterator(T[][] arrayAsParam) {
         List<T> list = new ArrayList<>();
-        for (T[] ts : arrayAsParam) {
-            list.addAll(Arrays.asList(ts).subList(0, arrayAsParam[0].length));
+        for (int m = 0; m < arrayAsParam.length; m++) {
+            for (int n = 0; n < arrayAsParam.length; n++) {
+                list.add(arrayAsParam[m][n]);
+            }
         }
         this.arrayList = list;
     }
