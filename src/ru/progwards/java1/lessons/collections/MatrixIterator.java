@@ -7,10 +7,7 @@
  */
 package ru.progwards.java1.lessons.collections;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class MatrixIterator<T> implements Iterator<T> {
 
@@ -19,9 +16,7 @@ public class MatrixIterator<T> implements Iterator<T> {
     public MatrixIterator(T[][] arrayAsParam) {
         List<T> list = new ArrayList<>();
         for (T[] ts : arrayAsParam) {
-            for (int n = 0; n < ts.length; n++) {
-                list.add(ts[n]);
-            }
+            Collections.addAll(list, ts);
         }
         this.arrayList = list;
     }
