@@ -10,10 +10,11 @@ compareTo(obj1, obj2) возвращает:
 */
 package lesson13.part3;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
-public class TreeSetSimple {
+public class TreeSetDescending {
     public static void main(String[] args) {
         TreeSet<Integer> treeSet = new TreeSet<>();
         treeSet.add(3);
@@ -25,7 +26,12 @@ public class TreeSetSimple {
 
         TreeSet<Integer> treeSetOnCollection = new TreeSet<>(List.of(1, -3, 6, 8, 0, -4, 4));
 
-        System.out.println(treeSet);
-        System.out.println(treeSetOnCollection);
+        System.out.println("treeSet: " + treeSet);
+        System.out.println("treeSetOnCollection: " + treeSetOnCollection);
+        System.out.print("Descending order for treeSetOnCollection:");
+        Iterator<Integer> descIter = treeSetOnCollection.descendingIterator();
+        while (descIter.hasNext()) {
+            System.out.print(" " + descIter.next());
+        }
     }
 }
