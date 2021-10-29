@@ -36,7 +36,8 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existInAll() {
-        Set<Product> allProducts = new TreeSet<>(products);
+        Set<Product> allProducts = null;
+
         for (Shop shop : shops) {
             allProducts.add((Product) shop.getProducts());
         }
@@ -56,29 +57,36 @@ public class ProductAnalytics {
     }
 
     public static void main(String[] args) {
-        Product aa = new Product("хлеб");
-        Product ab = new Product("молоко");
-        Product ba = new Product("сахар");
-        Product bb = new Product("соль");
-        List<Product> productsProd = List.of(aa, ab, ba, bb);
+        Product a1 = new Product("хлеб");
+        Product a2 = new Product("молоко");
+        Product a3 = new Product("сахар");
+        Product a4 = new Product("соль");
+        List<Product> productsProd = List.of(a1, a2, a3, a4);
+//        ListIterator<Product> iterator = productsProd.listIterator();
+//        while(iterator.hasNext())
+//        {
+//            System.out.println(iterator.next().getCode());
+//        }
 
-        Product ee = new Product("гвозди");
-        Product ef = new Product("брезент");
-        Product fe = new Product("топор");
-        Product ff = new Product("пила");
-        List<Product> productsProm = List.of(ee, ef, fe, ff);
+        Product b1 = new Product("гвозди");
+        Product b2 = new Product("брезент");
+        Product b3 = new Product("топор");
+        Product b4 = new Product("пила");
+        List<Product> productsProm = List.of(b1, b2, b3, b4);
 
-        Product yy = new Product("гвозди");
-        Product yz = new Product("брезент");
-        Product zy = new Product("топор");
-        Product zz = new Product("пила");
-        List<Product> productsLux = List.of(yy, yz, zy, zz);
+        Product c1 = new Product("вилка");
+        Product c2 = new Product("розетка");
+        Product c3 = new Product("выключатель");
+        Product c4 = new Product("автомат");
+        List<Product> products220 = List.of(c1, c2, c3, c4);
 
         Shop shopProd = new Shop(productsProd);
         Shop shopProm = new Shop(productsProm);
-        Shop shopLux = new Shop(productsLux);
+        Shop shopLux = new Shop(products220);
+
         List<Shop> shopList = List.of(shopProd, shopProm, shopLux);
         ProductAnalytics analytics = new ProductAnalytics(productsProd, shopList);
-//        System.out.println(analytics.existInAll());
+                ListIterator<Product> iterator = productsProd.listIterator();
+        System.out.println(analytics.existInAll());
     }
 }

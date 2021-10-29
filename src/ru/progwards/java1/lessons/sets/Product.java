@@ -9,6 +9,7 @@ public class Product {
     }
 
     public String getCode() {
-        return code;
+        if (code != null) return code;
+        else return "код не существует";
     }
 }
