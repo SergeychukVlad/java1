@@ -36,10 +36,9 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existInAll() {
-        Set<Product> allProducts = null;
-
-        for (Shop shop : shops) {
-            allProducts.add((Product) shop.getProducts());
+        Set<Product> allProducts = new HashSet<>(Set.of());
+        for (Shop nextShop : shops) {
+            allProducts.addAll(nextShop.getProducts());
         }
         return allProducts;
     }
@@ -56,37 +55,25 @@ public class ProductAnalytics {
         return null;
     }
 
+    public static void printProducts(Set<Product> products) {
+        for (Product product : products) {
+            System.out.println(product.getCode());
+        }
+        System.out.println(" --- ");
+    }
+
     public static void main(String[] args) {
-        Product a1 = new Product("хлеб");
-        Product a2 = new Product("молоко");
-        Product a3 = new Product("сахар");
-        Product a4 = new Product("соль");
-        List<Product> productsProd = List.of(a1, a2, a3, a4);
-//        ListIterator<Product> iterator = productsProd.listIterator();
-//        while(iterator.hasNext())
-//        {
-//            System.out.println(iterator.next().getCode());
-//        }
+        List<Product> products = List.of(new Product("хлеб"), new Product("молоко"), new Product("сахар"),
+                new Product("гвозди"), new Product("брезент"), new Product("топор"),
+                new Product("розетка"), new Product("выключатель"), new Product("вилка"));
 
-        Product b1 = new Product("гвозди");
-        Product b2 = new Product("брезент");
-        Product b3 = new Product("топор");
-        Product b4 = new Product("пила");
-        List<Product> productsProm = List.of(b1, b2, b3, b4);
+        Shop shop1 = new Shop(List.of(new Product("хлеб"), new Product("молоко"), new Product("гвозди")));
+        Shop shop2 = new Shop(List.of(new Product("розетка"), new Product("гвозди"), new Product("вилка")));
+        Shop shop3 = new Shop(List.of(new Product("хлеб"), new Product("брезент"), new Product("топор")));
+        List<Shop> shops = List.of(shop1, shop2, shop3);
 
-        Product c1 = new Product("вилка");
-        Product c2 = new Product("розетка");
-        Product c3 = new Product("выключатель");
-        Product c4 = new Product("автомат");
-        List<Product> products220 = List.of(c1, c2, c3, c4);
-
-        Shop shopProd = new Shop(productsProd);
-        Shop shopProm = new Shop(productsProm);
-        Shop shopLux = new Shop(products220);
-
-        List<Shop> shopList = List.of(shopProd, shopProm, shopLux);
-        ProductAnalytics analytics = new ProductAnalytics(productsProd, shopList);
-                ListIterator<Product> iterator = productsProd.listIterator();
-        System.out.println(analytics.existInAll());
+        ProductAnalytics analytics = new ProductAnalytics(products, shops);
+        Set<Product> allProducts = analytics.existInAll();
+        printProducts(allProducts);
     }
 }
