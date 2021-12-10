@@ -27,8 +27,8 @@ import java.util.*;
 public class ProductAnalytics {
 
     private List<Shop> shops;
-
     private List<Product> products;
+    private Set<Product> products_existInAll = new HashSet<>();
 
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
         this.products = products;
@@ -36,23 +36,53 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existInAll() {
-        Set<Product> allProducts = new HashSet<>(Set.of());
-        for (Shop nextShop : shops) {
-            allProducts.addAll(nextShop.getProducts());
-        }
-        return allProducts;
+        products_existInAll.clear();
+        for (Shop nextShop : shops)
+            products_existInAll.addAll(nextShop.getProducts());
+        return products_existInAll;
     }
 
     public Set<Product> existAtListInOne() {
-        return null;
+        products_existInAll.clear();
+        for (Shop nextShop : shops)
+            products_existInAll.addAll(nextShop.getProducts());
+
+        Set<Product> result = new HashSet<>(products_existInAll);
+        for (Shop nextShop : shops)
+            result.retainAll(nextShop.getProducts());
+        return result;
     }
 
     public Set<Product> notExistInShops() {
-        return null;
+        products_existInAll.clear();
+        Set<Product> result = new HashSet<>(products);
+        for (Shop nextShop : shops)
+            products_existInAll.addAll(nextShop.getProducts());
+
+        result.removeAll(products_existInAll);
+        return result;
     }
 
     public Set<Product> existOnlyInOne() {
-        return null;
+        products_existInAll.clear();
+        for (Shop nextShop : shops)
+            products_existInAll.addAll(nextShop.getProducts());
+
+        Set<Product> result = new HashSet<>(products_existInAll);
+        Set<Product> intersection = new HashSet<>();
+
+        for (Shop nextShop : shops) {
+            if (intersection.isEmpty()) {
+                intersection.addAll(nextShop.getProducts());
+            } else {
+                intersection.retainAll(nextShop.getProducts());
+                result.removeAll(intersection);
+            }
+            if (result.size() == products_existInAll.size()) {
+                result.removeAll(nextShop.getProducts());
+            }
+        }
+        return result;
     }
 
     public static void printProducts(Set<Product> products) {
@@ -63,17 +93,27 @@ public class ProductAnalytics {
     }
 
     public static void main(String[] args) {
-        List<Product> products = List.of(new Product("хлеб"), new Product("молоко"), new Product("сахар"),
-                new Product("гвозди"), new Product("брезент"), new Product("топор"),
-                new Product("розетка"), new Product("выключатель"), new Product("вилка"));
+        Product prod1 = new Product("хлеб");
+        Product prod2 = new Product("молоко");
+        Product prod3 = new Product("сахар");
+        Product prod4 = new Product("гвозди");
+        Product prod5 = new Product("брезент");
+        Product prod6 = new Product("топор");
+        Product prod7 = new Product("розетка");
+        Product prod8 = new Product("выключатель");
+        Product prod9 = new Product("вилка");
+        List<Product> products = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9);
 
-        Shop shop1 = new Shop(List.of(new Product("хлеб"), new Product("молоко"), new Product("гвозди")));
-        Shop shop2 = new Shop(List.of(new Product("розетка"), new Product("гвозди"), new Product("вилка")));
-        Shop shop3 = new Shop(List.of(new Product("хлеб"), new Product("брезент"), new Product("топор")));
+        Shop shop1 = new Shop(List.of(prod1, prod2, prod4, prod5));
+        Shop shop2 = new Shop(List.of(prod7, prod4, prod9));
+        Shop shop3 = new Shop(List.of(prod2, prod4, prod5, prod6));
         List<Shop> shops = List.of(shop1, shop2, shop3);
 
         ProductAnalytics analytics = new ProductAnalytics(products, shops);
-        Set<Product> allProducts = analytics.existInAll();
-        printProducts(allProducts);
+
+        printProducts(analytics.existInAll());
+        printProducts(analytics.existAtListInOne());
+        printProducts(analytics.notExistInShops());
+        printProducts(analytics.existOnlyInOne());
     }
 }
