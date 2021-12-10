@@ -36,13 +36,10 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existInAll() {
+        Set<Product> result = new HashSet<>(products);
         for (Shop nextShop : shops)
-            products_existInAll.addAll(nextShop.getProducts());
-
-        if (!products_existInAll.containsAll(products)) {
-            products_existInAll.clear();
-        }
-        return products_existInAll;
+            result.retainAll(nextShop.getProducts());
+        return result;
     }
 
     public Set<Product> existAtListInOne() {
