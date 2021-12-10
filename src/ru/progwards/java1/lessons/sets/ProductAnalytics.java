@@ -28,7 +28,6 @@ public class ProductAnalytics {
 
     private List<Shop> shops;
     private List<Product> products;
-    private Set<Product> products_existInAll = new HashSet<>();
 
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
         this.products = products;
@@ -50,32 +49,49 @@ public class ProductAnalytics {
     }
 
     public Set<Product> notExistInShops() {
-        Set<Product> result = new HashSet<>(products);
+        Set<Product> productsAllShops = new HashSet<>();
         for (Shop nextShop : shops)
-            products_existInAll.addAll(nextShop.getProducts());
+            productsAllShops.addAll(nextShop.getProducts());
 
-        result.removeAll(products_existInAll);
+        Set<Product> result = new HashSet<>(products);
+        result.removeAll(productsAllShops);
         return result;
     }
 
     public Set<Product> existOnlyInOne() {
-        for (Shop nextShop : shops)
-            products_existInAll.addAll(nextShop.getProducts());
-
-        Set<Product> result = new HashSet<>(products_existInAll);
-        Set<Product> intersection = new HashSet<>();
-
+        Set<Product> result = new HashSet<>();
         for (Shop nextShop : shops) {
-            if (intersection.isEmpty()) {
-                intersection.addAll(nextShop.getProducts());
-            } else {
-                intersection.retainAll(nextShop.getProducts());
-                result.removeAll(intersection);
-            }
-            if (result.size() == products_existInAll.size()) {
-                result.removeAll(nextShop.getProducts());
-            }
+            result.addAll(nextShop.getProducts());
         }
+
+        Set<Product> intersection1 = new HashSet<>();
+        Set<Product> intersection2 = new HashSet<>();
+        Set<Product> intersection3 = new HashSet<>();
+        Set<Product> shopProducts1 = new HashSet<>();
+        Set<Product> shopProducts2 = new HashSet<>();
+        Set<Product> shopProducts3 = new HashSet<>();
+        int i = 1;
+        for (Shop nextShop : shops) {
+            if (i == 1) {
+                shopProducts1.addAll(nextShop.getProducts());
+                intersection1.addAll(shopProducts1);
+                shopProducts3.addAll(shopProducts1);
+            } else if (i == 2) {
+                shopProducts2.addAll(nextShop.getProducts());
+                intersection2.addAll(shopProducts2);
+            } else if (i == shops.size()) {
+                intersection3.addAll(shopProducts3);
+            }
+            i++;
+        }
+        intersection1.retainAll(shopProducts2);
+        result.removeAll(intersection1);
+
+        intersection2.retainAll(shopProducts3);
+        result.removeAll(intersection2);
+
+        intersection3.retainAll(shopProducts3);
+        result.removeAll(intersection3);
         return result;
     }
 
@@ -97,14 +113,12 @@ public class ProductAnalytics {
         Product prod8 = new Product("выключатель");
         Product prod9 = new Product("вилка");
         Product prod10 = new Product("соль");
-        List<Product> products = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9);
         List<Product> products2test = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10);
 
-        Shop shop1 = new Shop(List.of(prod2, prod4, prod7, prod9, prod10));
-        Shop shop2 = new Shop(List.of(prod5, prod6, prod8, prod10));
-        Shop shop3 = new Shop(List.of(prod3, prod4, prod7, prod8, prod9));
+        Shop shop1 = new Shop(List.of(prod1, prod3, prod5));
+        Shop shop2 = new Shop(List.of(prod2, prod7, prod10));
+        Shop shop3 = new Shop(List.of(prod1, prod3, prod5, prod7, prod9, prod10));
         List<Shop> shops = List.of(shop1, shop2, shop3);
-        List<Shop> shops2test = List.of(shop1, shop2);
 
         ProductAnalytics analytics = new ProductAnalytics(products2test, shops);
 
