@@ -36,25 +36,23 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existInAll() {
-        products_existInAll.clear();
         for (Shop nextShop : shops)
             products_existInAll.addAll(nextShop.getProducts());
+
+        if (!products_existInAll.containsAll(products)) {
+            products_existInAll.clear();
+        }
         return products_existInAll;
     }
 
     public Set<Product> existAtListInOne() {
-        products_existInAll.clear();
+        Set<Product> result = new HashSet<>();
         for (Shop nextShop : shops)
-            products_existInAll.addAll(nextShop.getProducts());
-
-        Set<Product> result = new HashSet<>(products_existInAll);
-        for (Shop nextShop : shops)
-            result.retainAll(nextShop.getProducts());
+            result.addAll(nextShop.getProducts());
         return result;
     }
 
     public Set<Product> notExistInShops() {
-        products_existInAll.clear();
         Set<Product> result = new HashSet<>(products);
         for (Shop nextShop : shops)
             products_existInAll.addAll(nextShop.getProducts());
@@ -102,14 +100,17 @@ public class ProductAnalytics {
         Product prod7 = new Product("розетка");
         Product prod8 = new Product("выключатель");
         Product prod9 = new Product("вилка");
+        Product prod10 = new Product("соль");
         List<Product> products = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9);
+        List<Product> products2test = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10);
 
-        Shop shop1 = new Shop(List.of(prod1, prod2, prod4, prod5));
-        Shop shop2 = new Shop(List.of(prod7, prod4, prod9));
-        Shop shop3 = new Shop(List.of(prod2, prod4, prod5, prod6));
+        Shop shop1 = new Shop(List.of(prod2, prod3, prod5, prod7, prod8));
+        Shop shop2 = new Shop(List.of(prod3, prod5, prod8, prod10));
+        Shop shop3 = new Shop(List.of(prod1, prod4, prod6, prod7, prod10));
         List<Shop> shops = List.of(shop1, shop2, shop3);
+        List<Shop> shops2test = List.of(shop1, shop2);
 
-        ProductAnalytics analytics = new ProductAnalytics(products, shops);
+        ProductAnalytics analytics = new ProductAnalytics(products2test, shops);
 
         printProducts(analytics.existInAll());
         printProducts(analytics.existAtListInOne());
