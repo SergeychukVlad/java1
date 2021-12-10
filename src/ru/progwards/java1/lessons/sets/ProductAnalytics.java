@@ -59,7 +59,6 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-        products_existInAll.clear();
         for (Shop nextShop : shops)
             products_existInAll.addAll(nextShop.getProducts());
 
@@ -101,9 +100,9 @@ public class ProductAnalytics {
         List<Product> products = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9);
         List<Product> products2test = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10);
 
-        Shop shop1 = new Shop(List.of(prod2, prod3, prod5, prod7, prod8));
-        Shop shop2 = new Shop(List.of(prod3, prod5, prod8, prod10));
-        Shop shop3 = new Shop(List.of(prod1, prod4, prod6, prod7, prod10));
+        Shop shop1 = new Shop(List.of(prod2, prod4, prod7, prod9, prod10));
+        Shop shop2 = new Shop(List.of(prod5, prod6, prod8, prod10));
+        Shop shop3 = new Shop(List.of(prod3, prod4, prod7, prod8, prod9));
         List<Shop> shops = List.of(shop1, shop2, shop3);
         List<Shop> shops2test = List.of(shop1, shop2);
 
