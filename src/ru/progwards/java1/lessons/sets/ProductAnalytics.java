@@ -84,13 +84,6 @@ public class ProductAnalytics {
         return result;
     }
 
-    public static void printProducts(Set<Product> products) {
-        for (Product product : products) {
-            System.out.println(product.getCode());
-        }
-        System.out.println(" --- ");
-    }
-
     public static void main(String[] args) {
         Product prod1 = new Product("п1");
         Product prod2 = new Product("п2");
@@ -111,9 +104,9 @@ public class ProductAnalytics {
 
         ProductAnalytics analytics = new ProductAnalytics(products2test, shops);
 
-        printProducts(analytics.existInAll());
-        printProducts(analytics.existAtListInOne());
-        printProducts(analytics.notExistInShops());
-        printProducts(analytics.existOnlyInOne());
+        analytics.existInAll();
+        analytics.existAtListInOne();
+        analytics.notExistInShops();
+        analytics.existOnlyInOne();
     }
 }
