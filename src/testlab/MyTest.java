@@ -1,6 +1,8 @@
 package testlab;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MyTest {
@@ -66,17 +68,18 @@ public class MyTest {
         sum.addAll(integers3);
         System.out.println(sum);
 
-        Set<Integer> intersection1 = new HashSet<>(integers1);
-        intersection1.retainAll(integers2);
-        sum.removeAll(intersection1);
+        List<Set<Integer>> sets = Arrays.asList(integers1, integers2, integers3);
+        Set<Integer> intersection = new HashSet<>(sets.get(0));
+        Set<Integer> sumIntersection = new HashSet<>(sets.get(sets.size() - 1));
+        sumIntersection.retainAll(intersection);
 
-        Set<Integer> intersection2 = new HashSet<>(integers2);
-        intersection2.retainAll(integers3);
-        sum.removeAll(intersection2);
+        for (int i = 1; i < sets.size(); i++) {
+            intersection.addAll(sets.get(i - 1));
+            intersection.retainAll(sets.get(i));
+            sumIntersection.addAll(intersection);
+        }
+        sum.removeAll(sumIntersection);
 
-        Set<Integer> intersection3 = new HashSet<>(integers1);
-        intersection3.retainAll(integers3);
-        sum.removeAll(intersection3);
 
         System.out.println(sum);
     }
