@@ -58,22 +58,43 @@ public class MyTest {
 
     private static void test4() {
         Set<Integer> test = new HashSet<>(Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-        Set<Integer> integers1 = Set.of(1, 2, 3, 8);
-        Set<Integer> integers2 = Set.of(3, 6, 9, 10);
-        Set<Integer> integers3 = Set.of(3, 7, 8, 10);
+        Set<Integer> integers1 = Set.of(1, 6, 7, 9, 10);
+        Set<Integer> integers2 = Set.of(1, 2, 7, 8);
+        Set<Integer> integers3 = Set.of(1, 4, 9, 10);
 
         Set<Integer> sum = new HashSet<>(integers1);
         sum.addAll(integers2);
         sum.addAll(integers3);
         System.out.println(sum);
 
-        Set<Integer> intersection = new HashSet<>();
+//        Set<Integer> intersection = new HashSet<>();
+//        Set<Integer> sumIntersection = new HashSet<>();
+//
+//        sumIntersection.addAll(integers1);
+//        sumIntersection.addAll(integers2);
+//        sumIntersection.retainAll(integers3);
+//        System.out.println(sumIntersection);
+//
+//        intersection.addAll(integers1);
+//        intersection.retainAll(integers2);
+//
+//        sumIntersection.addAll(intersection);
+//        sum.removeAll(sumIntersection);
+//
+//        System.out.println(sum);
+
+        Set<Integer> intersection = new HashSet<>(integers1);
+        Set<Integer> sumIntersection = new HashSet<>(intersection);
+        intersection.retainAll(integers2);
+
+        intersection.clear();
         intersection.addAll(integers1);
         intersection.addAll(integers2);
-
         intersection.retainAll(integers3);
-        sum.removeAll(intersection);
-        intersection.clear();
+        sumIntersection.addAll(intersection);
+
+        sum.removeAll(sumIntersection);
         System.out.println(sum);
+
     }
 }
