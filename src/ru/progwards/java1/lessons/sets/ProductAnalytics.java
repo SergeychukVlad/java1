@@ -72,14 +72,29 @@ public class ProductAnalytics {
         for (Shop shop : shops) {
             result.addAll(shop.getProducts());
 
-            if (i == shops.size() - 1)
+            if (i == shops.size() - 1) {
                 intersection.retainAll(shop.getProducts());
-            else
+            } else {
                 intersection.addAll(shop.getProducts());
+            }
 
             i++;
         }
-        result.removeAll(intersection);
+        Set<Product> sumIntersection = new HashSet<>(intersection);
+
+// corner case
+        i = 0;
+        intersection.clear();
+        for (Shop shop : shops) {
+            if (i == 1) {
+                intersection.retainAll(shop.getProducts());
+                break;
+            } else
+                intersection.addAll(shop.getProducts());
+            i++;
+        }
+        sumIntersection.addAll(intersection);
+        result.removeAll(sumIntersection);
 
         return result;
     }
@@ -97,9 +112,9 @@ public class ProductAnalytics {
         Product prod10 = new Product("п10");
         List<Product> products2test = List.of(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10);
 
-        Shop shop1 = new Shop(List.of(prod1, prod2, prod3, prod8));
-        Shop shop2 = new Shop(List.of(prod3, prod6, prod9, prod10));
-        Shop shop3 = new Shop(List.of(prod3, prod7, prod8, prod10));
+        Shop shop1 = new Shop(List.of(prod1, prod6, prod7, prod9, prod10));
+        Shop shop2 = new Shop(List.of(prod1, prod2, prod7, prod8));
+        Shop shop3 = new Shop(List.of(prod1, prod4, prod9, prod10));
         List<Shop> shops = List.of(shop1, shop2, shop3);
 
         ProductAnalytics analytics = new ProductAnalytics(products2test, shops);
