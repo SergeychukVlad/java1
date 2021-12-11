@@ -57,30 +57,23 @@ public class MyTest {
     }
 
     private static void test4() {
-        // 2, 7, 9
         Set<Integer> test = new HashSet<>(Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-        Set<Integer> integers1 = Set.of(1, 3, 5);
-        Set<Integer> integers2 = Set.of(2, 7, 10);
-        Set<Integer> integers3 = Set.of(1, 3, 5, 9, 10);
+        Set<Integer> integers1 = Set.of(1, 2, 3, 8);
+        Set<Integer> integers2 = Set.of(3, 6, 9, 10);
+        Set<Integer> integers3 = Set.of(3, 7, 8, 10);
 
         Set<Integer> sum = new HashSet<>(integers1);
         sum.addAll(integers2);
         sum.addAll(integers3);
         System.out.println(sum);
 
-        List<Set<Integer>> sets = Arrays.asList(integers1, integers2, integers3);
-        Set<Integer> intersection = new HashSet<>(sets.get(0));
-        Set<Integer> sumIntersection = new HashSet<>(sets.get(sets.size() - 1));
-        sumIntersection.retainAll(intersection);
+        Set<Integer> intersection = new HashSet<>();
+        intersection.addAll(integers1);
+        intersection.addAll(integers2);
 
-        for (int i = 1; i < sets.size(); i++) {
-            intersection.addAll(sets.get(i - 1));
-            intersection.retainAll(sets.get(i));
-            sumIntersection.addAll(intersection);
-        }
-        sum.removeAll(sumIntersection);
-
-
+        intersection.retainAll(integers3);
+        sum.removeAll(intersection);
+        intersection.clear();
         System.out.println(sum);
     }
 }
