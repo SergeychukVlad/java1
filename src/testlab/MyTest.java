@@ -67,22 +67,6 @@ public class MyTest {
         sum.addAll(integers3);
         System.out.println(sum);
 
-//        Set<Integer> intersection = new HashSet<>();
-//        Set<Integer> sumIntersection = new HashSet<>();
-//
-//        sumIntersection.addAll(integers1);
-//        sumIntersection.addAll(integers2);
-//        sumIntersection.retainAll(integers3);
-//        System.out.println(sumIntersection);
-//
-//        intersection.addAll(integers1);
-//        intersection.retainAll(integers2);
-//
-//        sumIntersection.addAll(intersection);
-//        sum.removeAll(sumIntersection);
-//
-//        System.out.println(sum);
-
         Set<Integer> intersection = new HashSet<>(integers1);
         Set<Integer> sumIntersection = new HashSet<>(intersection);
         intersection.retainAll(integers2);
