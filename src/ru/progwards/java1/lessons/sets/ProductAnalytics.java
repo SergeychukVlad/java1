@@ -71,18 +71,20 @@ public class ProductAnalytics {
         int i = 0;
         for (Shop shop : shops) {
             result.addAll(shop.getProducts());
-
+//  set result собирает товары из всех магазинов
             if (i == shops.size() - 1) {
                 intersection.retainAll(shop.getProducts());
             } else {
                 intersection.addAll(shop.getProducts());
             }
+//  одновременно
+//  set intersection собирает пересечения товаров сравниваемых shop
+//  (вариант, когда наборы товаров не имеют пересечений)
 
             i++;
         }
         Set<Product> sumIntersection = new HashSet<>(intersection);
-
-// corner case
+//  в sumIntersection кладём найденный набор пересечений после этого прохода по shops
         i = 0;
         intersection.clear();
         for (Shop shop : shops) {
@@ -93,9 +95,12 @@ public class ProductAnalytics {
                 intersection.addAll(shop.getProducts());
             i++;
         }
+//  этим проходом по shops set intersection собирает пересечения товаров сравниваемых магазинов
+//  (вариант, когда наборы товаров имеют пересечения)
+//  пополняем sumIntersection
         sumIntersection.addAll(intersection);
+//  из набора товаров, которые есть в магазинах, вычитаем набор всех пересечений
         result.removeAll(sumIntersection);
-
         return result;
     }
 
