@@ -8,5 +8,25 @@
  */
 package ru.progwards.java1.lessons.sets;
 
+import java.io.*;
+
 public class LettersInFile {
+
+
+    public static String process(String fileName) throws IOException {
+        if (fileName != null) {
+            try {
+                FileReader reader = new FileReader(fileName);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+
+    }
 }
