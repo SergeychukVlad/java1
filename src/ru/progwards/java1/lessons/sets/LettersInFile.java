@@ -28,6 +28,7 @@ public class LettersInFile {
                 do {
                     line = reader.readLine();
                     if (line == null) break;
+
                     chars = line.toCharArray();
                     for (char aChar : chars) {
                         if (aChar >= 65 && aChar <= 90
@@ -53,6 +54,7 @@ public class LettersInFile {
     }
 
     public static void main(String[] args) {
-        process("D:\\Progwards\\java1\\src\\ru\\progwards\\java1\\lessons\\sets\\lesson13");
+        String fileName = "D:\\Progwards\\java1\\src\\ru\\progwards\\java1\\lessons\\sets\\lesson13";
+        process(fileName);
     }
 }
