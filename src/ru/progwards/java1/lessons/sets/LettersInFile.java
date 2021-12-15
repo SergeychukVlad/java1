@@ -42,7 +42,7 @@ public class LettersInFile {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        } else throw new NullPointerException();
 
         TreeSet<Character> sortedChars = new TreeSet<>(characters);
         for (Character sortedChar : sortedChars) {
