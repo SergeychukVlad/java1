@@ -4,29 +4,55 @@
 
 3.1 Метод public static String process(String fileName) - вернуть все буквы, которые встретились в файле,
 сконкатенированные в виде строки. Буквы должны быть упорядочены по алфавиту, типа “ADEF...”.
-се возникающие исключения, по работе с потоками, пробросить выше.
+Все возникающие исключения, по работе с потоками, пробросить выше.
  */
 package ru.progwards.java1.lessons.sets;
 
 import java.io.*;
+import java.util.*;
 
 public class LettersInFile {
 
+    public static String process(String fileName) {
+        StringBuilder result = new StringBuilder();
+        Set<Character> characters = new HashSet<>();
 
-    public static String process(String fileName) throws IOException {
         if (fileName != null) {
             try {
-                FileReader reader = new FileReader(fileName);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } finally {
+                File file = new File(fileName);
+                FileReader fileReader = new FileReader(file);
+                BufferedReader reader = new BufferedReader(fileReader);
+                String line;
+                char[] chars;
 
+                do {
+                    line = reader.readLine();
+                    if (line == null) break;
+                    chars = line.toCharArray();
+                    for (char aChar : chars) {
+                        if (aChar >= 65 && aChar <= 90
+                                || aChar >= 97 && aChar <= 122
+                                || aChar >= 1040 && aChar <= 1103) {
+                            characters.add(aChar);
+                        }
+                    }
+                } while (chars.length > 0);
+            } catch (FileNotFoundException e) {
+                System.out.println("LettersInFile(). File fileName: " + e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        return null;
+
+        TreeSet<Character> sortedChars = new TreeSet<>(characters);
+        for (Character sortedChar : sortedChars) {
+            result.append(sortedChar);
+        }
+
+        return result.toString();
     }
 
     public static void main(String[] args) {
-
+        process("D:\\Progwards\\java1\\src\\ru\\progwards\\java1\\lessons\\sets\\lesson13");
     }
 }
