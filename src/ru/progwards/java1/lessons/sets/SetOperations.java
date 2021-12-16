@@ -42,9 +42,9 @@ public class SetOperations {
         Set<Integer> set1 = Set.of(1, -3, 6, 8, 0, -4, 4);
         Set<Integer> set2 = Set.of(-9, -7, -1, 19, 7, 10, -4, 4, 0);
 
-        System.out.println("union: " + union(set1, set2));
-        System.out.println("intersection: " + intersection(set1, set2));
-        System.out.println("difference: " + difference(set1, set2));
-        System.out.println("symDifference: " + symDifference(set1, set2));
+        union(set1, set2);
+        intersection(set1, set2);
+        difference(set1, set2);
+        symDifference(set1, set2);
     }
 }

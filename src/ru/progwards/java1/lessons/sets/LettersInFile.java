@@ -39,7 +39,7 @@ public class LettersInFile {
                     }
                 } while (chars.length > 0);
             } catch (FileNotFoundException e) {
-                System.out.println("LettersInFile(). File fileName: " + e.getMessage());
+                System.out.println("LettersInFile(). File: " + fileName + " " + e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
             }

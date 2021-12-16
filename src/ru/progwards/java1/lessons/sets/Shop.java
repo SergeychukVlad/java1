@@ -9,7 +9,6 @@ public class Shop {
     public Shop(List<Product> products) {
         this.products = products;
     }
-
     public List<Product> getProducts() {
         return products;
     }
