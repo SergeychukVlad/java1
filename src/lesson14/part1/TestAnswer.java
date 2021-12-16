@@ -1,8 +1,6 @@
 package lesson14.part1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class TestAnswer {
