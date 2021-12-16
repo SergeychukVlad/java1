@@ -33,7 +33,9 @@ public class LettersInFile {
                     for (char aChar : chars) {
                         if (aChar >= 65 && aChar <= 90
                                 || aChar >= 97 && aChar <= 122
-                                || aChar >= 1040 && aChar <= 1105) {
+                                || aChar == 1025    // Ё
+                                || aChar == 1105    // ё
+                                || aChar >= 1040 && aChar <= 1103) {
                             characters.add(aChar);
                         }
                     }
