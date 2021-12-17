@@ -31,13 +31,16 @@ public class LettersInFile {
 
                     chars = line.toCharArray();
                     for (char aChar : chars) {
-                        if (aChar >= 65 && aChar <= 90
-                                || aChar >= 97 && aChar <= 122
-                                || aChar == 1025    // Ё
-                                || aChar == 1105    // ё
-                                || aChar >= 1040 && aChar <= 1103) {
+                        if (Character.isAlphabetic(aChar))
                             characters.add(aChar);
-                        }
+// http://proglang.su/java/characters-isletter
+//                        if (aChar >= 65 && aChar <= 90
+//                                || aChar >= 97 && aChar <= 122
+//                                || aChar == 1025    // Ё
+//                                || aChar == 1105    // ё
+//                                || aChar >= 1040 && aChar <= 1103) {
+//                            characters.add(aChar);
+//                        }
                     }
                 } while (chars.length > 0);
             } catch (FileNotFoundException e) {
@@ -57,6 +60,11 @@ public class LettersInFile {
 
     public static void main(String[] args) {
         String fileName = "D:\\Progwards\\java1\\src\\ru\\progwards\\java1\\lessons\\sets\\lesson13";
-        process(fileName);
+        System.out.println(process(fileName));
     }
 }
+/*
+ЁПабвгдежзийклмнопрстуфхцчшщъыьэюяё - изначальный вариант
+ЁПабвгдежзийклмнопрстуфхцчшщъыьэюяё - isLetter()
+ЁПабвгдежзийклмнопрстуфхцчшщъыьэюяё - isAlphabetic()
+ */
