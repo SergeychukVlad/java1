@@ -24,7 +24,7 @@ import java.util.*;
 
 public class CollectionsSort {
 
-    static final int ELEMENT_COUNT = 5000;
+    static final int ELEMENT_COUNT = 500;
 
     public static void mySortOld(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
@@ -44,9 +44,10 @@ public class CollectionsSort {
         ListIterator<Integer> listIterator;
         Integer currentElement, previousElement;
         boolean sorted = false;
-        int iter = 0;
+        int iter;
 
         while (!sorted) {
+            iter = 0;
             listIterator = dataCopy.listIterator();
 
             while (listIterator.hasNext()) {
@@ -55,16 +56,16 @@ public class CollectionsSort {
 
                 if (listIterator.hasNext()) {
                     currentElement = dataCopy.get(listIterator.nextIndex());
-                    if (previousElement >= currentElement) {
+                    if (previousElement > currentElement) {
                         Collections.swap(dataCopy, dataCopy.indexOf(previousElement), dataCopy.indexOf(currentElement));
                         iter++;
-                    } else iter = 0;
+                    }
                 }
-
             }
+
             if (iter == 0) sorted = true;
         }
-        System.out.println(dataCopy);
+//        System.out.println(dataCopy);
     }
 
     public static void minSortOld(Collection<Integer> data) {
@@ -90,13 +91,14 @@ public class CollectionsSort {
             dataResult.add(min);
             dataCopy.removeIf(r -> r.equals(min));
         }
-        data = new ArrayList<>(dataResult);
-        System.out.println(data);
+//        data = new ArrayList<>(dataResult);
+//        System.out.println(dataResult);
     }
 
     public static void collSort(Collection<Integer> data) {
-        Collections.sort(new ArrayList<>(data));
-        System.out.println(data);
+        ArrayList<Integer> list = new ArrayList<>(data);
+        Collections.sort(list);
+//        System.out.println(list);
     }
 
     public static Collection<String> compareSort() {
@@ -106,7 +108,8 @@ public class CollectionsSort {
     public static void main(String[] args) {
         List<Integer> testList = new ArrayList<>();
         for (int i = 0; i < ELEMENT_COUNT; i++) {
-            testList.add(new Random().nextInt());
+            Random random = new Random();
+            testList.add(random.nextInt());
         }
 
         long start = System.currentTimeMillis();
