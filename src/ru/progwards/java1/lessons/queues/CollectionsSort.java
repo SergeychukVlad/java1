@@ -24,7 +24,9 @@ import java.util.*;
 
 public class CollectionsSort {
 
-    public static void mySort(Collection<Integer> data) {
+    static final int ELEMENT_COUNT = 5000;
+
+    public static void mySortOld(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
                 if (!(((List<Integer>) data).get(i) <= ((List<Integer>) data).get(j))) {
@@ -37,7 +39,7 @@ public class CollectionsSort {
         System.out.println(data);
     }
 
-    public static void mySortWithIterator(Collection<Integer> data) {
+    public static void mySort(Collection<Integer> data) {
         ArrayList<Integer> dataCopy = new ArrayList<>(data);
         ListIterator<Integer> listIterator;
         Integer currentElement, previousElement;
@@ -65,7 +67,7 @@ public class CollectionsSort {
         System.out.println(dataCopy);
     }
 
-    public static void minSort(Collection<Integer> data) {
+    public static void minSortOld(Collection<Integer> data) {
         List<Integer> dataResult = new ArrayList<>();
         List<Integer> dataCopy = new ArrayList<>(data);
         int dataSize = data.size();
@@ -78,7 +80,7 @@ public class CollectionsSort {
         System.out.println(dataResult);
     }
 
-    public static void minSortWithIterator(Collection<Integer> data) {
+    public static void minSort(Collection<Integer> data) {
         List<Integer> dataResult = new ArrayList<>();
         List<Integer> dataCopy = new ArrayList<>(data);
         ListIterator<Integer> listIterator = dataCopy.listIterator();
@@ -93,6 +95,8 @@ public class CollectionsSort {
     }
 
     public static void collSort(Collection<Integer> data) {
+        Collections.sort(new ArrayList<>(data));
+        System.out.println(data);
     }
 
     public static Collection<String> compareSort() {
@@ -101,20 +105,33 @@ public class CollectionsSort {
 
     public static void main(String[] args) {
         List<Integer> testList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < ELEMENT_COUNT; i++) {
             testList.add(new Random().nextInt());
         }
 
+        long start = System.currentTimeMillis();
         System.out.print("mySort:              ");
         mySort(testList);
+        System.out.println("затрачено - " + (System.currentTimeMillis() - start));
 
-        System.out.print("mySortWithIterator:  ");
-        mySortWithIterator(testList);
+//        start = System.currentTimeMillis();
+//        System.out.print("mySortWithIterator:  ");
+//        mySortWithIterator(testList);
+//        System.out.println("затрачено - " + (System.currentTimeMillis() - start));
 
+        start = System.currentTimeMillis();
         System.out.print("minSort:             ");
         minSort(testList);
+        System.out.println("затрачено - " + (System.currentTimeMillis() - start));
 
-        System.out.print("minSortWithIterator: ");
-        minSortWithIterator(testList);
+//        start = System.currentTimeMillis();
+//        System.out.print("minSortWithIterator: ");
+//        minSortWithIterator(testList);
+//        System.out.println("затрачено - " + (System.currentTimeMillis() - start));
+
+        start = System.currentTimeMillis();
+        System.out.print("collSort:            ");
+        collSort(testList);
+        System.out.println("затрачено - " + (System.currentTimeMillis() - start));
     }
 }
