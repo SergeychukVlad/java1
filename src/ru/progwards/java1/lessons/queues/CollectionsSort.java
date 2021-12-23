@@ -53,7 +53,7 @@ public class CollectionsSort {
 
                 if (listIterator.hasNext()) {
                     currentElement = dataCopy.get(listIterator.nextIndex());
-                    if (previousElement > currentElement) {
+                    if (previousElement >= currentElement) {
                         Collections.swap(dataCopy, dataCopy.indexOf(previousElement), dataCopy.indexOf(currentElement));
                         iter++;
                     } else iter = 0;
@@ -100,13 +100,20 @@ public class CollectionsSort {
     }
 
     public static void main(String[] args) {
-        List<Integer> testList = Arrays.asList(1, 2, -9, 16, 89, 0);
-        System.out.print("mySort: ");
+        List<Integer> testList = new ArrayList<>();
+        for (int i = 0; i < 500; i++) {
+            testList.add(new Random().nextInt());
+        }
+
+        System.out.print("mySort:              ");
         mySort(testList);
-        System.out.print("mySortWithIterator: ");
+
+        System.out.print("mySortWithIterator:  ");
         mySortWithIterator(testList);
-        System.out.print("minSort: ");
+
+        System.out.print("minSort:             ");
         minSort(testList);
+
         System.out.print("minSortWithIterator: ");
         minSortWithIterator(testList);
     }
