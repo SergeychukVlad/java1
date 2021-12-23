@@ -20,5 +20,94 @@
 
 package ru.progwards.java1.lessons.queues;
 
+import java.util.*;
+
 public class CollectionsSort {
+
+    public static void mySort(Collection<Integer> data) {
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = i + 1; j < data.size(); j++) {
+                if (!(((List<Integer>) data).get(i) <= ((List<Integer>) data).get(j))) {
+                    Collections.swap((List<?>) data,
+                            ((List<Integer>) data).indexOf(((List<Integer>) data).get(i)),
+                            ((List<Integer>) data).indexOf(((List<Integer>) data).get(j)));
+                }
+            }
+        }
+        System.out.println(data);
+    }
+
+    public static void mySortWithIterator(Collection<Integer> data) {
+        ArrayList<Integer> dataCopy = new ArrayList<>(data);
+        ListIterator<Integer> listIterator;
+        Integer currentElement, previousElement;
+        boolean sorted = false;
+        int iter = 0;
+
+        while (!sorted) {
+            listIterator = dataCopy.listIterator();
+
+            while (listIterator.hasNext()) {
+                listIterator.next();
+                previousElement = dataCopy.get(listIterator.previousIndex());
+
+                if (listIterator.hasNext()) {
+                    currentElement = dataCopy.get(listIterator.nextIndex());
+                    if (previousElement > currentElement) {
+                        Collections.swap(dataCopy, dataCopy.indexOf(previousElement), dataCopy.indexOf(currentElement));
+                        iter++;
+                    } else iter = 0;
+                }
+
+            }
+            if (iter == 0) sorted = true;
+        }
+        System.out.println(dataCopy);
+    }
+
+    public static void minSort(Collection<Integer> data) {
+        List<Integer> dataResult = new ArrayList<>();
+        List<Integer> dataCopy = new ArrayList<>(data);
+        int dataSize = data.size();
+
+        for (int i = 0; i < dataSize; i++) {
+            Integer min = Collections.min(dataCopy);
+            dataCopy.removeIf(r -> r.equals(min));
+            dataResult.add(min);
+        }
+        System.out.println(dataResult);
+    }
+
+    public static void minSortWithIterator(Collection<Integer> data) {
+        List<Integer> dataResult = new ArrayList<>();
+        List<Integer> dataCopy = new ArrayList<>(data);
+        ListIterator<Integer> listIterator = dataCopy.listIterator();
+
+        while (listIterator.hasNext()) {
+            Integer min = Collections.min(dataCopy);
+            dataResult.add(min);
+            dataCopy.removeIf(r -> r.equals(min));
+        }
+        data = new ArrayList<>(dataResult);
+        System.out.println(data);
+    }
+
+    public static void collSort(Collection<Integer> data) {
+    }
+
+    public static Collection<String> compareSort() {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> testList = Arrays.asList(1, 2, -9, 16, 89, 0);
+        System.out.print("mySort: ");
+        mySort(testList);
+        System.out.print("mySortWithIterator: ");
+        mySortWithIterator(testList);
+        System.out.print("minSort: ");
+        minSort(testList);
+        System.out.print("minSortWithIterator: ");
+        minSortWithIterator(testList);
+    }
 }
