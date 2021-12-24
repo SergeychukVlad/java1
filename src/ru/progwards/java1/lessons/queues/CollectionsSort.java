@@ -38,24 +38,26 @@ public class CollectionsSort {
 
     public static void minSort(Collection<Integer> data) {
         List<Integer> dataResult = new ArrayList<>();
+        int size = data.size();
 
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < size; i++) {
             Integer min = Collections.min(data);
             data.removeIf(r -> r.equals(min));
             dataResult.add(min);
         }
         data = List.copyOf(dataResult);
+        System.out.println(data);
     }
 
     public static void collSort(Collection<Integer> data) {
         ArrayList<Integer> dataResult = new ArrayList<>(data);
         Collections.sort(dataResult);
         data = List.copyOf(dataResult);
+        System.out.println(data);
     }
 
     public static Collection<String> compareSort() {
         List<Integer> testList = new ArrayList<>();
-
         ArrayList<String> result = new ArrayList<>();
         long start;
 
