@@ -38,33 +38,6 @@ public class CollectionsSort {
         }
     }
 
-    public static void mySortWithIterator(Collection<Integer> data) {
-        ArrayList<Integer> dataCopy = new ArrayList<>(data);
-        ListIterator<Integer> listIterator;
-        int currentElement, previousElement, count;
-        boolean sorted = false;
-
-        while (!sorted) {
-            count = 0;
-            listIterator = dataCopy.listIterator();
-
-            while (listIterator.hasNext()) {
-                listIterator.next();
-                previousElement = dataCopy.get(listIterator.previousIndex());
-
-                if (listIterator.hasNext()) {
-                    currentElement = dataCopy.get(listIterator.nextIndex());
-                    if (previousElement > currentElement) {
-                        Collections.swap(dataCopy, dataCopy.indexOf(previousElement), dataCopy.indexOf(currentElement));
-                        count++;
-                    }
-                }
-            }
-
-            if (count == 0) sorted = true;
-        }
-    }
-
     public static void minSort(Collection<Integer> data) {
         List<Integer> dataResult = new ArrayList<>();
 
@@ -73,23 +46,15 @@ public class CollectionsSort {
             data.removeIf(r -> r.equals(min));
             dataResult.add(min);
         }
-        data.addAll(dataResult);
-    }
-
-    public static void minSortWithIterator(Collection<Integer> data) {
-        List<Integer> dataCopy = new ArrayList<>(data);
-        List<Integer> dataResult = new ArrayList<>();
-        ListIterator<Integer> listIterator = dataCopy.listIterator();
-
-        while (listIterator.hasNext()) {
-            Integer min = Collections.min(dataCopy);
-            dataCopy.removeIf(r -> r.equals(min));
-            dataResult.add(min);
-        }
+        data = List.copyOf(dataResult);
+        System.out.println(data);
     }
 
     public static void collSort(Collection<Integer> data) {
-        Collections.sort(new ArrayList<>(data));
+        ArrayList<Integer> dataResult = new ArrayList<>(data);
+        Collections.sort(dataResult);
+        data = List.copyOf(dataResult);
+        System.out.println(data);
     }
 
     public static Collection<String> compareSort() {
@@ -104,23 +69,16 @@ public class CollectionsSort {
 
         start = System.currentTimeMillis();
         mySort(testList);
-        result.add((System.currentTimeMillis() - start) + "-mySort()");
-
-        start = System.currentTimeMillis();
-        mySortWithIterator(testList);
-        result.add((System.currentTimeMillis() - start) + "-mySortWithIterator()");
+        result.add((System.currentTimeMillis() - start) + "-mySort");
 
         start = System.currentTimeMillis();
         minSort(testList);
-        result.add((System.currentTimeMillis() - start) + "-minSort()");
-
-        start = System.currentTimeMillis();
-        minSortWithIterator(testList);
-        result.add((System.currentTimeMillis() - start) + "-minSortWithIterator()");
+        result.add((System.currentTimeMillis() - start) + "-minSort");
 
         start = System.currentTimeMillis();
         collSort(testList);
-        result.add((System.currentTimeMillis() - start) + "-collSort()");
+        result.add((System.currentTimeMillis() - start) + "-collSort");
+
         result.sort(new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
@@ -142,7 +100,3 @@ public class CollectionsSort {
         System.out.println(compareSort());
     }
 }
-/*
-[0-collSort(), 2-mySortWithIterator(), 63-minSortWithIterator(), 99-minSort(), 713-mySort()]
-
- */
