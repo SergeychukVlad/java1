@@ -24,7 +24,7 @@ import java.util.*;
 
 public class CollectionsSort {
 
-    static final int ELEMENT_COUNT = 1000;
+    static final int ELEMENT_COUNT = 10;
 
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
@@ -67,18 +67,18 @@ public class CollectionsSort {
 
     public static void minSort(Collection<Integer> data) {
         List<Integer> dataResult = new ArrayList<>();
-        List<Integer> dataCopy = new ArrayList<>(data);
 
         for (int i = 0; i < data.size(); i++) {
-            Integer min = Collections.min(dataCopy);
-            dataCopy.removeIf(r -> r.equals(min));
+            Integer min = Collections.min(data);
+            data.removeIf(r -> r.equals(min));
             dataResult.add(min);
         }
+        data.addAll(dataResult);
     }
 
     public static void minSortWithIterator(Collection<Integer> data) {
-        List<Integer> dataResult = new ArrayList<>();
         List<Integer> dataCopy = new ArrayList<>(data);
+        List<Integer> dataResult = new ArrayList<>();
         ListIterator<Integer> listIterator = dataCopy.listIterator();
 
         while (listIterator.hasNext()) {
@@ -89,8 +89,7 @@ public class CollectionsSort {
     }
 
     public static void collSort(Collection<Integer> data) {
-        ArrayList<Integer> list = new ArrayList<>(data);
-        Collections.sort(list);
+        Collections.sort(new ArrayList<>(data));
     }
 
     public static Collection<String> compareSort() {
