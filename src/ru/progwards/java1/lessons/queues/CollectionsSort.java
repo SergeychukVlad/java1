@@ -24,8 +24,6 @@ import java.util.*;
 
 public class CollectionsSort {
 
-    static final int ELEMENT_COUNT = 10;
-
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
@@ -47,22 +45,16 @@ public class CollectionsSort {
             dataResult.add(min);
         }
         data = List.copyOf(dataResult);
-        System.out.println(data);
     }
 
     public static void collSort(Collection<Integer> data) {
         ArrayList<Integer> dataResult = new ArrayList<>(data);
         Collections.sort(dataResult);
         data = List.copyOf(dataResult);
-        System.out.println(data);
     }
 
     public static Collection<String> compareSort() {
         List<Integer> testList = new ArrayList<>();
-        for (int i = 0; i < ELEMENT_COUNT; i++) {
-            Random random = new Random();
-            testList.add(random.nextInt());
-        }
 
         ArrayList<String> result = new ArrayList<>();
         long start;
