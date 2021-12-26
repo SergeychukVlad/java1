@@ -16,25 +16,56 @@
 1.4 Реализовать метод public static Collection<String> compareSort() в котором сравнить производительность методов
 и вернуть их имена, отсортированные в порядке производительности, первый - самый быстрый.
 В случае равенства производительности каких-то методов, возвращать их названия в алфавитном порядке.
+
+Разные варианты решений.
  */
+
+
 
 package ru.progwards.java1.lessons.queues;
 
 import java.util.*;
 
-public class CollectionsSort {
+public class CollectionsSort_Variations {
 
-    static final int ELEMENT_COUNT = 100;
+    static final int ELEMENT_COUNT = 10;
 
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
-                if (!(((List<Integer>) data).get(i) < ((List<Integer>) data).get(j))) {
+                if (!(((List<Integer>) data).get(i) <= ((List<Integer>) data).get(j))) {
                     Collections.swap((List<?>) data,
                             ((List<Integer>) data).indexOf(((List<Integer>) data).get(i)),
                             ((List<Integer>) data).indexOf(((List<Integer>) data).get(j)));
                 }
             }
+        }
+    }
+
+    public static void mySortWithIterator(Collection<Integer> data) {
+        ArrayList<Integer> dataCopy = new ArrayList<>(data);
+        ListIterator<Integer> listIterator;
+        int currentElement, previousElement, count;
+        boolean sorted = false;
+
+        while (!sorted) {
+            count = 0;
+            listIterator = dataCopy.listIterator();
+
+            while (listIterator.hasNext()) {
+                listIterator.next();
+                previousElement = dataCopy.get(listIterator.previousIndex());
+
+                if (listIterator.hasNext()) {
+                    currentElement = dataCopy.get(listIterator.nextIndex());
+                    if (previousElement > currentElement) {
+                        Collections.swap(dataCopy, dataCopy.indexOf(previousElement), dataCopy.indexOf(currentElement));
+                        count++;
+                    }
+                }
+            }
+
+            if (count == 0) sorted = true;
         }
     }
 
@@ -47,6 +78,18 @@ public class CollectionsSort {
             copyList.add(min);
         }
         data.addAll(copyList);
+    }
+
+    public static void minSortWithIterator(Collection<Integer> data) {
+        List<Integer> dataCopy = new ArrayList<>(data);
+        List<Integer> dataResult = new ArrayList<>();
+        ListIterator<Integer> listIterator = dataCopy.listIterator();
+
+        while (listIterator.hasNext()) {
+            Integer min = Collections.min(dataCopy);
+            dataCopy.removeIf(r -> r.equals(min));
+            dataResult.add(min);
+        }
     }
 
     public static void collSort(Collection<Integer> data) {
@@ -63,39 +106,48 @@ public class CollectionsSort {
             testList.add(random.nextInt());
         }
 
-        ArrayList<String> methodNameList = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
+        long start;
 
-        long start = System.currentTimeMillis();
+        start = System.currentTimeMillis();
         mySort(testList);
-        methodNameList.add((System.currentTimeMillis() - start) + ":mySort");
+        result.add((System.currentTimeMillis() - start) + "-mySort");
+
+        start = System.currentTimeMillis();
+        mySortWithIterator(testList);
+        result.add((System.currentTimeMillis() - start) + "-mySortWithIterator");
 
         start = System.currentTimeMillis();
         minSort(testList);
-        methodNameList.add((System.currentTimeMillis() - start) + ":minSort");
+        result.add((System.currentTimeMillis() - start) + "-minSort");
+
+        start = System.currentTimeMillis();
+        minSortWithIterator(testList);
+        result.add((System.currentTimeMillis() - start) + "-minSortWithIterator");
 
         start = System.currentTimeMillis();
         collSort(testList);
-        methodNameList.add((System.currentTimeMillis() - start) + ":collSort");
+        result.add((System.currentTimeMillis() - start) + "-collSort");
 
-        methodNameList.sort(new Comparator<>() {
+        result.sort(new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
-                return Long.compare(Long.parseLong(o1.substring(0, o1.indexOf(':'))),
-                        Long.parseLong(o2.substring(0, o2.indexOf(':'))));
+                return Long.compare(Long.parseLong(o1.substring(0, o1.indexOf('-'))),
+                        Long.parseLong(o2.substring(0, o2.indexOf('-'))));
             }
         });
 
-        ListIterator<String> listIterator = methodNameList.listIterator();
+        ListIterator<String> listIterator = result.listIterator();
         while (listIterator.hasNext()) {
-            String methodName = listIterator.next();
-            String[] parts = methodName.split(":");
-            listIterator.set(methodName.replace(methodName, parts[1]));
+            String next = listIterator.next();
+            String[] parts = next.split("-");
+            listIterator.set(next.replace(next, parts[1]));
         }
-        return methodNameList;
+        return result;
     }
 
     public static void main(String[] args) {
-        compareSort();
+        System.out.println(compareSort());
     }
 }
 
