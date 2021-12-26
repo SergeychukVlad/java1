@@ -37,14 +37,14 @@ public class CollectionsSort {
     }
 
     public static void minSort(Collection<Integer> data) {
-        List<Integer> dataResult = new ArrayList<>();
+        List<Integer> minData = new ArrayList<>();
         int size = data.size();
         for (int i = 0; i < size; i++) {
             Integer min = Collections.min(data);
             data.removeIf(r -> r.equals(min));
-            dataResult.add(min);
+            minData.add(min);
         }
-        data.addAll(dataResult);
+        data.addAll(minData);
     }
 
     public static void collSort(Collection<Integer> data) {
@@ -55,7 +55,7 @@ public class CollectionsSort {
     }
 
     public static Collection<String> compareSort() {
-        List<Integer> testList = new ArrayList<>();
+        List<Integer> testList = new ArrayList<>(Arrays.asList(12, 5, -9, -89, 0));
         ArrayList<String> result = new ArrayList<>();
 
         long start = System.currentTimeMillis();
