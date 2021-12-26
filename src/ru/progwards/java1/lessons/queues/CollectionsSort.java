@@ -64,24 +64,23 @@ public class CollectionsSort {
         }
 
         ArrayList<String> result = new ArrayList<>();
-        long start;
 
-        start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         mySort(testList);
-        result.add((System.currentTimeMillis() - start) + "-mySort");
+        result.add((System.currentTimeMillis() - start) + " mySort");
 
         start = System.currentTimeMillis();
         minSort(testList);
-        result.add((System.currentTimeMillis() - start) + "-minSort");
+        result.add((System.currentTimeMillis() - start) + " minSort");
 
         start = System.currentTimeMillis();
         collSort(testList);
-        result.add((System.currentTimeMillis() - start) + "-collSort");
+        result.add((System.currentTimeMillis() - start) + " collSort");
         result.sort(new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
-                return Long.compare(Long.parseLong(o1.substring(0, o1.indexOf('-'))),
-                        Long.parseLong(o2.substring(0, o2.indexOf('-'))));
+                return Long.compare(Long.parseLong(o1.substring(0, o1.indexOf(' '))),
+                        Long.parseLong(o2.substring(0, o2.indexOf(' '))));
             }
         });
 
@@ -90,7 +89,7 @@ public class CollectionsSort {
         ListIterator<String> listIterator = result.listIterator();
         while (listIterator.hasNext()) {
             String nameOfMethod = listIterator.next();
-            String[] parts = nameOfMethod.split("-");
+            String[] parts = nameOfMethod.split(" ");
             listIterator.set(nameOfMethod.replace(nameOfMethod, parts[1]));
             System.out.println(parts[1]);
         }
