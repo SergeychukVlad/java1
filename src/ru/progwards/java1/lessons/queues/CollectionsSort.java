@@ -67,33 +67,35 @@ public class CollectionsSort {
 
         long start = System.currentTimeMillis();
         mySort(testList);
-        result.add((System.currentTimeMillis() - start) + " mySort");
+        result.add((System.currentTimeMillis() - start) + ":mySort");
 
         start = System.currentTimeMillis();
         minSort(testList);
-        result.add((System.currentTimeMillis() - start) + " minSort");
+        result.add((System.currentTimeMillis() - start) + ":minSort");
 
         start = System.currentTimeMillis();
         collSort(testList);
-        result.add((System.currentTimeMillis() - start) + " collSort");
+        result.add((System.currentTimeMillis() - start) + ":collSort");
         result.sort(new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
-                return Long.compare(Long.parseLong(o1.substring(0, o1.indexOf(' '))),
-                        Long.parseLong(o2.substring(0, o2.indexOf(' '))));
+                return Long.compare(Long.parseLong(o1.substring(0, o1.indexOf(':'))),
+                        Long.parseLong(o2.substring(0, o2.indexOf(':'))));
             }
         });
 
-        System.out.println(result);
-
-        ListIterator<String> listIterator = result.listIterator();
-        while (listIterator.hasNext()) {
-            String nameOfMethod = listIterator.next();
-            String[] parts = nameOfMethod.split(" ");
-            listIterator.set(nameOfMethod.replace(nameOfMethod, parts[1]));
-            System.out.println(parts[1]);
+        for (int i = 0; i < result.size(); i++) {
+            String nameOfMethod = result.get(i);
+            String[] parts = nameOfMethod.split(":");
+            result.set(i, parts[1]);
         }
-        System.out.println(result);
+//
+//        ListIterator<String> listIterator = result.listIterator();
+//        while (listIterator.hasNext()) {
+//            String nameOfMethod = listIterator.next();
+//            String[] parts = nameOfMethod.split(":");
+//            listIterator.set(nameOfMethod.replace(nameOfMethod, parts[1]));
+//        }
         return result;
     }
 
