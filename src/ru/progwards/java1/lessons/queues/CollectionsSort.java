@@ -24,6 +24,8 @@ import java.util.*;
 
 public class CollectionsSort {
 
+    static final int ELEMENT_COUNT = 100;
+
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
@@ -37,14 +39,14 @@ public class CollectionsSort {
     }
 
     public static void minSort(Collection<Integer> data) {
-        List<Integer> minData = new ArrayList<>();
+        List<Integer> copyList = new ArrayList<>();
         int size = data.size();
         for (int i = 0; i < size; i++) {
             Integer min = Collections.min(data);
             data.removeIf(r -> r.equals(min));
-            minData.add(min);
+            copyList.add(min);
         }
-        data.addAll(minData);
+        data.addAll(copyList);
     }
 
     public static void collSort(Collection<Integer> data) {
@@ -55,21 +57,26 @@ public class CollectionsSort {
     }
 
     public static Collection<String> compareSort() {
-        List<Integer> testList = new ArrayList<>(Arrays.asList(12, 5, -9, -89, 0));
-        ArrayList<String> result = new ArrayList<>();
+        List<Integer> testList = new ArrayList<>();
+        for (int i = 0; i < ELEMENT_COUNT; i++) {
+            Random random = new Random();
+            testList.add(random.nextInt());
+        }
 
-        long start = System.currentTimeMillis();
+        ArrayList<String> result = new ArrayList<>();
+        long start;
+
+        start = System.currentTimeMillis();
         mySort(testList);
-        result.add((System.currentTimeMillis() - start) + "-mySort");
+        result.add((System.currentTimeMillis() - start) + "-mySort()");
 
         start = System.currentTimeMillis();
         minSort(testList);
-        result.add((System.currentTimeMillis() - start) + "-minSort");
+        result.add((System.currentTimeMillis() - start) + "-minSort()");
 
         start = System.currentTimeMillis();
         collSort(testList);
-        result.add((System.currentTimeMillis() - start) + "-collSort");
-
+        result.add((System.currentTimeMillis() - start) + "-collSort()");
         result.sort(new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
@@ -88,6 +95,10 @@ public class CollectionsSort {
     }
 
     public static void main(String[] args) {
-        compareSort();
+        System.out.println(compareSort());
     }
 }
+/*
+[0-collSort(), 2-mySortWithIterator(), 63-minSortWithIterator(), 99-minSort(), 713-mySort()]
+
+ */
