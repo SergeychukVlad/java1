@@ -40,8 +40,9 @@ public class CollectionsSort {
 
     public static void minSort(Collection<Integer> data) {
         List<Integer> copyList = new ArrayList<>();
-        int size = data.size();
-        for (int i = 0; i < size; i++) {
+        int dataSize = data.size();
+
+        for (int i = 0; i < dataSize; i++) {
             Integer min = Collections.min(data);
             data.removeIf(r -> r.equals(min));
             copyList.add(min);
@@ -95,7 +96,7 @@ public class CollectionsSort {
     }
 
     public static void main(String[] args) {
-        compareSort();
+        System.out.println(compareSort());
     }
 }
 
