@@ -91,14 +91,7 @@ public class CollectionsSort {
         return result;
     }
 
-    static void test() {
-        List<Integer> testList = new ArrayList<>(Arrays.asList(1, 12, -9, 5, -10));
-        mySort(testList);
-        minSort(testList);
-        collSort(testList);
-        System.out.println(compareSort());
-    }
     public static void main(String[] args) {
-        test();
+        System.out.println(compareSort());
     }
 }
