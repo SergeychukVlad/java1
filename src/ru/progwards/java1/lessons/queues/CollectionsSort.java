@@ -37,40 +37,41 @@ public class CollectionsSort {
     }
 
     public static void minSort(Collection<Integer> data) {
-        List<Integer> dataResult = new ArrayList<>();
+        List<Integer> copyList = new ArrayList<>();
         int size = data.size();
-
         for (int i = 0; i < size; i++) {
             Integer min = Collections.min(data);
             data.removeIf(r -> r.equals(min));
-            dataResult.add(min);
+            copyList.add(min);
         }
-        data = List.copyOf(dataResult);
-        System.out.println(data);
+        data.addAll(copyList);
     }
 
     public static void collSort(Collection<Integer> data) {
         ArrayList<Integer> dataResult = new ArrayList<>(data);
+        data.clear();
         Collections.sort(dataResult);
-        data = List.copyOf(dataResult);
-        System.out.println(data);
+        data.addAll(dataResult);
     }
 
     public static Collection<String> compareSort() {
-        List<Integer> testList = new ArrayList<>();
+        List<Integer> testList = new ArrayList<>(Arrays.asList(1, 12, -9, 5, -10));
         ArrayList<String> result = new ArrayList<>();
         long start;
 
         start = System.currentTimeMillis();
         mySort(testList);
+        System.out.println(System.currentTimeMillis() - start);
         result.add((System.currentTimeMillis() - start) + "-mySort");
 
         start = System.currentTimeMillis();
         minSort(testList);
+        System.out.println(System.currentTimeMillis() - start);
         result.add((System.currentTimeMillis() - start) + "-minSort");
 
         start = System.currentTimeMillis();
         collSort(testList);
+        System.out.println(System.currentTimeMillis() - start);
         result.add((System.currentTimeMillis() - start) + "-collSort");
 
         result.sort(new Comparator<>() {
@@ -90,7 +91,14 @@ public class CollectionsSort {
         return result;
     }
 
-    public static void main(String[] args) {
+    static void test() {
+        List<Integer> testList = new ArrayList<>(Arrays.asList(1, 12, -9, 5, -10));
+        mySort(testList);
+        minSort(testList);
+        collSort(testList);
         System.out.println(compareSort());
+    }
+    public static void main(String[] args) {
+        test();
     }
 }
