@@ -87,9 +87,9 @@ public class CollectionsSort {
         for (int i = 0; i < result.size(); i++) {
             String nameOfMethod = result.get(i);
             String[] parts = nameOfMethod.split(":");
-            result.set(i, parts[1]);
+            result.set(i, parts[1].trim());
         }
-//
+
 //        ListIterator<String> listIterator = result.listIterator();
 //        while (listIterator.hasNext()) {
 //            String nameOfMethod = listIterator.next();
