@@ -23,6 +23,7 @@ package ru.progwards.java1.lessons.queues;
 import java.util.*;
 
 public class CollectionsSort {
+    static final int ELEMENT_COUNT = 500;
 
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
@@ -55,11 +56,15 @@ public class CollectionsSort {
     }
 
     public static Collection<String> compareSort() {
-        List<Integer> testList = new ArrayList<>(Arrays.asList(1, 12, -9, 5, -10));
-        ArrayList<String> result = new ArrayList<>();
-        long start;
+        List<Integer> testList = new ArrayList<>();
+        for (int i = 0; i < ELEMENT_COUNT; i++) {
+            Random random = new Random();
+            testList.add(random.nextInt());
+        }
 
-        start = System.currentTimeMillis();
+        ArrayList<String> result = new ArrayList<>();
+
+        long start = System.currentTimeMillis();
         mySort(testList);
         result.add((System.currentTimeMillis() - start) + "-mySort");
 
