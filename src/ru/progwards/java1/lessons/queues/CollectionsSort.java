@@ -23,7 +23,6 @@ package ru.progwards.java1.lessons.queues;
 import java.util.*;
 
 public class CollectionsSort {
-    static final int ELEMENT_COUNT = 500;
 
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
@@ -38,14 +37,14 @@ public class CollectionsSort {
     }
 
     public static void minSort(Collection<Integer> data) {
-        List<Integer> copyList = new ArrayList<>();
+        List<Integer> dataResult = new ArrayList<>();
         int size = data.size();
         for (int i = 0; i < size; i++) {
             Integer min = Collections.min(data);
             data.removeIf(r -> r.equals(min));
-            copyList.add(min);
+            dataResult.add(min);
         }
-        data.addAll(copyList);
+        data.addAll(dataResult);
     }
 
     public static void collSort(Collection<Integer> data) {
@@ -57,11 +56,6 @@ public class CollectionsSort {
 
     public static Collection<String> compareSort() {
         List<Integer> testList = new ArrayList<>();
-        for (int i = 0; i < ELEMENT_COUNT; i++) {
-            Random random = new Random();
-            testList.add(random.nextInt());
-        }
-
         ArrayList<String> result = new ArrayList<>();
 
         long start = System.currentTimeMillis();
@@ -94,6 +88,6 @@ public class CollectionsSort {
     }
 
     public static void main(String[] args) {
-        System.out.println(compareSort());
+        compareSort();
     }
 }
