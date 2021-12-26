@@ -49,8 +49,8 @@ public class CollectionsSort {
 
     public static void collSort(Collection<Integer> data) {
         ArrayList<Integer> dataResult = new ArrayList<>(data);
-        data.clear();
         Collections.sort(dataResult);
+        data.clear();
         data.addAll(dataResult);
     }
 
@@ -61,17 +61,14 @@ public class CollectionsSort {
 
         start = System.currentTimeMillis();
         mySort(testList);
-        System.out.println(System.currentTimeMillis() - start);
         result.add((System.currentTimeMillis() - start) + "-mySort");
 
         start = System.currentTimeMillis();
         minSort(testList);
-        System.out.println(System.currentTimeMillis() - start);
         result.add((System.currentTimeMillis() - start) + "-minSort");
 
         start = System.currentTimeMillis();
         collSort(testList);
-        System.out.println(System.currentTimeMillis() - start);
         result.add((System.currentTimeMillis() - start) + "-collSort");
 
         result.sort(new Comparator<>() {
@@ -90,8 +87,8 @@ public class CollectionsSort {
         }
         return result;
     }
-//
-//    public static void main(String[] args) {
-//        System.out.println(compareSort());
-//    }
+
+    public static void main(String[] args) {
+        System.out.println(compareSort());
+    }
 }
