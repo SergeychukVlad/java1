@@ -31,5 +31,26 @@
 
 package ru.progwards.java1.lessons.queues;
 
+import java.util.Random;
+
 public class OrderQueue {
+
+    public void add(Order order) {
+
+    }
+
+    public Order get() {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Random rnd = new Random();
+        int[] intArray = new int[10];
+
+        for (int i = 0; i < 10; i++) {
+            intArray[i] = rnd.nextInt();
+            Order order = new Order(intArray[i]);
+            System.out.println(order.getNum());
+        }
+    }
 }
