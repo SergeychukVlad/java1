@@ -31,26 +31,57 @@
 
 package ru.progwards.java1.lessons.queues;
 
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 public class OrderQueue {
+    PriorityQueue<Order> queueByClass1 = new PriorityQueue<>();
+    PriorityQueue<Order> queueByClass2 = new PriorityQueue<>();
+    PriorityQueue<Order> queueByClass3 = new PriorityQueue<>();
 
     public void add(Order order) {
-
+        if (order.getSum() > 0 && order.getSum() <= 10000) {
+            queueByClass3.add(order);
+        } else if (order.getSum() > 10000 && order.getSum() <= 20000) {
+            queueByClass2.offer(order);
+        } else if (order.getSum() > 20000) {
+            queueByClass1.offer(order);
+        }
     }
 
     public Order get() {
-        return null;
+        List<PriorityQueue<Order>> queues = List.of(this.queueByClass1, queueByClass2, queueByClass3);
+        Order order = null;
+        if (queues.isEmpty()) {
+            return order;
+        } else {
+            for (int i = 0; i < queues.size(); i++) {
+                order =  queues.get(i).peek();
+            }
+        }
+        return order;
     }
+
 
     public static void main(String[] args) {
         Random rnd = new Random();
         int[] intArray = new int[10];
+        OrderQueue orderQueue = new OrderQueue();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < intArray.length; i++) {
             intArray[i] = rnd.nextInt();
             Order order = new Order(intArray[i]);
-            System.out.println(order.getNum());
+            order.setSum(3000 * i);
+
+            orderQueue.add(order);
+            System.out.print(order.getNum());
+            System.out.println(" " + order.getSum());
+        }
+
+        for (int i = 0; i < intArray.length; i++) {
+            System.out.println(orderQueue.get());
         }
     }
+
 }

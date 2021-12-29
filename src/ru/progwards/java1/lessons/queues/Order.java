@@ -11,6 +11,10 @@ public class Order {
         this.num = id++;
     }
 
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
     public double getSum() {
         return sum;
     }
