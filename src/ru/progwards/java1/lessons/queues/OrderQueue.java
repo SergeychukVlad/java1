@@ -31,36 +31,35 @@
 
 package ru.progwards.java1.lessons.queues;
 
-import java.util.List;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Random;
 
 public class OrderQueue {
-    PriorityQueue<Order> queueByClass1 = new PriorityQueue<>();
-    PriorityQueue<Order> queueByClass2 = new PriorityQueue<>();
-    PriorityQueue<Order> queueByClass3 = new PriorityQueue<>();
+
+    Comparator<Order> comparator = new Comparator<>() {
+        @Override
+        public int compare(Order o1, Order o2) {
+            return Double.compare(o2.getSum(), o1.getSum());
+        }
+    };
+
+    PriorityQueue<Order> queueByClass = new PriorityQueue<>(comparator);
 
     public void add(Order order) {
-        if (order.getSum() > 0 && order.getSum() <= 10000) {
-            queueByClass3.add(order);
-        } else if (order.getSum() > 10000 && order.getSum() <= 20000) {
-            queueByClass2.offer(order);
-        } else if (order.getSum() > 20000) {
-            queueByClass1.offer(order);
-        }
+        if (order.getSum() > 0)
+            queueByClass.offer(order);
     }
 
     public Order get() {
-        List<PriorityQueue<Order>> queues = List.of(this.queueByClass1, queueByClass2, queueByClass3);
-        Order order = null;
-        if (queues.isEmpty()) {
+        Order order;
+        if (!queueByClass.isEmpty()) {
+            order = queueByClass.peek();
+            queueByClass.remove(order);
             return order;
-        } else {
-            for (int i = 0; i < queues.size(); i++) {
-                order =  queues.get(i).peek();
-            }
         }
-        return order;
+        else return null;
     }
 
 
@@ -73,15 +72,13 @@ public class OrderQueue {
             intArray[i] = rnd.nextInt();
             Order order = new Order(intArray[i]);
             order.setSum(3000 * i);
-
             orderQueue.add(order);
-            System.out.print(order.getNum());
-            System.out.println(" " + order.getSum());
         }
 
-        for (int i = 0; i < intArray.length; i++) {
-            System.out.println(orderQueue.get());
+        Iterator<Order> iterator = orderQueue.queueByClass.iterator();
+        while (iterator.hasNext()) {
+            Order forPrint = orderQueue.get();
+            System.out.println(forPrint.getSum());
         }
     }
-
 }
