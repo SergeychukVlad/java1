@@ -1,7 +1,7 @@
 package ru.progwards.java1.lessons.queues;
 
 public class Order {
-    static int id = 0;
+    static int id = 1;
 
     double sum;
     int num;
