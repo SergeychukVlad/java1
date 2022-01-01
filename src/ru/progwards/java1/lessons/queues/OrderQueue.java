@@ -31,78 +31,62 @@
 
 package ru.progwards.java1.lessons.queues;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 public class OrderQueue {
 
-    Comparator<Order> comparator = new Comparator<>() {
-        @Override
-        public int compare(Order o1, Order o2) {
-            return Double.compare(o2.getSum(), o1.getSum());
-        }
-    };
-    PriorityQueue<Order> queueByClass = new PriorityQueue<>(comparator);
-
-
-    PriorityQueue<Order> queueByClass1 = new PriorityQueue<>(comparator);
-    PriorityQueue<Order> queueByClass2 = new PriorityQueue<>(comparator);
-    PriorityQueue<Order> queueByClass3 = new PriorityQueue<>(comparator);
-
-    int currentServiceClass = 1;
+    ArrayDeque<Order> queueByClass1 = new ArrayDeque<>();
+    ArrayDeque<Order> queueByClass2 = new ArrayDeque<>();
+    ArrayDeque<Order> queueByClass3 = new ArrayDeque<>();
 
     public void add(Order order) {
-        queueByClass.offer(order);
-
         double rate = order.getSum();
         if (rate > 0 && rate <= 10000) {
             queueByClass3.offer(order);
-        }
-        else if (rate > 10000 && rate <= 20000) {
+        } else if (rate > 10000 && rate <= 20000) {
             queueByClass2.offer(order);
-        }
-        else if (rate > 20000) {
+        } else if (rate > 20000) {
             queueByClass1.offer(order);
         }
     }
 
     public Order get() {
         Order order;
-        if (!queueByClass1.isEmpty() && currentServiceClass == 1) {
+        if (!queueByClass1.isEmpty()) {
             order = queueByClass1.peek();
             queueByClass1.remove(order);
-            currentServiceClass++;
+            System.out.println(order.getSum() + " (" + order.getNum() + ")");
             return order;
-        } else if (!queueByClass2.isEmpty() && currentServiceClass == 2) {
+        } else if (!queueByClass2.isEmpty()) {
             order = queueByClass2.peek();
             queueByClass2.remove(order);
-            currentServiceClass++;
+            System.out.println(order.getSum() + " (" + order.getNum() + ")");
             return order;
-        } else if (!queueByClass3.isEmpty() && currentServiceClass == 3) {
+        } else if (!queueByClass3.isEmpty()) {
             order = queueByClass3.peek();
             queueByClass3.remove(order);
-            currentServiceClass = 1;
+            System.out.println(order.getSum() + " (" + order.getNum() + ")");
             return order;
         } else return null;
     }
 
-    public int getCurrentClass() {
-        return 0;
-    }
-
     public static void main(String[] args) {
-        Random rnd = new Random();
-        int[] intArray = new int[10];
+        int[] intArray = new int[21];
+        double[] intArrayValue = {21526.0, 10490.0, 22740.0, 25148.0, 23289.0, 29285.0, 18933.0, 21516.0, 21497.0,
+                16001.0, 13195.0, 3392.0, 24899.0, 12092.0, 17080.0, 8262.0, 12832.0, 18173.0, 22135.0, 12656.0, 24332.0
+        };
         OrderQueue orderQueue = new OrderQueue();
 
         for (int i = 0; i < intArray.length; i++) {
-            intArray[i] = rnd.nextInt();
             Order order = new Order(intArray[i]);
-            order.setSum(3000 * i);
+            order.setSum(intArrayValue[i]);
             orderQueue.add(order);
             System.out.println(order.getSum() + " (" + order.getNum() + ")");
+        }
+        System.out.println(" ***************************** ");
+
+        for (int i = 0; i < 21; i++) {
+            orderQueue.get();
         }
 
     }
@@ -127,4 +111,26 @@ ERROR: Тест "Метод get()" не пройден. Метод работа�
 12656.0(20), 3392.0(12), 8262.0(16).
 
 По данной задаче в целом не зачет, решение возвращено на доработку. Задача выполнена на 0.00%
+
+21526.0 (0)             21526.0 (0)
+10490.0 (1)                                     10490.0 (1)
+22740.0 (2)             22740.0 (2)
+25148.0 (3)             25148.0 (3)
+23289.0 (4)             23289.0 (4)
+29285.0 (5)             29285.0 (5)
+18933.0 (6)                                     18933.0 (6)
+21516.0 (7)             21516.0 (7)
+21497.0 (8)             21497.0 (8)
+16001.0 (9)                                     16001.0 (9)
+13195.0 (10)                                    13195.0 (10)
+3392.0 (11)                                                             3392.0 (11)
+24899.0 (12)            24899.0 (12)
+12092.0 (13)                                    12092.0 (13)
+17080.0 (14)                                    17080.0 (14)
+8262.0 (15)                                                             8262.0 (15)
+12832.0 (16)                                    12832.0 (16)
+18173.0 (17)                                    18173.0 (17)
+22135.0 (18)            22135.0 (18)
+12656.0 (19)                                    12656.0 (19)
+24332.0 (20)            24332.0 (20)
  */
