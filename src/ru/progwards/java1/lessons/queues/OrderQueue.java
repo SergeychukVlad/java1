@@ -60,10 +60,10 @@ public class OrderQueue {
         List<ArrayDeque<Order>> queuesByClasses = Arrays.asList(queueByClass1, queueByClass2, queueByClass3);
         Order order;
 
-        for (int i = 0; i < queuesByClasses.size(); i++) {
-            if (!queuesByClasses.get(i).isEmpty()) {
-                order = queuesByClasses.get(i).peek();
-                queuesByClasses.get(i).remove(order);
+        for (ArrayDeque<Order> queuesByClass : queuesByClasses) {
+            if (!queuesByClass.isEmpty()) {
+                order = queuesByClass.peek();
+                queuesByClass.remove(order);
                 return order;
             }
         }
