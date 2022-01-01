@@ -55,7 +55,7 @@ public class OrderQueue {
     }
 
 
-    public Order get() {                                    // выгрузка очередей последовательно, по классам
+    public Order get() {                                    // Выгрузка очередей последовательно, по классам
 
         List<ArrayDeque<Order>> queuesByClasses = Arrays.asList(queueByClass1, queueByClass2, queueByClass3);
         Order order;
@@ -72,21 +72,23 @@ public class OrderQueue {
     }
 
 
-    public static void myTest() {                               // тестовые данные
+    public static void myTest() {                               // Тестовые данные
 
         int[] intArray = new int[21];
-        double[] intArrayValue = {21526.0, 10490.0, 22740.0, 25148.0, 23289.0, 29285.0, 18933.0, 21516.0, 21497.0,
-                16001.0, 13195.0, 3392.0, 24899.0, 12092.0, 17080.0, 8262.0, 12832.0, 18173.0, 22135.0, 12656.0, 24332.0
+        double[] intArrayValue = {
+                21526.0, 10490.0, 22740.0, 25148.0, 23289.0, 29285.0, 18933.0, 21516.0, 21497.0, 16001.0,
+                13195.0, 3392.0, 24899.0, 12092.0, 17080.0, 8262.0, 12832.0, 18173.0, 22135.0, 12656.0, 24332.0
         };
         OrderQueue orderQueue = new OrderQueue();
 
+        System.out.println(" приём заявок - заполнение очередей ");
         for (int i = 0; i < intArray.length; i++) {
             Order order = new Order(intArray[i]);
             order.setSum(intArrayValue[i]);
             orderQueue.add(order);
             System.out.println(order.getSum() + " (" + order.getNum() + ")");
         }
-        System.out.println(" ***************************** ");
+        System.out.println(" выгрузка очередей по классности ");
 
         for (int i = 0; i < 21; i++) {
             Order order = orderQueue.get();
