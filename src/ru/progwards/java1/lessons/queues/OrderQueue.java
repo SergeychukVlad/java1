@@ -51,23 +51,17 @@ public class OrderQueue {
     }
 
     public Order get() {
+        List<ArrayDeque<Order>> queuesByClasses = Arrays.asList(queueByClass1, queueByClass2, queueByClass3);
         Order order;
-        if (!queueByClass1.isEmpty()) {
-            order = queueByClass1.peek();
-            queueByClass1.remove(order);
-            System.out.println(order.getSum() + " (" + order.getNum() + ")");
-            return order;
-        } else if (!queueByClass2.isEmpty()) {
-            order = queueByClass2.peek();
-            queueByClass2.remove(order);
-            System.out.println(order.getSum() + " (" + order.getNum() + ")");
-            return order;
-        } else if (!queueByClass3.isEmpty()) {
-            order = queueByClass3.peek();
-            queueByClass3.remove(order);
-            System.out.println(order.getSum() + " (" + order.getNum() + ")");
-            return order;
-        } else return null;
+
+        for (int i = 0; i < queuesByClasses.size(); i++) {
+            if (!queuesByClasses.get(i).isEmpty()) {
+                order = queuesByClasses.get(i).peek();
+                queuesByClasses.get(i).remove(order);
+                return order;
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) {
