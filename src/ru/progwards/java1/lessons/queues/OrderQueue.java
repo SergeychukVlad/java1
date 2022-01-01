@@ -58,7 +58,7 @@ public class OrderQueue {
 
         double rate = order.getSum();
         if (rate > 0 && rate <= 10000) {
-            queueByClass1.offer(order);
+            queueByClass3.offer(order);
         }
         else if (rate > 10000 && rate <= 20000) {
             queueByClass2.offer(order);
