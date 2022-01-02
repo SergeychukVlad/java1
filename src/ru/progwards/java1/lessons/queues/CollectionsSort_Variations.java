@@ -146,6 +146,47 @@ public class CollectionsSort_Variations {
         return result;
     }
 
+
+    public static Collection<String> compareSortOnCollections() {
+        List<Integer> testList = new ArrayList<>();
+        for (int i = 0; i < ELEMENT_COUNT; i++) {
+            testList.add(new Random().nextInt());
+        }
+
+        ArrayList<String> methodNameList = new ArrayList<>();
+
+        double start = System.currentTimeMillis();
+        mySort(testList);
+        methodNameList.add((System.currentTimeMillis() - start) + "-mySort");
+
+        start = System.currentTimeMillis();
+        minSort(testList);
+        methodNameList.add((System.currentTimeMillis() - start) + "-minSort");
+
+        start = System.currentTimeMillis();
+        collSort(testList);
+        methodNameList.add((System.currentTimeMillis() - start) + "-collSort");
+
+        methodNameList.sort(new Comparator<>() {
+            @Override
+            public int compare(String str1, String str2) {
+                return Double.compare(
+                        Double.parseDouble(str1.substring(0, str1.indexOf('-'))),
+                        Double.parseDouble(str2.substring(0, str2.indexOf('-')))
+                );
+            }
+        });
+
+        System.out.println(methodNameList);
+
+        for (int i = 0; i < methodNameList.size(); i++) {
+            String methodName = methodNameList.get(i);
+            methodNameList.set(i, methodName.substring(methodName.indexOf("-") + 1));
+        }
+        return methodNameList;
+    }
+
+
     public static void main(String[] args) {
         System.out.println(compareSort());
     }
