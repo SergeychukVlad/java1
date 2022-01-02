@@ -39,7 +39,7 @@ import java.util.List;
 
 public class StackCalc {
 
-    LinkedList<Double> doubles;
+    public LinkedList<Double> doubles;
 
     public StackCalc(LinkedList<Double> doubles) {
         this.doubles = doubles;
