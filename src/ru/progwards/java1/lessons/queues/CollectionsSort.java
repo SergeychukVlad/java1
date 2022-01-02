@@ -66,21 +66,21 @@ public class CollectionsSort {
             testList.add(new Random().nextInt());
         }
 
-        ArrayList<String> methodNameList = new ArrayList<>();
+        String[] methodNames = new String[3];
 
         double start = System.currentTimeMillis();
         mySort(testList);
-        methodNameList.add((System.currentTimeMillis() - start) + "-mySort()");
+        methodNames[0] = System.currentTimeMillis() - start + "-mySort";
 
         start = System.currentTimeMillis();
         minSort(testList);
-        methodNameList.add((System.currentTimeMillis() - start) + "-minSort()");
+        methodNames[1] = (System.currentTimeMillis() - start) + "-minSort";
 
         start = System.currentTimeMillis();
         collSort(testList);
-        methodNameList.add((System.currentTimeMillis() - start) + "-collSort()");
+        methodNames[2] = (System.currentTimeMillis() - start) + "-collSort";
 
-        methodNameList.sort(new Comparator<>() {
+        Arrays.sort(methodNames, new Comparator<>() {
             @Override
             public int compare(String str1, String str2) {
                 return Double.compare(
@@ -90,11 +90,11 @@ public class CollectionsSort {
             }
         });
 
-        for (int i = 0; i < methodNameList.size(); i++) {
-            String methodName = methodNameList.get(i);
-            methodNameList.set(i, methodName.substring(methodName.indexOf("-") + 1));
+        for (int i = 0; i < methodNames.length; i++) {
+            String methodName = methodNames[i];
+            methodNames[i] = methodName.substring(methodName.indexOf("-") + 1);
         }
-        return methodNameList;
+        return Arrays.asList(methodNames);
     }
 
 
@@ -102,4 +102,3 @@ public class CollectionsSort {
         System.out.println(compareSort());
     }
 }
-
