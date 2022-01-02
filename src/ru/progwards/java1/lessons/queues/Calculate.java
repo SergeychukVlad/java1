@@ -26,6 +26,7 @@ public class Calculate {
         return doubles.get(0);
     }
 
+
     public static double calculation2() {
         LinkedList<Double> doubles =
                 new LinkedList<>(List.of(9.2, 13.001, 2.0, 87.0, 3.33, 19.0, 737.22, 24.0, 12.10, 55.60));

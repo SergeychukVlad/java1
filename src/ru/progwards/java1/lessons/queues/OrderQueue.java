@@ -39,7 +39,6 @@ public class OrderQueue {
     ArrayDeque<Order> queueByClass2 = new ArrayDeque<>();   // Очередь 2-го класса
     ArrayDeque<Order> queueByClass3 = new ArrayDeque<>();   // Очередь 3-го класса
 
-
     public void add(Order order) {                          // Наполнение очередей по условиям классности
 
         double rate = order.getSum();

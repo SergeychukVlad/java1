@@ -102,6 +102,6 @@ public class StackCalc {
 
         stackCalc.div();
         System.out.println("div() : " + stackCalc.getDoubles());
-
     }
+
 }

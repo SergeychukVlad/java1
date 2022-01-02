@@ -22,4 +22,5 @@ public class Order {
     public int getNum() {
         return num;
     }
+
 }
