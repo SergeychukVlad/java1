@@ -16,18 +16,6 @@ import java.util.List;
 public class Calculate {
 
     public static double calculation1() {
-        LinkedList<Double> doubles = new LinkedList<>(List.of(2.2, 3.0, 12.1));
-        StackCalc stackCalc = new StackCalc(doubles);
-
-        double pop_result = stackCalc.pop();
-        stackCalc.add();
-        stackCalc.push(pop_result);
-        stackCalc.mul();
-
-        return doubles.get(0);
-    }
-
-    public static double calculation11() {
         LinkedList<Double> doubles = new LinkedList<>(List.of(3.0, 12.1));
         StackCalc stackCalc = new StackCalc(doubles);
 
@@ -65,9 +53,8 @@ public class Calculate {
 
 
     public static void main(String[] args) {
-        System.out.println(2.2 * (3 + 12.1) + " " + calculation11());
         System.out.println(2.2 * (3 + 12.1) + " " + calculation1());
         System.out.println((737.22 + 24) / (55.6 - 12.1) + (19 - 3.33) * (87 + 2 * (13.001 - 9.2)) + " " + calculation2());
-
     }
+
 }
