@@ -25,14 +25,29 @@ import java.util.*;
 public class CollectionsSort {
 
     public static void mySort(Collection<Integer> data) {
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = i + 1; j < data.size(); j++) {
-                if (!(((List<Integer>) data).get(i) <= ((List<Integer>) data).get(j))) {
-                    Collections.swap((List<?>) data,
-                            ((List<Integer>) data).indexOf(((List<Integer>) data).get(i)),
-                            ((List<Integer>) data).indexOf(((List<Integer>) data).get(j)));
+        ArrayList<Integer> dataCopy = new ArrayList<>(data);
+        ListIterator<Integer> listIterator;
+        int currentElement, previousElement, count;
+        boolean sorted = false;
+
+        while (!sorted) {
+            count = 0;
+            listIterator = dataCopy.listIterator();
+
+            while (listIterator.hasNext()) {
+                listIterator.next();
+                previousElement = dataCopy.get(listIterator.previousIndex());
+
+                if (listIterator.hasNext()) {
+                    currentElement = dataCopy.get(listIterator.nextIndex());
+                    if (previousElement > currentElement) {
+                        Collections.swap(dataCopy, dataCopy.indexOf(previousElement), dataCopy.indexOf(currentElement));
+                        count++;
+                    }
                 }
             }
+
+            if (count == 0) sorted = true;
         }
     }
 
