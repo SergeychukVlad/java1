@@ -62,12 +62,18 @@ public class StackCalc {
     }
 
     public void sub() {
+        Double popValue = this.pop();
+        this.push(this.pop() - popValue);
     }
 
     public void mul() {
+        Double popValue = this.pop();
+        this.push(this.pop() * popValue);
     }
 
     public void div() {
+        Double popValue = this.pop();
+        this.push(this.pop() / popValue);
     }
 
     public static void main(String[] args) {
@@ -78,15 +84,29 @@ public class StackCalc {
         doubles.add(15.0);
 
         StackCalc stackCalc = new StackCalc(doubles);
-        System.out.println(stackCalc.getDoubles());
+        System.out.println(stackCalc.getDoubles() + "\n");
 
         stackCalc.push(99.99);
-        System.out.println(stackCalc.getDoubles());
+        System.out.println("push(): " + stackCalc.getDoubles());
 
         stackCalc.pop();
-        System.out.println(stackCalc.getDoubles());
+        System.out.println("pop() : " + stackCalc.getDoubles());
 
         stackCalc.add();
-        System.out.println(stackCalc.getDoubles());
+        System.out.println("add() : " + stackCalc.getDoubles());
+
+        stackCalc.sub();
+        System.out.println("sub() : " + stackCalc.getDoubles());
+
+        stackCalc.push(100.00);
+        stackCalc.push(2.00);
+        System.out.println("***() : " + stackCalc.getDoubles());
+
+        stackCalc.mul();
+        System.out.println("mul() : " + stackCalc.getDoubles());
+
+        stackCalc.div();
+        System.out.println("div() : " + stackCalc.getDoubles());
+
     }
 }
