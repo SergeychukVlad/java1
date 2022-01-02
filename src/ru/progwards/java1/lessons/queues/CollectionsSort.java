@@ -38,6 +38,7 @@ public class CollectionsSort {
         }
     }
 
+
     public static void minSort(Collection<Integer> data) {
         List<Integer> copyList = new ArrayList<>();
         int dataSize = data.size();
@@ -50,12 +51,14 @@ public class CollectionsSort {
         data.addAll(copyList);
     }
 
+
     public static void collSort(Collection<Integer> data) {
-        ArrayList<Integer> dataResult = new ArrayList<>(data);
-        Collections.sort(dataResult);
+        ArrayList<Integer> sortedData = new ArrayList<>(data);
+        Collections.sort(sortedData);
         data.clear();
-        data.addAll(dataResult);
+        data.addAll(sortedData);
     }
+
 
     public static Collection<String> compareSort() {
         List<Integer> testList = new ArrayList<>();
@@ -86,14 +89,13 @@ public class CollectionsSort {
             }
         });
 
-        ListIterator<String> listIterator = methodNameList.listIterator();
-        while (listIterator.hasNext()) {
-            String methodName = listIterator.next();
-            String[] parts = methodName.split(":");
-            listIterator.set(methodName.replace(methodName, parts[1]));
+        for (int i = 0; i < methodNameList.size(); i++) {
+            String methodName = methodNameList.get(i);
+            methodNameList.set(i, methodName.substring(methodName.indexOf(":") + 1));
         }
         return methodNameList;
     }
+
 
     public static void main(String[] args) {
         System.out.println(compareSort());
