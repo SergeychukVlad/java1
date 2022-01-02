@@ -27,7 +27,7 @@ public class CollectionsSort {
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
-                if (!(((List<Integer>) data).get(i) < ((List<Integer>) data).get(j))) {
+                if (!(((List<Integer>) data).get(i) <= ((List<Integer>) data).get(j))) {
                     Collections.swap((List<?>) data,
                             ((List<Integer>) data).indexOf(((List<Integer>) data).get(i)),
                             ((List<Integer>) data).indexOf(((List<Integer>) data).get(j)));
