@@ -34,20 +34,38 @@ Class Calculate, который содержит методы:
 
 package ru.progwards.java1.lessons.queues;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class StackCalc {
 
-    public void push(double value){}
+    LinkedList<Double> doubles;
 
-    public double pop(){
+    public StackCalc(LinkedList<Double> doubles) {
+        this.doubles = doubles;
+    }
+
+    public void push(double value) {
+    }
+
+    public double pop() {
         return 0.0;
     }
 
-    public void add(){}
+    public void add() {
+    }
 
-    public void sub(){}
+    public void sub() {
+    }
 
-    public void mul(){}
+    public void mul() {
+    }
 
-    public void div(){}
+    public void div() {
+    }
 
+    public static void main(String[] args) {
+        LinkedList<Double> doubles = (LinkedList<Double>) List.of(10.0, 34.45, 21.2, 15.0);
+        StackCalc stackCalc = new StackCalc(doubles);
+    }
 }
