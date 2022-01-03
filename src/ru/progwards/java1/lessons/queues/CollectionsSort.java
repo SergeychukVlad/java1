@@ -24,6 +24,15 @@ import java.util.*;
 
 public class CollectionsSort {
 
+    private static List<Integer> getTestList() {
+        List<Integer> testList = new ArrayList<>();
+        for (int i = 0; i < 500; i++) {
+            testList.add(new Random().nextInt());
+        }
+        return testList;
+    }
+
+
     public static void mySort(Collection<Integer> data) {
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
@@ -61,11 +70,7 @@ public class CollectionsSort {
 
 
     public static Collection<String> compareSort() {
-        List<Integer> testList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
-            testList.add(new Random().nextInt());
-        }
-
+        List<Integer> testList = getTestList();
         String[] methodNames = new String[3];
 
         double start = System.currentTimeMillis();
@@ -90,9 +95,14 @@ public class CollectionsSort {
             }
         });
 
-        for (int i = 0; i < methodNames.length; i++) {
-            String methodName = methodNames[i];
-            methodNames[i] = methodName.substring(methodName.indexOf("-") + 1);
+        try {
+            for (int i = 0; i < methodNames.length; i++) {
+                String methodName = methodNames[i];
+                methodNames[i] = methodName.substring(methodName.indexOf("-") + 1);
+            }
+
+        } catch (NoSuchElementException e) {
+            e.getMessage();
         }
         return Arrays.asList(methodNames);
     }
