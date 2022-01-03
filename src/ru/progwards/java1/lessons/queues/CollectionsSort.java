@@ -95,15 +95,11 @@ public class CollectionsSort {
             }
         });
 
-        try {
-            for (int i = 0; i < methodNames.length; i++) {
-                String methodName = methodNames[i];
-                methodNames[i] = methodName.substring(methodName.indexOf("-") + 1);
-            }
-
-        } catch (NoSuchElementException e) {
-            e.getMessage();
+        for (int i = 0; i < methodNames.length; i++) {
+            String methodName = methodNames[i];
+            methodNames[i] = methodName.substring(methodName.indexOf("-") + 1);
         }
+
         return Arrays.asList(methodNames);
     }
 

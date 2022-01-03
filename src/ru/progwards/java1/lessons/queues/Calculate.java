@@ -16,21 +16,21 @@ import java.util.List;
 public class Calculate {
 
     public static double calculation1() {
-        LinkedList<Double> doubles = new LinkedList<>(List.of(3.0, 12.1));
-        StackCalc stackCalc = new StackCalc(doubles);
+        LinkedList<Double> doubleList = new LinkedList<>(List.of(3.0, 12.1));
+        StackCalc stackCalc = new StackCalc(doubleList);
 
         stackCalc.add();
         stackCalc.push(2.2);
         stackCalc.mul();
 
-        return doubles.get(0);
+        return doubleList.get(0);
     }
 
 
     public static double calculation2() {
-        LinkedList<Double> doubles =
+        LinkedList<Double> doubleList =
                 new LinkedList<>(List.of(9.2, 13.001, 2.0, 87.0, 3.33, 19.0, 737.22, 24.0, 12.10, 55.60));
-        StackCalc stackCalc = new StackCalc(doubles);
+        StackCalc stackCalc = new StackCalc(doubleList);
 
         stackCalc.sub();
         stackCalc.mul();
@@ -49,13 +49,13 @@ public class Calculate {
         stackCalc.div();
         stackCalc.push(part1_result);
         stackCalc.add();
-        return doubles.get(0);
+        return doubleList.get(0);
     }
 
 
     public static void main(String[] args) {
-        System.out.println(2.2 * (3 + 12.1) + " " + calculation1());
-        System.out.println((737.22 + 24) / (55.6 - 12.1) + (19 - 3.33) * (87 + 2 * (13.001 - 9.2)) + " " + calculation2());
+        System.out.println((2.2 * (3 + 12.1) == calculation1()));
+        System.out.println(((737.22 + 24) / (55.6 - 12.1) + (19 - 3.33) * (87 + 2 * (13.001 - 9.2)) == calculation2()));
     }
 
 }

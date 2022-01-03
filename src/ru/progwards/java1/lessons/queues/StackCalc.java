@@ -39,22 +39,22 @@ import java.util.List;
 
 public class StackCalc {
 
-    LinkedList<Double> doubles;
+    LinkedList<Double> doubleLinkedList;
 
-    private LinkedList<Double> getDoubles() {
-        return doubles;
+    public StackCalc(LinkedList<Double> doubleLinkedList) {
+        this.doubleLinkedList = doubleLinkedList;
     }
 
-    public StackCalc(LinkedList<Double> doubles) {
-        this.doubles = doubles;
+    private LinkedList<Double> getDoubleLinkedList() {
+        return doubleLinkedList;
     }
 
     public void push(double value) {
-        doubles.addFirst(value);
+        doubleLinkedList.addFirst(value);
     }
 
     public double pop() {
-        return doubles.removeFirst();
+        return doubleLinkedList.removeFirst();
     }
 
     public void add() {
@@ -78,30 +78,30 @@ public class StackCalc {
     }
 
     public static void main(String[] args) {
-        LinkedList<Double> doubles = new LinkedList<>(List.of(10.0, 34.45, 21.20, 15.0));
-        StackCalc stackCalc = new StackCalc(doubles);
+        LinkedList<Double> doubleList = new LinkedList<>(List.of(10.0, 34.45, 21.20, 15.0));
+        StackCalc stackCalc = new StackCalc(doubleList);
 
         stackCalc.push(99.99);
-        System.out.println("push(): " + stackCalc.getDoubles());
+        System.out.println("push(): " + stackCalc.getDoubleLinkedList());
 
         stackCalc.pop();
-        System.out.println("pop() : " + stackCalc.getDoubles());
+        System.out.println("pop() : " + stackCalc.getDoubleLinkedList());
 
         stackCalc.add();
-        System.out.println("add() : " + stackCalc.getDoubles());
+        System.out.println("add() : " + stackCalc.getDoubleLinkedList());
 
         stackCalc.sub();
-        System.out.println("sub() : " + stackCalc.getDoubles());
+        System.out.println("sub() : " + stackCalc.getDoubleLinkedList());
 
         stackCalc.push(100.00);
         stackCalc.push(2.00);
-        System.out.println("***() : " + stackCalc.getDoubles());
+        System.out.println("***() : " + stackCalc.getDoubleLinkedList());
 
         stackCalc.mul();
-        System.out.println("mul() : " + stackCalc.getDoubles());
+        System.out.println("mul() : " + stackCalc.getDoubleLinkedList());
 
         stackCalc.div();
-        System.out.println("div() : " + stackCalc.getDoubles());
+        System.out.println("div() : " + stackCalc.getDoubleLinkedList());
     }
 
 }
