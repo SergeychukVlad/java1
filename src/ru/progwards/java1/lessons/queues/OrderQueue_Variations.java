@@ -45,19 +45,16 @@ public class OrderQueue_Variations {
         return new Comparator<>() {
             @Override
             public int compare(Order order1, Order order2) {
-                if (order1.getSum() <= 10000 && order1.getSum() > order2.getSum())
-                    return 3;
-                else if (order1.getSum() > 20000 && order1.getSum() > order2.getSum())
-                    return 1;
-                else return 2;
+                return Integer.compare(order1.getNum(), order2.getNum());
             }
         };
     }
 
+
     public void add(Order order) {                          // Наполнение очередей по условиям классности
 
         double rate = order.getSum();
-        if (rate > 0) queueByClass.offer(order);
+        if (rate > 0) queueByClass.add(order);
 
     }
 
@@ -65,18 +62,32 @@ public class OrderQueue_Variations {
     public Order get() {                                    // Выгрузка очередей последовательно, по классам
 
         Order order;
-        PriorityQueue<Order> orders = new PriorityQueue<>(getComparator());
-        orders.addAll(queueByClass);
 
-        for (int i = 0; i < orders.size(); i++) {
-                if (!orders.isEmpty()) {
-                    order = orders.peek();
-                    orders.remove(order);
+//        PriorityQueue<Order> orders = new PriorityQueue<>(new Comparator<Order>() {
+//            @Override
+//            public int compare(Order order1, Order order2) {
+//                return Double.compare(order2.getSum(), order1.getSum());
+//            }
+//        });
+//        orders.addAll(queueByClass);
+
+        for (int i = 1; i < 3; i++) {
+            for (int j = 0; j < queueByClass.size(); j++) {
+                order = queueByClass.peek();
+                if (order.getSum() > 20000 && i == 1) {
+                    queueByClass.remove(order);
                     return order;
+                } else if (order.getSum() <= 20000 && order.getSum() > 10000 && i == 2) {
+                    queueByClass.remove(order);
+                    return order;
+                } else {
+                    queueByClass.remove(order);
+                    return order;
+                }
             }
+
         }
         return null;
-
     }
 
 
