@@ -35,26 +35,24 @@ Class Calculate, который содержит методы:
 package ru.progwards.java1.lessons.queues;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class StackCalc {
 
-    LinkedList<Double> doubleLinkedList;
+    LinkedList<Double> doubles = new LinkedList<>();
 
-    public StackCalc(LinkedList<Double> doubleLinkedList) {
-        this.doubleLinkedList = doubleLinkedList;
+    public LinkedList<Double> getDoubles() {
+        if (!doubles.isEmpty())
+        return doubles;
+        else return null;
     }
 
-    private LinkedList<Double> getDoubleLinkedList() {
-        return doubleLinkedList;
-    }
 
     public void push(double value) {
-        doubleLinkedList.addFirst(value);
+        doubles.addFirst(value);
     }
 
     public double pop() {
-        return doubleLinkedList.removeFirst();
+        return doubles.removeFirst();
     }
 
     public void add() {
@@ -78,30 +76,34 @@ public class StackCalc {
     }
 
     public static void main(String[] args) {
-        LinkedList<Double> doubleList = new LinkedList<>(List.of(10.0, 34.45, 21.20, 15.0));
-        StackCalc stackCalc = new StackCalc(doubleList);
+
+        StackCalc stackCalc = new StackCalc();
 
         stackCalc.push(99.99);
-        System.out.println("push(): " + stackCalc.getDoubleLinkedList());
+        stackCalc.push(100.00);
+        stackCalc.push(300.00);
+        stackCalc.push(10.45);
+        System.out.println("push(): " + stackCalc.getDoubles());
 
         stackCalc.pop();
-        System.out.println("pop() : " + stackCalc.getDoubleLinkedList());
+        System.out.println("pop() : " + stackCalc.getDoubles());
 
+        stackCalc.push(50.00);
+        stackCalc.push(40.00);
         stackCalc.add();
-        System.out.println("add() : " + stackCalc.getDoubleLinkedList());
+        System.out.println("add() : " + stackCalc.getDoubles());
 
         stackCalc.sub();
-        System.out.println("sub() : " + stackCalc.getDoubleLinkedList());
+        System.out.println("sub() : " + stackCalc.getDoubles());
 
-        stackCalc.push(100.00);
         stackCalc.push(2.00);
-        System.out.println("***() : " + stackCalc.getDoubleLinkedList());
+        System.out.println("***() : " + stackCalc.getDoubles());
 
         stackCalc.mul();
-        System.out.println("mul() : " + stackCalc.getDoubleLinkedList());
+        System.out.println("mul() : " + stackCalc.getDoubles());
 
         stackCalc.div();
-        System.out.println("div() : " + stackCalc.getDoubleLinkedList());
+        System.out.println("div() : " + stackCalc.getDoubles());
     }
 
 }

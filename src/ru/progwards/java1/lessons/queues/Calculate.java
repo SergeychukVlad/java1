@@ -10,46 +10,61 @@ Class Calculate, который содержит методы:
  */
 package ru.progwards.java1.lessons.queues;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Calculate {
 
     public static double calculation1() {
-        LinkedList<Double> doubleList = new LinkedList<>(List.of(3.0, 12.1));
-        StackCalc stackCalc = new StackCalc(doubleList);
+        StackCalc stackCalc = new StackCalc();
 
-        stackCalc.add();
+        stackCalc.push(3.0);
+        stackCalc.push(12.1);
+        stackCalc.add();                    // (3+12.1)
         stackCalc.push(2.2);
-        stackCalc.mul();
+        stackCalc.mul();                    // 2.2*(3+12.1)
 
-        return doubleList.get(0);
+        return stackCalc.pop();
     }
 
 
     public static double calculation2() {
-        LinkedList<Double> doubleList =
-                new LinkedList<>(List.of(9.2, 13.001, 2.0, 87.0, 3.33, 19.0, 737.22, 24.0, 12.10, 55.60));
-        StackCalc stackCalc = new StackCalc(doubleList);
+        StackCalc stackCalc = new StackCalc();
 
-        stackCalc.sub();
-        stackCalc.mul();
+        stackCalc.push(737.22);
+        stackCalc.push(24.0);
         stackCalc.add();
-        double part1_result = stackCalc.pop();
+        double braces1_value = stackCalc.pop();     // (737.22+24)
+
+        stackCalc.push(55.6);
+        stackCalc.push(12.1);
         stackCalc.sub();
-        stackCalc.push(part1_result);
-        stackCalc.mul();
-        part1_result = stackCalc.pop();
-        stackCalc.add();
-        double part2_result = stackCalc.pop();
-        stackCalc.sub();
-        double part3_result = stackCalc.pop();
-        stackCalc.push(part2_result);
-        stackCalc.push(part3_result);
+        double braces2_value = stackCalc.pop();     // (55.6-12.1)
+
+        stackCalc.push(braces1_value);
+        stackCalc.push(braces2_value);
         stackCalc.div();
-        stackCalc.push(part1_result);
+        double left_part = stackCalc.pop();         // (737.22+24)/(55.6-12.1)
+
+        stackCalc.push(19.0);
+        stackCalc.push(3.33);
+        stackCalc.sub();
+        braces1_value = stackCalc.pop();            // (19-3.33)
+
+        stackCalc.push(13.001);
+        stackCalc.push(9.2);
+        stackCalc.sub();
+        stackCalc.push(stackCalc.pop());            // (13.001-9.2)
+
+        stackCalc.push(2.0);
+        stackCalc.mul();
+        stackCalc.push(87.0);
         stackCalc.add();
-        return doubleList.get(0);
+        stackCalc.push(braces1_value);              // (87+2*(13.001-9.2))
+
+        stackCalc.mul();                            // (19-3.33)*(87+2*(13.001-9.2))
+
+        stackCalc.push(left_part);
+        stackCalc.add();
+
+        return stackCalc.pop();                     // (737.22+24)/(55.6-12.1)+(19-3.33)*(87+2*(13.001-9.2))
     }
 
 
