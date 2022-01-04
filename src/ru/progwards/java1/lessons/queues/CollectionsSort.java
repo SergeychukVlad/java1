@@ -26,7 +26,7 @@ public class CollectionsSort {
 
     private static List<Integer> getTestList() {
         List<Integer> testList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 100; i++) {
             testList.add(new Random().nextInt());
         }
         return testList;
@@ -34,17 +34,18 @@ public class CollectionsSort {
 
 
     public static void mySort(Collection<Integer> data) {
+        Integer[] mayDataCopy = data.toArray(Integer[]::new);
+
         for (int i = 0; i < data.size(); i++) {
             for (int j = i + 1; j < data.size(); j++) {
-                if (!(((List<Integer>) data).get(i) < ((List<Integer>) data).get(j))) {
-                    Collections.swap((List<?>) data,
-                            ((List<Integer>) data).indexOf(((List<Integer>) data).get(i)),
-                            ((List<Integer>) data).indexOf(((List<Integer>) data).get(j)));
-                } else if (((List<Integer>) data).get(i).equals(((List<Integer>) data).get(j))) {
+                if (mayDataCopy[i] > mayDataCopy[j])
+                    Collections.swap(Arrays.asList(mayDataCopy), i, j);
+                else if (mayDataCopy[i].equals(mayDataCopy[j]))
                     j++;
-                }
             }
         }
+        data.clear();
+        Collections.addAll(data, mayDataCopy);
     }
 
 
