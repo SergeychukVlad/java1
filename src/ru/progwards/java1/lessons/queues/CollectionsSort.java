@@ -54,7 +54,7 @@ public class CollectionsSort {
 
         for (int i = 0; i < dataSize; i++) {
             Integer min = Collections.min(data);
-            data.removeIf(r -> r.equals(min));
+            data.remove(min);
             copyList.add(min);
         }
         data.addAll(copyList);
