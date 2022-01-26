@@ -63,12 +63,12 @@ public class OrderQueue_Variations {
 
         Order order;
 
-//        PriorityQueue<Order> orders = new PriorityQueue<>(new Comparator<Order>() {
-//            @Override
-//            public int compare(Order order1, Order order2) {
-//                return Double.compare(order2.getSum(), order1.getSum());
-//            }
-//        });
+        PriorityQueue<Order> orders = new PriorityQueue<>(new Comparator<Order>() {
+            @Override
+            public int compare(Order order1, Order order2) {
+                return Double.compare(order2.getSum(), order1.getSum());
+            }
+        });
 //        orders.addAll(queueByClass);
 
         for (int i = 1; i < 3; i++) {

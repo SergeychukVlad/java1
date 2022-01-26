@@ -1,0 +1,18 @@
+1. Словари в Java.
+что такое словари и для чего они нужны?
+интерфейс Map
+классы HashMap и Hashtable
+класс LinkedHashMap
+тестирование HashMap и Hashtable
+
+2. Устройство HashMap.
+устройство HashMap
+дополнительные методы интерфейса Map
+статические методы интерфейса Map
+
+3. Класс TreeMap, интерфейсы SortedMap, NavigableMap.
+класс TreeMap
+интерфейс SortedMap
+интерфейс NavigableMap
+устройство TreeMap и красно-чёрное дерево
+тестирование HashMap и TreeMap
